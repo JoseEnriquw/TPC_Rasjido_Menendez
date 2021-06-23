@@ -10,6 +10,7 @@ namespace Dominio
     {
         public int ID { get; set; }
         public int IDInsumo { get; set; }
+        public int cantidad { get; set; }
 
     }
 }

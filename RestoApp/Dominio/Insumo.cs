@@ -9,9 +9,11 @@ namespace Dominio
     public class Insumo
     {
         public int ID { get; set; }
-        public int IDTipo { get; set; }
         public string Nombre { get; set; }
-        public float Precio{ get; set; }
+        public int IDcategoria { get; set; }
+        public string tipo { get; set; }
+        public string tiempo { get; set; }
+        public decimal Precio{ get; set; }
 
     }
 }

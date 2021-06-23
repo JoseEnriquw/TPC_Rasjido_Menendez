@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Persona
+    public class Cargo
     {
         public int ID { get; set; }
-        public int IDCargo { get; set; }
-        public string DNI { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
-
-        
     }
 }

@@ -12,21 +12,19 @@ namespace Negocio
     {
         AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "Rasjido_Menendez_DB");
 
-        public List<Cargo_TipoInsumo> ListarCargos_TipoInsumo(string consulta)
+        public List<Cargo> ListarCargos(string consulta)
         {
-            List<Cargo_TipoInsumo> lista = new List<Cargo_TipoInsumo>();
+            List<Cargo> lista = new List<Cargo>();
             accessdata.setearConsulta(consulta);
             accessdata.ejecutarLectura();
             while (accessdata.Lector.Read())
             {
-                Cargo_TipoInsumo aux = new Cargo_TipoInsumo();
-                aux.ID = (int)accessdata.Lector["Id"];
+                Cargo aux = new Cargo();
+                aux.ID = (int)accessdata.Lector["ID"];
                 aux.Nombre = (string)accessdata.Lector["Nombre"];
 
                 lista.Add(aux);
             }
-
-
             return lista;
         }
 
@@ -38,15 +36,14 @@ namespace Negocio
             while (accessdata.Lector.Read())
             {
                 Insumo aux = new Insumo();
-                aux.ID = (int)accessdata.Lector["Id"];
-                aux.IDTipo = (int)accessdata.Lector["IDTipo"];
+                aux.ID = (int)accessdata.Lector["ID"];
                 aux.Nombre = (string)accessdata.Lector["Nombre"];
-                aux.Precio = (float)accessdata.Lector["Precio"];
+                aux.IDcategoria = (int)accessdata.Lector["IDcategoria"];
+                aux.tipo = (string)accessdata.Lector["Tipo"];
+                aux.Precio = (decimal)accessdata.Lector["Precio"];
 
                 lista.Add(aux);
             }
-
-
             return lista;
         }
 
@@ -58,18 +55,14 @@ namespace Negocio
             while (accessdata.Lector.Read())
             {
                 Pedido aux = new Pedido();
-                aux.ID = (int)accessdata.Lector["Id"];
+                aux.ID = (int)accessdata.Lector["ID"];
                 aux.IDMesa = (int)accessdata.Lector["IDMesa"];
-                aux.IDInsumo = (int)accessdata.Lector["IDInsumo"];
+                aux.Precio = (decimal)accessdata.Lector["Precio"];
                 aux.Cantidad = (int)accessdata.Lector["Cantidad"];
-                aux.Precio = (float)accessdata.Lector["Precio"];
                 aux.Estado = (bool)accessdata.Lector["Estado"];
-                aux.FechaHora = (DateTime)accessdata.Lector["FechaHora"];
 
                 lista.Add(aux);
             }
-
-
             return lista;
         }
 
@@ -83,14 +76,12 @@ namespace Negocio
                 Persona aux = new Persona();
                 aux.ID = (int)accessdata.Lector["Id"];
                 aux.IDCargo = (int)accessdata.Lector["IDCargo"];
-                aux.DNI = (int)accessdata.Lector["DNI"];
+                aux.DNI = (string)accessdata.Lector["DNI"];
                 aux.Nombre = (string)accessdata.Lector["Nombre"];
                 aux.Apellido = (string)accessdata.Lector["Apellido"];
 
                 lista.Add(aux);
             }
-
-
             return lista;
         }
 
@@ -102,8 +93,8 @@ namespace Negocio
             while (accessdata.Lector.Read())
             {
                 Usuario aux = new Usuario();
-                aux.ID = (int)accessdata.Lector["Id"];
-                aux.DNI = (int)accessdata.Lector["DNI"];
+                aux.ID = (int)accessdata.Lector["ID"];
+                aux.DNI = (string)accessdata.Lector["DNI"];
                 aux.Contraseña = (string)accessdata.Lector["Contraseña"];
 
                 lista.Add(aux);
@@ -123,6 +114,7 @@ namespace Negocio
                 Stock aux = new Stock();
                 aux.ID = (int)accessdata.Lector["Id"];
                 aux.IDInsumo = (int)accessdata.Lector["IDInsumo"];
+                aux.cantidad = (int)accessdata.Lector["cantidad"];
 
                 lista.Add(aux);
             }
@@ -139,8 +131,26 @@ namespace Negocio
             while (accessdata.Lector.Read())
             {
                 Mesa aux = new Mesa();
-                aux.ID = (int)accessdata.Lector["Id"];
+                aux.ID = (int)accessdata.Lector["ID"];
                 aux.IDMesero = (int)accessdata.Lector["IDMesero"];
+
+                lista.Add(aux);
+            }
+
+
+            return lista;
+        }
+
+        public List<Categorias> ListarCategorias(string consulta)
+        {
+            List<Categorias> lista = new List<Categorias>();
+            accessdata.setearConsulta(consulta);
+            accessdata.ejecutarLectura();
+            while (accessdata.Lector.Read())
+            {
+                Categorias aux = new Categorias();
+                aux.ID = (int)accessdata.Lector["ID"];
+                aux.Nombre = (string)accessdata.Lector["Nombre"];
 
                 lista.Add(aux);
             }
