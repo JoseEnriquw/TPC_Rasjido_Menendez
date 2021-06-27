@@ -8,7 +8,11 @@ namespace Dominio
 {
     public class Mesa
     {
-        public int ID { get; set; }
-        public int IDMesero { get; set; }
+        public int Id { get; set; }
+        public Persona Mesero { get; set; }
+
+        public List<Pedido> Pedidos { get; set; }
+
+        public bool Estado { get; set; }
     }
 }

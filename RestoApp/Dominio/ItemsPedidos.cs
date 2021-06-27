@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Cargo
+    public class ItemsPedidos
     {
         public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public Insumo Item { get; set; }
+        public decimal PrecioSubTotal { get; set; }
+        public int Cantidad { get; set; }
     }
 }
