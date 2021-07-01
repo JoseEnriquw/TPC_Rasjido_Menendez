@@ -1,23 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Dominio.Cargo">
-    <Position X="0.5" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Cargo.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Dominio.Categorias">
-    <Position X="4" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Categorias.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Dominio.Insumo">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAgAAAAgAAQAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAACAIAAAAAAAAAgAAAAgAAQgAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Insumo.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -47,20 +33,6 @@
     <TypeIdentifier>
       <HashCode>AAECAAAAAAAAAAAEAAAAgAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Persona.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Dominio.Stock">
-    <Position X="2.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
-      <FileName>Stock.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Dominio.TipoInsumo">
-    <Position X="5.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>TipoInsumo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Dominio.Usuario">
