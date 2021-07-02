@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dominio;
 
+
 namespace Negocio
 {
 
@@ -17,7 +18,7 @@ namespace Negocio
         public List<Insumo> ListarInsumos(string where)
         {
             List<Insumo> lista = new List<Insumo>();
-            accessdata.setearConsulta("select * from VW_Insumos" + where);
+            accessdata.setearConsulta("select * from VW_Insumos " + where);
             accessdata.ejecutarLectura();
             while (accessdata.Lector.Read())
             {

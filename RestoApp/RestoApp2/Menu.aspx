@@ -9,7 +9,7 @@
 
         <table class="filter">
               <tr>
-                  <td class="item-filter">HORARIO: <asp:DropDownList ID="DropDownList1" runat="server" CssClass="drop"></asp:DropDownList></td>
+                  <td class="item-filter">PRECIO: <asp:TextBox ID="TextBox1" runat="server" CssClass="drop"></asp:TextBox></td>
                   <td class="item-filter">CATEGORIA: <asp:DropDownList ID="DropDownList2" runat="server" CssClass="drop"></asp:DropDownList></td>
                   <td class="item-filter">TIPO DE INSUMO: <asp:DropDownList ID="DropDownList3" runat="server" CssClass="drop"></asp:DropDownList></td>
               </tr>
@@ -26,201 +26,24 @@
     <div class="contenido">
         <ul>
 
+            <% foreach (Dominio.Insumo item in listaMenu){ %>
 
             
-
-            
             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="Mesa.aspx" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
+                            <a href="Mesa.aspx?<%=item.Id %>" class="hovereffect">
+                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'">
                                 <div class="overlay">
                                 </div>
                             </a>
                     <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO &nbsp</b>$99.99</h5>
+                        <h4 class="card-text mt-5 mb-0 fs-14"><b><% =item.Nombre %></b></h4>
+                        <h5 class="card-text mt-5 mb-0 fs-14"><% =item.Categoria %>, <% =item.Tipo %></h5>
+                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO &nbsp</b><% =item.Precio %></h5>
                     </div>
             </li>
 
+            <% } %>
 
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="Mesa.aspx" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="Mesa.aspx" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
-
-
-
-
-
-            <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-                            <a href="#" class="hovereffect">
-                                <img class="img-responsive" src="https://via.placeholder.com/350x180/FFB6C1/000000" alt="">
-                                <div class="overlay">
-                                </div>
-                            </a>
-                    <div class="card-body">
-                        <h4 class="card-text mt-5 mb-0 fs-14"><b>NOMBRE INSUMO</b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14">Plato, Ensalada, Almuerzo </h5>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO</b>$99.99</h5>
-                    </div>
-            </li>
 
 
         </ul>

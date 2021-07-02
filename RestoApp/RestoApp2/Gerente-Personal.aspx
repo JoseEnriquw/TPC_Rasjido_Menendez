@@ -45,27 +45,24 @@
 							<th><span>NOMBRE</span></th>
 							<th><span>APELLIDO</span></th>
 							<th><span>DNI</span></th>
-							<th><span>ESTADO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
 					<tbody>
 
 
-
+					<%foreach (Dominio.Persona item in listadoPersonal){%>
+                        
 
 						<tr>
 							<td>
-                                PEPITO
+                                <%=item.Nombre%>
 							</td>
 							<td>
-								EL PISTOLERO
+								<%=item.Apellido%>
 							</td>
 							<td>
-								99.999.999
-							</td>
-							<td>
-                                ACTIVO
+								<%=item.Dni%>
 							</td>
 							<td class="text-right">
 								<asp:Button OnClick="window.open('Mesero.aspx');" ID="Button1" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme"/>
@@ -73,7 +70,7 @@
 							</td>
 						</tr>
 
-
+						<%} %>
 
 
 
