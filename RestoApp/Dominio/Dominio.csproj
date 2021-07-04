@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cargo.cs" />
+    <Compile Include="Categorias.cs" />
+    <Compile Include="TipoInsumo.cs" />
     <Compile Include="Insumo.cs" />
     <Compile Include="ItemsPedidos.cs" />
     <Compile Include="Mesa.cs" />

@@ -9,9 +9,10 @@
 
         <table class="filter">
               <tr>
-                  <td class="item-filter">PRECIO: <asp:TextBox ID="TextBox1" runat="server" CssClass="drop"></asp:TextBox></td>
-                  <td class="item-filter">CATEGORIA: <asp:DropDownList ID="DropDownList2" runat="server" CssClass="drop"></asp:DropDownList></td>
-                  <td class="item-filter">TIPO DE INSUMO: <asp:DropDownList ID="DropDownList3" runat="server" CssClass="drop"></asp:DropDownList></td>
+                           
+                  <td class="item-filter">BUSCAR: <asp:TextBox ID="TB_Buscar" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:TextBox></td>
+                  <td class="item-filter">CATEGORIA: <asp:DropDownList ID="DDL_Categorias" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" AutoPostBack="true"></asp:DropDownList></td>
+                  <td class="item-filter">TIPO DE INSUMO: <asp:DropDownList ID="DDL_Tipo_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" AutoPostBack="true"></asp:DropDownList></td>
               </tr>
           </table>
 </div>
@@ -26,18 +27,18 @@
     <div class="contenido">
         <ul>
 
-            <% foreach (Dominio.Insumo item in listaMenu){ %>
+            <% foreach (Dominio.Insumo item in ListaMenu){ %>
 
             
             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
                             <a href="Mesa.aspx?<%=item.Id %>" class="hovereffect">
-                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'">
-                                <div class="overlay">
-                                </div>
+                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px"
+>
+                                
                             </a>
                     <div class="card-body">
                         <h4 class="card-text mt-5 mb-0 fs-14"><b><% =item.Nombre %></b></h4>
-                        <h5 class="card-text mt-5 mb-0 fs-14"><% =item.Categoria %>, <% =item.Tipo %></h5>
+                        <h5 class="card-text mt-5 mb-0 fs-14"><% =item.Categoria.Descripcion %>, <% =item.Tipo.Descripcion %></h5>
                         <h5 class="card-text mt-5 mb-0 fs-14"><b>PRECIO &nbsp</b><% =item.Precio %></h5>
                     </div>
             </li>

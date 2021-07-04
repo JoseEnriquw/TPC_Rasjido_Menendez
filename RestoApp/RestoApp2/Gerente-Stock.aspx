@@ -64,8 +64,8 @@
 								<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button OnClick="window.open('Gerente-Stock.aspx');" ID="Button1" runat="server" Text="ACTUALIZAR"  class="btn btn-theme"/>
-								<asp:Button OnClick="window.open('Gerente-Stock.aspx');" ID="Button3" runat="server" Text="ELIMINAR"  class="btn btn-theme"/>
+								<asp:Button  ID="Button1" runat="server" Text="ACTUALIZAR"  class="btn btn-theme"/>
+								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR"  class="btn btn-theme"/>
 							</td>
 						</tr>
 

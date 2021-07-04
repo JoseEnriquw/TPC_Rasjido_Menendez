@@ -51,7 +51,7 @@
 					<tbody>
 
 
-					<%foreach (Dominio.Persona item in listadoPersonal){%>
+					<%foreach (Dominio.Persona item in Personalista){%>
                         
 
 						<tr>
@@ -65,8 +65,8 @@
 								<%=item.Dni%>
 							</td>
 							<td class="text-right">
-								<asp:Button OnClick="window.open('Mesero.aspx');" ID="Button1" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme"/>
-								<asp:Button OnClick="window.open('Gerente-Personal.aspx');" ID="Button3" runat="server" Text="ELIMINAR" class="btn btn-theme"/>
+								<asp:Button  ID="Button1" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme"/>
+								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR" class="btn btn-theme"/>
 							</td>
 						</tr>
 

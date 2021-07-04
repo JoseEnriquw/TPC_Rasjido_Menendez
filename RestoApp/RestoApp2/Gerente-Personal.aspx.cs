@@ -11,7 +11,7 @@ namespace RestoApp2
 {
     public partial class Gerente_Personal : System.Web.UI.Page
     {
-        public List<Persona> Personalista;
+        public List<Persona> Personalista=new List<Persona>();
         protected void Page_Load(object sender, EventArgs e)
         {
             Consultas personal = new Consultas();

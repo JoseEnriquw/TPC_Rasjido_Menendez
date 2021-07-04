@@ -79,13 +79,12 @@ Cantidad smallint not null check(Cantidad >0)
 go
 
 Create View VW_Insumos as
-select ID,Nombre,(
-select Descripcion from Categorias where ID=IDCategoria) as Categoria,(
-select Descripcion from TipoInsumos where ID=IDTipo) as Tipo,Precio,Stock,UrlImg from Insumos
+select I.ID,Nombre,IDCategoria,C.Descripcion as Categoria,IDTipo,T.Descripcion as Tipo,Precio,Stock,UrlImg from Insumos I
+inner join TipoInsumos T on T.ID=I.IDTipo
+inner join Categorias C on C.ID=I.IDCategoria
 go
 Create View VW_Personas as
-select ID,(
-select Descripcion from Cargos where ID=IDCargo) as Cargo,DNI,Nombre,Apellido from Personas
+select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido from Personas P inner join Cargos C on C.ID=P.IDCargo
 go
 
 Create Trigger TR_Verificar_Mesero on Mesas
@@ -106,8 +105,10 @@ begin
 
 end
 
+
+
 select *from VW_Personas
-select * from VW_Insumos
+select * from VW_Insumos order by Precio asc
 select * from TipoInsumos
 SELECT * from Categorias
 
