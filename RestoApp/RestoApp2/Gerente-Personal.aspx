@@ -9,9 +9,9 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TextBox4" runat="server" CssClass="drop"></asp:TextBox></td>
-                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TextBox5" runat="server"  CssClass="drop"></asp:TextBox></td>
-                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TextBox6" runat="server"  CssClass="drop"></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
+                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
+                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
               </tr>
           </table>
     </div>
@@ -51,7 +51,7 @@
 					<tbody>
 
 
-					<%foreach (Dominio.Persona item in Personalista){%>
+					<%foreach (Dominio.Persona item in PersonaLista){%>
                         
 
 						<tr>

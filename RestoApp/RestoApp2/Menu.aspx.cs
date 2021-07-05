@@ -61,26 +61,50 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
-            //string Buscar=TB_Buscar.Text;
+            string Buscar = TB_Buscar.Text;
             int IDCategoria = int.Parse(DDL_Categorias.SelectedItem.Value);
             int IDTipo = int.Parse(DDL_Tipo_Insumo.SelectedItem.Value);
-            
-            
-            if (IDCategoria!=0 && IDTipo!=0)
+
+           
+            //Los 3 tienen datos
+            if (IDCategoria != 0 && IDTipo != 0 && Buscar != " ")
             {
-                ListaMenu=((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id ==IDTipo && x.Categoria.Id==IDCategoria);
-                
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
+
             }
-            else if(IDCategoria == 0 && IDTipo != 0)
+            //Cate no tiene Datos y los demas si
+            else if (IDCategoria == 0 && IDTipo != 0 && Buscar != " ")
             {
-                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo );
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
             }
-            else if(IDCategoria != 0 && IDTipo == 0)
+            //Tipo no tine datos y los demas si
+            else if (IDCategoria != 0 && IDTipo == 0 && Buscar != " ")
+            {
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Categoria.Id == IDCategoria && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
+            }
+            //Buscar no tiene datos y los demas si 
+            else if(IDCategoria != 0 && IDTipo != 0 && Buscar == " ")
+            {
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria);
+            }
+            //Solo buscar tiene datos
+            else if (IDCategoria == 0 && IDTipo == 0 && Buscar != " ")
+            {
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
+            }
+            //Solo Cate tiene datos
+            else if(IDCategoria != 0 && IDTipo == 0 && Buscar == " ")
             {
                 ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Categoria.Id == IDCategoria);
             }
+            //Solo Tipo tiene datos
+            else if (IDCategoria == 0 && IDTipo != 0 && Buscar == " ")
+            {
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo );
+            }
             else
             {
+                //ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
                 ListaMenu = ((List<Insumo>)Session["ListadoMenu"]);
             }
         }
