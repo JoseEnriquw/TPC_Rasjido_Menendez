@@ -12,6 +12,9 @@ namespace Negocio
     public class Consultas
     {
         public AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "TPC_Rasjido_Menendez_DB");
+        
+        public Persona userLog = new Persona();
+        public List<Mesa> listaMesa = new List<Mesa>();
 
         //Categorias
         public List<Categorias> FiltrosCategorias()
@@ -87,14 +90,14 @@ namespace Negocio
                 while (accessdata.Lector.Read())
                 {
                     Insumo aux = new Insumo();
-                    aux.Id = (int)accessdata.Lector.GetInt32(0);
-                    aux.Nombre = (string)accessdata.Lector.GetString(1);
+                    aux.Id = accessdata.Lector.GetInt32(0);
+                    aux.Nombre = accessdata.Lector.GetString(1);
 
                     aux.Categoria = new Categorias(accessdata.Lector.GetInt32(2), accessdata.Lector.GetString(3));
-                    aux.Tipo = new TipoInsumo((int)accessdata.Lector.GetInt32(4), accessdata.Lector.GetString(5));
+                    aux.Tipo = new TipoInsumo(accessdata.Lector.GetInt32(4), accessdata.Lector.GetString(5));
                     aux.Precio = (decimal)accessdata.Lector["Precio"];
                     aux.Stock = (short)accessdata.Lector["Stock"];
-                    aux.UrlImagen = (string)accessdata.Lector.GetString(8);
+                    aux.UrlImagen = accessdata.Lector.GetString(8);
 
                     lista.Add(aux);
                 }
@@ -112,6 +115,45 @@ namespace Negocio
             return lista;
         }
 
+        public bool ValidarLogueo(string _dni, string _pass)
+        {
+            accessdata.setearConsulta("select * from Usuarios where DNI = '" + _dni + "' AND Contraseña = '" + _pass + "'");
+            accessdata.ejecutarLectura();
+            if (accessdata.Lector.Read())
+            {
+                accessdata.cerrarConexion();
+                List<Persona> lista = ListarPersona(" where DNI='" + _dni + "'");
+                if (lista.Count == 1)
+                {
+                    userLog.Id = lista[0].Id;
+                    userLog.Nombre = lista[0].Nombre;
+                    userLog.Apellido = lista[0].Apellido;
+                    userLog.Cargo.Id = lista[0].Cargo.Id;
+                    userLog.Cargo.Descripcion = lista[0].Cargo.Descripcion;
+                    userLog.Dni = lista[0].Dni;
+                    return true;
+                }
+            }
+            accessdata.cerrarConexion();
+            return false;
+        }
+
+        public List<Mesa> MesasVacias()
+        {
+            accessdata.setearConsulta("");
+            accessdata.ejecutarLectura();
+            while (accessdata.Lector.Read())
+            {
+                Mesa aux = new Mesa();
+                aux.NumeroMesa = (int)accessdata.Lector["ID"];
+                aux.Pedidos = null;
+                aux.Mesero = null;
+                aux.Estado = "libre";
+                listaMesa.Add(aux);
+            }
+            return listaMesa;
+        }
+
         //public List<Pedido> ListarPedido(string consulta)
         //{
         //    List<Pedido> lista = new List<Pedido>();
@@ -123,7 +165,7 @@ namespace Negocio
         //        aux.Id = (int)accessdata.Lector["Id"];
         //        aux.Precio = (decimal)accessdata.Lector["Precio"];
         //        aux.ListaItems.Add( (ItemsPedidos)accessdata.Lector["Items"]);
-               
+
 
         //        lista.Add(aux);
         //    }
@@ -163,38 +205,6 @@ namespace Negocio
             return lista;
         }
 
-        //Usuario
-        public List<Usuario> ListarUsuario(string consulta)
-        {
-            List<Usuario> lista = new List<Usuario>();
-
-            try
-            {
-                accessdata.setearConsulta(consulta);
-                accessdata.ejecutarLectura();
-                while (accessdata.Lector.Read())
-                {
-                    Usuario aux = new Usuario();
-                    aux.Id = (int)accessdata.Lector["ID"];
-                    aux.Dni = (string)accessdata.Lector["DNI"];
-                    aux.Contraseña = (string)accessdata.Lector["Contraseña"];
-
-                    lista.Add(aux);
-                }
-            }
-            catch (Exception ex)
-            {
-                 throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-
-            return lista;
-        }
-
-        
 
         //public List<Mesa> ListarMesa(string consulta)
         //{

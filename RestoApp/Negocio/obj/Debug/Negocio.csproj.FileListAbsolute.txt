@@ -7,3 +7,12 @@ D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.c
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\bin\Debug\Negocio.dll
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\bin\Debug\Dominio.dll
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\obj\Debug\Negocio.dll
+C:\Users\Adriel Rasjido\Desktop\Trabajo cuatrimestral\Publico\RestoApp\Negocio\obj\Debug\Negocio.pdb

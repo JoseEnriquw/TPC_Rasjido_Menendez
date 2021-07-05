@@ -16,22 +16,21 @@
                     <div>
                        <h3>INGRESA CON TU USUARIO</h3>
                        <label for="yourName">DNI</label>
-                       <input type="text" class="form-control" id="yourName" />
+                       <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
                        <label for="exampleInputEmail1">Contraseña</label>
-                       <input type="password" class="form-control" id="exampleInputEmail1" />
+                       <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                        <br />
-                       <button class="btn btn-theme" OnClick="window.open('Mesa.aspx');" >INGRESAR</button>
+                       <asp:Button ID="Button1" runat="server" Text="INGRESAR" CssClass="btn btn-theme" OnClick="ingreso"/>
                    </div>
                </td>
                <td class="login-menue">
                    <div>
                         <h3 class="text-white mb-4">QUE HAY EN EL MENU?</h3>
-                        <button class="btn btn-theme" OnClick="window.open('Mesero.aspx');">VER MENU</button>
+                        <asp:Button ID="Button2" runat="server" Text="VER MENU" CssClass="btn btn-theme" OnClick="MenuVer"/>
                    </div>
                </td>
            </tr>
-       </table>              
-
+       </table>               
 
 
 </div>

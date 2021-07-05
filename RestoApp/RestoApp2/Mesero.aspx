@@ -26,70 +26,33 @@
 
 
 
+<%  
+            Negocio.Consultas cons = new Negocio.Consultas();
+            foreach (Dominio.Mesa item in cons.listaMesa)
+            { %>
 
 						<tr>
 							<td>
                                 <div class="job-box">
-                                        N1
+                                        N<%=item.NumeroMesa%>
                                 </div>
 							</td>
 							<td>
-								<div class="abierto">
-                                        ABIERTO
+								<div class="<%=item.Estado%>">
+                                        <%=item.Estado%>
                                 </div>
 							</td>
 							<td class="text-center">
-								PEPITO JUAREZ
+								<%=item.Mesero.Nombre%>&nbsp<%=item.Mesero.Apellido%>
 							</td>
 							<td class="text-right">
-								<asp:Button OnClick="window.open('Mesero.aspx');" ID="Button3" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
-								<asp:Button OnClick="window.open('Mesa.aspx');" ID="Button1" runat="server" Text="SUS PEDIDOS" class="btn btn-theme"/>
+								<asp:Button ID="Button1" runat="server" Text="ABRIR MESA" class="btn btn-theme"/>
+								<asp:Button ID="Button2" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
+								<asp:Button ID="Button3" runat="server" Text="SUS PEDIDOS" class="btn btn-theme"/>
 							</td>
 						</tr>
 
-
-						<tr>
-							<td>
-                                <div class="job-box">
-                                        N2
-                                </div>
-							</td>
-							<td>
-								<div class="libre">
-                                        LIBRE
-                                </div>
-							</td>
-							<td class="text-center">
-								SIN MESERO
-							</td>
-							<td class="text-right">
-								<asp:Button OnClick="window.open('Mesa.aspx');" ID="Button2" runat="server" Text="ABRIR MESA" class="btn btn-theme"/>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-                                <div class="job-box">
-                                        N3
-                                </div>
-							</td>
-							<td>
-								<div class="cerrado">
-                                        CERRADO
-                                </div>
-							</td>
-							<td class="text-center">
-								JUAN PEREZ
-							</td>
-							<td class="text-right">
-								
-							</td>
-						</tr>
-
-
-
-
-
+<%} %>
 
 
 						</tbody>
