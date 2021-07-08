@@ -4,3 +4,9 @@ D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.c
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.dll
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.pdb
 D:\Programacion\Visual\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\bin\Debug\Dominio.dll
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.dll
+C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.pdb

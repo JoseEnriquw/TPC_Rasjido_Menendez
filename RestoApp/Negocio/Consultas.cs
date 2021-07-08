@@ -12,6 +12,9 @@ namespace Negocio
     public class Consultas
     {
         public AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "TPC_Rasjido_Menendez_DB");
+        public Persona userLog = new Persona();
+        public List<Mesa> mesasPriv = new List<Mesa>();
+        public List<Mesa> mesasPubl = new List<Mesa>();
 
         //Categorias
         public List<Categorias> FiltrosCategorias()
@@ -194,27 +197,77 @@ namespace Negocio
             return lista;
         }
 
-        
+        public bool ValidarLogueo(string _dni, string _pass)
+        {
+            accessdata.setearConsulta("select * from Usuarios where DNI = '" + _dni + "' AND Contraseña = '" + _pass + "'");
+            accessdata.ejecutarLectura();
+            if (accessdata.Lector.Read())
+            {
+                accessdata.cerrarConexion();
+                List<Persona> lista = ListarPersona(" where DNI='" + _dni + "'");
+                if (lista.Count == 1)
+                {
+                    userLog.Id = lista[0].Id;
+                    userLog.Nombre = lista[0].Nombre;
+                    userLog.Apellido = lista[0].Apellido;
+                    userLog.Cargo = new Cargo(lista[0].Cargo.Id, lista[0].Cargo.Descripcion);
+                    userLog.Dni = lista[0].Dni;
+                    return true;
+                }
+            }
 
-        //public List<Mesa> ListarMesa(string consulta)
-        //{
-        //    List<Mesa> lista = new List<Mesa>();
-        //    accessdata.setearConsulta(consulta);
-        //    accessdata.ejecutarLectura();
-        //    while (accessdata.Lector.Read())
-        //    {
-        //        Mesa aux = new Mesa();
-        //        aux.Id = (int)accessdata.Lector["ID"];
-        //        aux.IDMeser = (int)accessdata.Lector["IDMesero"];
 
-        //        lista.Add(aux);
-        //    }
+            accessdata.cerrarConexion();
+            return false;
+        }
 
+        //Lista publica
+        public List<Mesa> CrearMesas()
+        {
+              List<Mesa> lista = new List<Mesa>();
+              accessdata.setearConsulta("select ID from Mesas");
+              accessdata.ejecutarLectura();
+              while (accessdata.Lector.Read())
+                {
+                Mesa aux = new Mesa();
+                aux.NumeroMesa = (int)accessdata.Lector["ID"];
+                aux.Mesero = new Persona();
+                aux.Mesero = null;
+                aux.Pedidos = new Pedido();
+                aux.Pedidos = null;
+                aux.Estado = "abierto";
+                lista.Add(aux);
+            }
+           return lista;
+        }
 
-        //    return lista;
-        //}
+        //Lista privada para mesero
+        public List<Mesa> VistaMesero(List<Mesa> lista)
+        {
+            for (int i = 0; i < lista.Count(); i++)
+            {
+                if (lista[i].Mesero.Id != userLog.Id && lista[i].Estado=="abierto")
+                {
+                    lista[i].Estado = "cerrado";
+                }
+            }
+            return lista;
+        }
 
-  
+        //Actualizacion lista publica
+        public List<Mesa> MeseroAct(List<Mesa> lista, Mesa itemAct)
+        {
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if(lista[i].NumeroMesa == itemAct.NumeroMesa)
+                {
+                    lista[i].Mesero = itemAct.Mesero;
+                    lista[i].Pedidos = itemAct.Pedidos;
+                    lista[i].Estado = itemAct.Estado;
+                }
+            }
+            return lista;
+        }
 
     }
 }
