@@ -36,43 +36,43 @@ namespace RestoApp2
             //Los 3 tienen datos
             if (DNI !=" " && Nombre != " " && Apellido != " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.Contains(DNI) && x.Nombre.Contains(Nombre) && x.Apellido.Contains(Apellido) );
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) && x.Nombre.ToUpper().Contains(Nombre.ToUpper()) && x.Apellido.ToUpper().Contains(Apellido.ToUpper()) );
 
             }
             //DNI no tiene Datos y los demas si
            else if (DNI == " " && Nombre != " " && Apellido != " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.Contains(Nombre) && x.Apellido.Contains(Apellido));
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.ToUpper().Contains(Nombre.ToUpper()) && x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
 
             }
             //Nombre no tine datos y los demas si
            else if (DNI != " " && Nombre == " " && Apellido != " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.Contains(DNI) &&  x.Apellido.Contains(Apellido));
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) &&  x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
 
             }
             //Apellido no tiene datos y los demas si 
            else if (DNI != " " && Nombre != " " && Apellido == " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.Contains(DNI) && x.Nombre.Contains(Nombre) );
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) && x.Nombre.ToUpper().Contains(Nombre.ToUpper()) );
 
             }
             //Solo DNI tiene datos
            else if (DNI != " " && Nombre == " " && Apellido == " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.Contains(DNI) );
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) );
 
             }
             //Solo Nombre tiene datos
            else if (DNI == " " && Nombre != " " && Apellido == " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.Contains(Nombre) );
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.ToUpper().Contains(Nombre.ToUpper()) );
 
             }
             //Solo Apellido tiene datos
            else if (DNI == " " && Nombre == " " && Apellido != " ")
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x =>  x.Apellido.Contains(Apellido));
+                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x =>  x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
 
             }
            else {

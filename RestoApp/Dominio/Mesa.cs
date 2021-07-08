@@ -10,7 +10,7 @@ namespace Dominio
     {
         public int Id { get; set; }
         public Persona Mesero { get; set; }
-        public List<Pedido> Pedidos { get; set; }
+        public Pedido Pedidos { get; set; }
         public bool Estado { get; set; }
     }
 }

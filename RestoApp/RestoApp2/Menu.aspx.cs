@@ -69,18 +69,18 @@ namespace RestoApp2
             //Los 3 tienen datos
             if (IDCategoria != 0 && IDTipo != 0 && Buscar != " ")
             {
-                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Buscar.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Buscar.ToUpper())));
 
             }
             //Cate no tiene Datos y los demas si
             else if (IDCategoria == 0 && IDTipo != 0 && Buscar != " ")
             {
-                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Tipo.Id == IDTipo && (x.Nombre.ToUpper().Contains(Buscar.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Buscar.ToUpper())));
             }
             //Tipo no tine datos y los demas si
             else if (IDCategoria != 0 && IDTipo == 0 && Buscar != " ")
             {
-                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Categoria.Id == IDCategoria && (x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar)));
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Buscar.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Buscar.ToUpper())));
             }
             //Buscar no tiene datos y los demas si 
             else if(IDCategoria != 0 && IDTipo != 0 && Buscar == " ")
@@ -90,7 +90,7 @@ namespace RestoApp2
             //Solo buscar tiene datos
             else if (IDCategoria == 0 && IDTipo == 0 && Buscar != " ")
             {
-                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
+                ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.ToUpper().Contains(Buscar.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Buscar.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Buscar.ToUpper()));
             }
             //Solo Cate tiene datos
             else if(IDCategoria != 0 && IDTipo == 0 && Buscar == " ")
