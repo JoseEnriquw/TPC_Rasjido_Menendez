@@ -14,7 +14,7 @@ namespace Negocio
         public AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "TPC_Rasjido_Menendez_DB");
         public Persona userLog = new Persona();
         public List<Mesa> mesasPriv = new List<Mesa>();
-        public List<Mesa> mesasPubl = new List<Mesa>();
+        public List<Mesa> mesasPubl = new List<Mesa>(); 
 
         //Categorias
         public List<Categorias> FiltrosCategorias()
@@ -232,9 +232,9 @@ namespace Negocio
                 Mesa aux = new Mesa();
                 aux.NumeroMesa = (int)accessdata.Lector["ID"];
                 aux.Mesero = new Persona();
-                aux.Mesero = null;
+                aux.Mesero.Nombre = "S/";
+                aux.Mesero.Apellido = "mesero";
                 aux.Pedidos = new Pedido();
-                aux.Pedidos = null;
                 aux.Estado = "abierto";
                 lista.Add(aux);
             }

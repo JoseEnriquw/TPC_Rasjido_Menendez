@@ -14,14 +14,26 @@ namespace RestoApp2
         public List<Dominio.Mesa> ListaMesas;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                int id = int.Parse(Request.QueryString["id"]);
 
-            Consultas logueo = new Consultas();
-
+                Consultas logueo = new Consultas();
                 ListaMesas = new List<Dominio.Mesa>();
-                logueo.mesasPriv = logueo.VistaMesero(logueo.mesasPubl);
-                ListaMesas = logueo.mesasPriv;
-                Session.Add("ListadoMesa", ListaMesas);
 
+
+                //Esta funcion esta de prueba (usar el session del inicio.aspx.cs
+                logueo.mesasPubl = logueo.CrearMesas();
+
+
+                ListaMesas = logueo.VistaMesero(logueo.mesasPubl);
+                Session.Add("ListadoMesa", ListaMesas);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Error.aspx");
+                throw ex;
+            }
         }
     }
 }

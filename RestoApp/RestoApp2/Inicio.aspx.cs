@@ -21,6 +21,7 @@ namespace RestoApp2
 
             if (!IsPostBack)
             {
+                //Fijarse (no es publica la lista se debe intentar con session)
                 Consulta.mesasPubl = Consulta.CrearMesas();
             }
         }
@@ -36,11 +37,11 @@ namespace RestoApp2
                     {
                         if (logueo.userLog.Cargo.Descripcion == "Empleado")
                         {
-                            Response.Redirect("Mesero.aspx");
+                            Response.Redirect("Mesero.aspx?id="+logueo.userLog.Id.ToString());
                         }
                         else if (logueo.userLog.Cargo.Descripcion == "Gerente")
                         {
-                            Response.Redirect("Gerente.aspx");
+                            Response.Redirect("Gerente.aspx?id="+logueo.userLog.Id.ToString());
                         }
                         else
                         {
@@ -68,7 +69,7 @@ namespace RestoApp2
         protected void MenuVer(object sender, EventArgs e)
         {
             Consultas logueo = new Consultas();
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id="+ logueo.userLog.Id.ToString());
         }
     }
 }

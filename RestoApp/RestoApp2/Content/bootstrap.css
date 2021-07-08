@@ -8387,12 +8387,14 @@ mesa-img {
     margin-bottom: 2%;
 }
 
-    .hovereffect:hover img {
-        -webkit-transform: rotate(-7deg) scale(1.33);
-        -ms-transform: rotate(-7deg) scale(1.33);
-        transform: rotate(-7deg) scale(1.33);
-        border: 2px solid #2a2a72;
-    }
+.hovereffect:hover img {
+    -webkit-transform: rotate(-7deg) scale(1.33);
+    -ms-transform: rotate(-7deg) scale(1.33);
+    transform: rotate(-7deg) scale(1.33);
+    border: 2px solid #2a2a72;
+    
+}
+
 
 
 .card {
@@ -8716,6 +8718,7 @@ body {
 
 
 .volver-atras-izquierda {
+    z-index: 8;
     background: #009ffd;
     border: 2px solid #000;
     border-radius: 10px;
@@ -8740,6 +8743,7 @@ body {
 }
 
 .volver-atras-derecha-1 {
+    z-index: 8;
     background: #009ffd;
     border: 2px solid #000;
     border-radius: 10px;
@@ -8764,6 +8768,7 @@ body {
 }
 
 .volver-atras-derecha-2 {
+    z-index: 8;
     background: #009ffd;
     border: 2px solid #000;
     border-radius: 10px;
@@ -8841,6 +8846,7 @@ body {
     align-items: center;
     border-radius: 65px;
 }
+
 
 @media (max-width: 1366px) and (max-height: 768px) {
     .jumbotron {

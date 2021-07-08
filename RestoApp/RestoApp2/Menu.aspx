@@ -32,7 +32,7 @@
             
             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
                             <a href="Mesa.aspx?<%=item.Id %>" class="hovereffect">
-                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px"
+                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px;"
 >
                                 
                             </a>
