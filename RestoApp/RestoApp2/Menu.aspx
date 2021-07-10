@@ -32,9 +32,7 @@
             
             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
                             <a href="Mesa.aspx?<%=item.Id %>" class="hovereffect">
-                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px;"
->
-                                
+                                <img class="img-responsive" src="<% =item.UrlImagen %>" alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px;">
                             </a>
                     <div class="card-body">
                         <h4 class="card-text mt-5 mb-0 fs-14"><b><% =item.Nombre %></b></h4>

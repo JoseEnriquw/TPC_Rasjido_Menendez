@@ -45,37 +45,59 @@
 							<th><span>NOMBRE</span></th>
 							<th><span>APELLIDO</span></th>
 							<th><span>DNI</span></th>
+							<th><span>CARGO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
 					<tbody>
 
 
-					<%foreach (Dominio.Persona item in PersonaLista){%>
-                        
 
-						<tr>
+						<tr style="background: #bbb;">
 							<td>
-                                <%=item.Nombre%>
+								<asp:TextBox ID="NombreNew" runat="server"></asp:TextBox>
 							</td>
 							<td>
-								<%=item.Apellido%>
+								<asp:TextBox ID="ApellidoNew" runat="server"></asp:TextBox>
 							</td>
 							<td>
-								<%=item.Dni%>
+								<asp:TextBox ID="DniNew" runat="server"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="CargoNew" runat="server"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme"/>
-								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR" class="btn btn-theme"/>
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" />
 							</td>
 						</tr>
 
-						<%} %>
 
+                        <asp:Repeater runat="server" ID="repeaterPersonal">
+                            <ItemTemplate>
+                        
 
+                        <tr style="background: #eee;">
+							<td>
+								<asp:TextBox ID="Nombre" runat="server"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Apellido" runat="server"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Dni" runat="server"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Cargo" runat="server"></asp:TextBox>
+							</td>
+							<td class="text-right">
+								<asp:Button  ID="Button1" runat="server" Text="ACTUALIZAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button  ID="Button2" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
+								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
+							</td>
+						</tr>
 
-
-
+                        </ItemTemplate>
+                        </asp:Repeater>
 
 						</tbody>
 					</table>

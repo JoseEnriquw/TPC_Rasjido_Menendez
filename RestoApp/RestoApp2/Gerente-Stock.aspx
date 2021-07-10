@@ -7,11 +7,11 @@
         <p class="lead">Ten un vistazo a tus productos!</p>
 
 
-		<table class="filter">
+<table class="filter">
               <tr>
-                  <td class="item-filter">INSUMO: <asp:TextBox ID="TextBox4" runat="server" CssClass="drop"></asp:TextBox></td>
-                  <td class="item-filter">PRECIO MENOR A: <asp:TextBox ID="TextBox5" runat="server"  CssClass="drop"></asp:TextBox></td>
-                  <td class="item-filter">CANTIDAD MENOR A: <asp:TextBox ID="TextBox6" runat="server"  CssClass="drop"></asp:TextBox></td>
+                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:TextBox></td>
+                  <td class="item-filter">PRECIO: <asp:DropDownList ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
+                  <td class="item-filter">CANTIDAD: <asp:DropDownList ID="TB_Cantidad" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
               </tr>
           </table>
     </div>
@@ -52,24 +52,28 @@
 
 
 
+                        <asp:Repeater runat="server" ID="repeaterStock">
+                            <ItemTemplate>
+						
 
-						<tr>
+						<tr style="background: #eee;">
 							<td>
-								<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+								<%#Eval("Nombre").ToString().ToUpper()%>
 							</td>
 							<td>
-								<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
 							<td>
-								<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Cantidad" runat="server"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="ACTUALIZAR"  class="btn btn-theme"/>
-								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR"  class="btn btn-theme"/>
+								<asp:Button  ID="Button1" runat="server" Text="RENOVAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button  ID="Button3" runat="server" Text="REMOVER"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
 							</td>
 						</tr>
 
-
+						</ItemTemplate>
+                        </asp:Repeater>
 
 
 

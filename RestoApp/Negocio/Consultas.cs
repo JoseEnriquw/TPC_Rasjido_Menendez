@@ -113,26 +113,70 @@ namespace Negocio
 
             return lista;
         }
+        public void actualizarPersona(bool opcion, Persona aux)
+        {
+            try
+            {
+                string id = " ID=" + aux.Id.ToString();
+                string cargo = " IDCargo=" + aux.Cargo.Id.ToString();
+                string dni = " DNI='" + aux.Dni + "'";
+                string nombre = " Nombre='" + aux.Nombre + "'";
+                string apellido = " Apellido='" + aux.Apellido + "'";
 
-        //public List<Pedido> ListarPedido(string consulta)
-        //{
-        //    List<Pedido> lista = new List<Pedido>();
-        //    accessdata.setearConsulta(consulta);
-        //    accessdata.ejecutarLectura();
-        //    while (accessdata.Lector.Read())
-        //    {
-        //        Pedido aux = new Pedido();
-        //        aux.Id = (int)accessdata.Lector["Id"];
-        //        aux.Precio = (decimal)accessdata.Lector["Precio"];
-        //        aux.ListaItems.Add( (ItemsPedidos)accessdata.Lector["Items"]);
-               
+                if (opcion == true)
+                {
+                    accessdata.setearConsulta("update Personas set" + id + " and" + cargo + " and" + dni + " and" + nombre + " and" + apellido);
+                }
+                else
+                {
+                    accessdata.setearConsulta("delete from Personas where" + id + " and" + cargo + " and" + dni + " and" + nombre + " and" + apellido);
+                }
 
-        //        lista.Add(aux);
-        //    }
-        //    return lista;
-        //}
+                accessdata.ejectutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+        }
 
-        //Personas
+        public void actualizarInsumo(bool opcion, Insumo aux)
+        {
+            try
+            {
+                string id = " ID=" + aux.Id.ToString();
+                string nombre = " Nombre='" + aux.Nombre + "'";
+                string idcategoria = " IDCategoria=" + aux.Categoria.Id.ToString();
+                string idtipo = " IDTipo=" + aux.Tipo.Id.ToString();
+                string precio = " Precio=" + aux.Precio.ToString();
+                string stock = " Stock=" + aux.Stock.ToString();
+                string url = " UrlImg='" + aux.UrlImagen + "'";
+
+
+                if (opcion == true)
+                {
+                    accessdata.setearConsulta("update Personas set" + id + " and" + nombre + " and" + idcategoria + " and" + idtipo + " and" + precio + " and" + stock + " and" + url);
+                }
+                else
+                {
+                    accessdata.setearConsulta("delete from Personas where" + id + " and" + nombre + " and" + idcategoria + " and" + idtipo + " and" + precio + " and" + stock + " and" + url);
+                }
+
+                accessdata.ejectutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+        }
         public List<Persona> ListarPersona(string where)
         {
             List<Persona> lista = new List<Persona>();
@@ -224,12 +268,16 @@ namespace Negocio
         public List<Mesa> CrearMesas()
         {
               List<Mesa> lista = new List<Mesa>();
-              accessdata.setearConsulta("select ID from Mesas");
+              accessdata.setearConsulta("select * from Mesas");
               accessdata.ejecutarLectura();
               while (accessdata.Lector.Read())
                 {
                 Mesa aux = new Mesa();
+
                 aux.NumeroMesa = (int)accessdata.Lector["ID"];
+                if ((String)accessdata.Lector["Descripcion"] == "none") { aux.Nombre = "N°" + accessdata.Lector["ID"].ToString(); }
+                else { aux.Nombre = (String)accessdata.Lector["Descripcion"]; }
+
                 aux.Mesero = new Persona();
                 aux.Mesero.Nombre = "S/";
                 aux.Mesero.Apellido = "mesero";
@@ -239,24 +287,5 @@ namespace Negocio
             }
            return lista;
         }
-
-      
-       
-
-        //Actualizacion lista publica
-        public List<Mesa> MeseroAct(List<Mesa> lista, Mesa itemAct)
-        {
-            for (int i = 0; i < lista.Count; i++)
-            {
-                if(lista[i].NumeroMesa == itemAct.NumeroMesa)
-                {
-                    lista[i].Mesero = itemAct.Mesero;
-                    lista[i].Pedidos = itemAct.Pedidos;
-                    lista[i].Estado = itemAct.Estado;
-                }
-            }
-            return lista;
-        }
-
     }
 }

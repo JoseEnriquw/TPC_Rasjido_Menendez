@@ -34,7 +34,7 @@
 						<tr>
 							<td>
                                 <div class="job-box">
-                                        <%#Eval("NumeroMesa")%>
+                                        <%#Eval("Nombre")%>
                                 </div>
 							</td>
 							<td>
@@ -48,14 +48,16 @@
 
 								
 							
-								<% if(prueba =="LIBRE" ){ %>
+								<%if(prueba =="LIBRE"){%>
 								<asp:Button ID="Button1" runat="server" Text="ABRIR MESA!" class="btn btn-theme" CommandArgument='<%#Eval("NumeroMesa")%>' OnClick="AbrirMesa" />
-								<%}
-                                    else if (prueba == "ABIERTO")
-                                    {%>
+								<%}%>
+
+                                   <%else /*if (prueba == "ABIERTO")*/{%>
 								<asp:Button ID="Button2" runat="server" Text="SUS PEDIDOS" class="btn btn-theme"/>
 								<asp:Button ID="Button3" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
 								<%} %>
+
+
 							</td>
 						</tr>
 

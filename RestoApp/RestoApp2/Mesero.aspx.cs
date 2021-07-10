@@ -47,7 +47,6 @@ namespace RestoApp2
             ((List<Dominio.Mesa>)Session["MesasGerente"])[pos].Mesero = ((Dominio.Persona)Session["UserLog"]);
 
             Response.Redirect("Mesa.aspx");
-            //((Button)sender).Text=
         }
 
         public List<Dominio.Mesa> VistaMesero(List<Dominio.Mesa> lista,int id)

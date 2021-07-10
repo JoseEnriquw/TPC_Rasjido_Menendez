@@ -9,6 +9,7 @@ namespace Dominio
     public class Mesa
     {
         public int NumeroMesa { get; set; }
+        public string Nombre { get; set; }
         
         public Persona Mesero { get; set; }
         
