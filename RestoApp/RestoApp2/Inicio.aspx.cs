@@ -12,17 +12,18 @@ namespace RestoApp2
     public partial class _Default : Page
     {
         
-        public List<Dominio.Persona> ListaPersonas = new List<Persona>();
+       
+        public Persona userLog = new Persona();
         protected void Page_Load(object sender, EventArgs e)
         {
             Consultas Consulta = new Consultas();
-            ListaPersonas= Consulta.ListarPersona(" ");
-            Session["ListaPersonas"]= ListaPersonas;
+     
 
-            if (!IsPostBack)
+            if (Session["MesasGerente"]==null)
             {
                 //Fijarse (no es publica la lista se debe intentar con session)
-                Consulta.mesasPubl = Consulta.CrearMesas();
+                Session["MesasGerente"] = Consulta.CrearMesas();
+
             }
         }
 
@@ -33,15 +34,16 @@ namespace RestoApp2
                 Consultas logueo = new Consultas();
                 if (TextBox1.Text != "" && TextBox2.Text != "")
                 {
-                    if (logueo.ValidarLogueo(TextBox1.Text, TextBox2.Text))
+                    if (logueo.ValidarLogueo(TextBox1.Text, TextBox2.Text,ref userLog))
                     {
-                        if (logueo.userLog.Cargo.Descripcion == "Empleado")
+                        Session["UserLog"] = userLog;
+                        if (userLog.Cargo.Descripcion == "Empleado")
                         {
-                            Response.Redirect("Mesero.aspx?id="+logueo.userLog.Id.ToString());
+                            Response.Redirect("Mesero.aspx");
                         }
-                        else if (logueo.userLog.Cargo.Descripcion == "Gerente")
+                        else if (userLog.Cargo.Descripcion == "Gerente")
                         {
-                            Response.Redirect("Gerente.aspx?id="+logueo.userLog.Id.ToString());
+                            Response.Redirect("Gerente.aspx");
                         }
                         else
                         {
@@ -69,7 +71,12 @@ namespace RestoApp2
         protected void MenuVer(object sender, EventArgs e)
         {
             Consultas logueo = new Consultas();
-            Response.Redirect("Menu.aspx?id="+ logueo.userLog.Id.ToString());
+            Response.Redirect("Menu.aspx");
         }
+
+
+    
+
     }
 }
+

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Mesero" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mesero.aspx.cs" Inherits="RestoApp2.Mesero" %>
+﻿<%@ Page Title="Mesero" Language="C#" MasterPageFile="~/Site.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Mesero.aspx.cs" Inherits="RestoApp2.Mesero" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -26,31 +26,32 @@
 
 
 
-					<%foreach ( Dominio.Mesa item in ListaMesas)
-                        {%>
+					
+                   
 
-                        
-
+                        <asp:Repeater ID="RepeaterMesero" runat="server">
+							<ItemTemplate>
 						<tr>
 							<td>
                                 <div class="job-box">
-                                        N<%=item.NumeroMesa%>
+                                        <%#Eval("NumeroMesa")%>
                                 </div>
 							</td>
 							<td>
-								<div class="<%=item.Estado%>">
-                                        <%=item.Estado.ToUpper()%>
-                                </div>
+								<div class="<%#Eval("Estado")%>">
+                                    	<%# prueba = Eval("Estado").ToString().ToUpper()  %>
 							</td>
 							<td class="text-center">
-								<%=item.Mesero.Nombre.ToUpper()%> <%=item.Mesero.Apellido.ToUpper()%>
+								<%#Eval("Mesero.Nombre").ToString().ToUpper()%> <%#Eval("Mesero.Apellido").ToString().ToUpper()%>
 							</td>
 							<td class="text-right">
-								<%if (item.Estado == "libre")
-                                    {%>
-								<asp:Button ID="Button1" runat="server" Text="ABRIR MESA!" class="btn btn-theme"/>
+
+								
+							
+								<% if(prueba =="LIBRE" ){ %>
+								<asp:Button ID="Button1" runat="server" Text="ABRIR MESA!" class="btn btn-theme" CommandArgument='<%#Eval("NumeroMesa")%>' OnClick="AbrirMesa" />
 								<%}
-                                    else if (item.Estado == "abierto")
+                                    else if (prueba == "ABIERTO")
                                     {%>
 								<asp:Button ID="Button2" runat="server" Text="SUS PEDIDOS" class="btn btn-theme"/>
 								<asp:Button ID="Button3" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
@@ -58,8 +59,8 @@
 							</td>
 						</tr>
 
-					<%	} %>
-
+				         </ItemTemplate>
+						</asp:Repeater>
 
 
 

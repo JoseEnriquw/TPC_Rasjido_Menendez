@@ -12,9 +12,8 @@ namespace Negocio
     public class Consultas
     {
         public AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "TPC_Rasjido_Menendez_DB");
-        public Persona userLog = new Persona();
-        public List<Mesa> mesasPriv = new List<Mesa>();
-        public List<Mesa> mesasPubl = new List<Mesa>(); 
+       
+
 
         //Categorias
         public List<Categorias> FiltrosCategorias()
@@ -197,7 +196,7 @@ namespace Negocio
             return lista;
         }
 
-        public bool ValidarLogueo(string _dni, string _pass)
+        public bool ValidarLogueo(string _dni, string _pass, ref Persona userLog)
         {
             accessdata.setearConsulta("select * from Usuarios where DNI = '" + _dni + "' AND Contraseña = '" + _pass + "'");
             accessdata.ejecutarLectura();
@@ -235,24 +234,14 @@ namespace Negocio
                 aux.Mesero.Nombre = "S/";
                 aux.Mesero.Apellido = "mesero";
                 aux.Pedidos = new Pedido();
-                aux.Estado = "abierto";
+                aux.Estado = "libre";
                 lista.Add(aux);
             }
            return lista;
         }
 
-        //Lista privada para mesero
-        public List<Mesa> VistaMesero(List<Mesa> lista)
-        {
-            for (int i = 0; i < lista.Count(); i++)
-            {
-                if (lista[i].Mesero.Id != userLog.Id && lista[i].Estado=="abierto")
-                {
-                    lista[i].Estado = "cerrado";
-                }
-            }
-            return lista;
-        }
+      
+       
 
         //Actualizacion lista publica
         public List<Mesa> MeseroAct(List<Mesa> lista, Mesa itemAct)
