@@ -55,19 +55,19 @@
 
 						<tr style="background: #bbb;">
 							<td>
-								<asp:TextBox ID="NombreNew" runat="server"></asp:TextBox>
+								<asp:TextBox ID="NombreNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="ApellidoNew" runat="server"></asp:TextBox>
+								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="DniNew" runat="server"></asp:TextBox>
+								<asp:TextBox ID="DniNew" runat="server" TextMode="Number" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="CargoNew" runat="server"></asp:TextBox>
+								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td class="text-right">
-                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" />
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="agregar" />
 							</td>
 						</tr>
 
@@ -78,16 +78,16 @@
 
                         <tr style="background: #eee;">
 							<td>
-								<asp:TextBox ID="Nombre" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="Number"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Cargo" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="Button1" runat="server" Text="ACTUALIZAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
@@ -102,4 +102,33 @@
 						</tbody>
 					</table>
 </div>
+
+	<div id="ventanaEmergente" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    width: 21%;
+    height: 29%;
+    left: 60%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+	">
+		<h1 style="color: #fca014">HUBO UN ERROR!</h1>
+        DEBE COMPLETAR TODOS LOS CAMPOS!
+        <br /><br /><br />
+        <asp:Button ID="Button3" runat="server" Text="CONTINUAR" CssClass="btn btn-theme"/>
+    </div>
+	
+
+    <script>
+        function abrirventanaEmerg() {
+            document.getElementById("ventanaEmergente").style.display = "block";
+            document.body.style.visibility = "visible: false";
+        }
+    </script>
 </asp:Content>

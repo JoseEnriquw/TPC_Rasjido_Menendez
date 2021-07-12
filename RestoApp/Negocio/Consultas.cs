@@ -144,6 +144,29 @@ namespace Negocio
             }
         }
 
+        public void agregarPersonal(Persona aux)
+        {
+            try
+            {
+                string id = aux.Id.ToString();
+                string cargo = aux.Cargo.Id.ToString();
+                string dni = aux.Dni;
+                string nombre = aux.Nombre;
+                string apellido = aux.Apellido;
+
+                accessdata.setearConsulta("insert into Personas values(" + cargo + ",'" + dni + "','" + nombre + "','" + apellido + "')");  
+                accessdata.ejectutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+        }
+
         public void actualizarInsumo(bool opcion, Insumo aux)
         {
             try
@@ -177,6 +200,32 @@ namespace Negocio
                 accessdata.cerrarConexion();
             }
         }
+
+        public void agregarInsumo(Insumo aux)
+        {
+            try
+            {
+                string id = aux.Id.ToString();
+                string nombre = aux.Nombre;
+                string idcategoria = aux.Categoria.Id.ToString();
+                string idtipo = aux.Tipo.Id.ToString();
+                string precio = aux.Precio.ToString();
+                string stock = aux.Stock.ToString();
+                string url = aux.UrlImagen;
+
+                accessdata.setearConsulta("insert into Insumos values('" + nombre + "'," + idcategoria + "," + idtipo + "," + precio + "," + stock + ",'" + url + "')");
+                accessdata.ejectutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+        }
+
         public List<Persona> ListarPersona(string where)
         {
             List<Persona> lista = new List<Persona>();
@@ -267,6 +316,7 @@ namespace Negocio
         //Lista publica
         public List<Mesa> CrearMesas()
         {
+            int cont = 1;
               List<Mesa> lista = new List<Mesa>();
               accessdata.setearConsulta("select * from Mesas");
               accessdata.ejecutarLectura();
@@ -275,7 +325,7 @@ namespace Negocio
                 Mesa aux = new Mesa();
 
                 aux.NumeroMesa = (int)accessdata.Lector["ID"];
-                if ((String)accessdata.Lector["Descripcion"] == "none") { aux.Nombre = "N°" + accessdata.Lector["ID"].ToString(); }
+                if ((String)accessdata.Lector["Descripcion"] == "none") { aux.Nombre = "N°" + cont.ToString(); }
                 else { aux.Nombre = (String)accessdata.Lector["Descripcion"]; }
 
                 aux.Mesero = new Persona();
@@ -284,8 +334,43 @@ namespace Negocio
                 aux.Pedidos = new Pedido();
                 aux.Estado = "libre";
                 lista.Add(aux);
+                cont++;
             }
            return lista;
+        }
+
+        public int cantidadMesas()
+        {
+            int cant = 0;
+            accessdata.setearConsulta("select * from Mesas");
+            accessdata.ejecutarLectura();
+            while (accessdata.Lector.Read())
+            {
+                cant++;
+            }
+            accessdata.cerrarConexion();
+            return cant;
+        }
+
+        public void MesasInsert(int cantidadNueva, int cantidadAnterior)
+        {
+            int dif = cantidadNueva - cantidadAnterior;
+            if (cantidadAnterior == cantidadNueva) { }
+            else if (cantidadAnterior < cantidadNueva)
+            {
+                for (int i = 0; i < (cantidadNueva - cantidadAnterior); i++)
+                {
+                    accessdata.setearConsulta("insert into Mesas values ('none')");
+                    accessdata.ejectutarAccion();
+                    accessdata.cerrarConexion();
+                }
+            }
+            else
+            {
+                accessdata.setearConsulta("delete Mesas where ID = (select top(" + dif + ") ID from Mesas order by ID desc)");
+                accessdata.ejectutarAccion();
+                accessdata.cerrarConexion();
+            }
         }
     }
 }

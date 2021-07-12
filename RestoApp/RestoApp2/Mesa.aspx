@@ -56,7 +56,7 @@
 								
 							</td>
 							<td>
-                                <asp:TextBox ID="txtCantidad" runat="server"  ></asp:TextBox>
+                                <asp:TextBox ID="txtCantidad" runat="server" TextMode="Number"></asp:TextBox>
 							</td>
 							<td>
 								<%#Eval("PrecioSubTotal") %>

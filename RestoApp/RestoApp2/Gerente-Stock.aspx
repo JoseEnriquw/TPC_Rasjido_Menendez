@@ -64,7 +64,7 @@
 								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
 							<td>
-								<asp:TextBox ID="Cantidad" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Cantidad" runat="server" TextMode="Number"></asp:TextBox>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="Button1" runat="server" Text="RENOVAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>

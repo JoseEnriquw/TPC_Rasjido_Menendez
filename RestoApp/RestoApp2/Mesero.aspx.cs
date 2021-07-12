@@ -16,9 +16,23 @@ namespace RestoApp2
         public string prueba = " ";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
             try
             {
-
                 int id = ((Dominio.Persona)Session["UserLog"]).Id;
                 List<Dominio.Mesa> listaprueba = new List<Dominio.Mesa>();
                 listaprueba = ((List<Dominio.Mesa>)Session["MesasGerente"]);
@@ -36,9 +50,6 @@ namespace RestoApp2
                 {
                     Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasMesero"]), id);
                 }
-
-
-
                     RepeaterMesero.DataSource = ListaMesas;
                     RepeaterMesero.DataBind();
                
@@ -48,6 +59,7 @@ namespace RestoApp2
                Response.Redirect("Error.aspx");
                 throw ex;
             }
+
         }
 
         protected void AbrirMesa(object sender, EventArgs e)

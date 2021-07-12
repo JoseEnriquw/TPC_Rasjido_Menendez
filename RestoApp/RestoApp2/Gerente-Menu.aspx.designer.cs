@@ -78,13 +78,13 @@ namespace RestoApp2
         protected global::System.Web.UI.WebControls.TextBox PrecioNew;
 
         /// <summary>
-        /// Control Button1.
+        /// Control ButtonAdd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button ButtonAdd;
 
         /// <summary>
         /// Control repeaterMenu.
@@ -94,5 +94,14 @@ namespace RestoApp2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater repeaterMenu;
+
+        /// <summary>
+        /// Control Button3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button3;
     }
 }

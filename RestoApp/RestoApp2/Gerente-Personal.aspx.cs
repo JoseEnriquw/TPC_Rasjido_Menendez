@@ -14,6 +14,21 @@ namespace RestoApp2
         public List<Persona> PersonaLista = new List<Persona>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
             Consultas personal = new Consultas();
             try
             {
@@ -153,6 +168,25 @@ namespace RestoApp2
                 cont++;
             }
         }
+
+        protected void agregar(object sender, EventArgs e)
+        {
+            Consultas personal = new Consultas();
+            Persona aux = new Persona();
+            if (NombreNew.Text != "" && ApellidoNew.Text != "" && DniNew.Text != "" && CargoNew.Text != "")
+            {
+                aux.Nombre = NombreNew.Text;
+                aux.Apellido = ApellidoNew.Text;
+                aux.Dni = DniNew.Text;
+                aux.Cargo.Descripcion = CargoNew.Text;
+                if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
+            }
+            else
+            {
+                string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
+            }
+            
+        }
     }
 }
-

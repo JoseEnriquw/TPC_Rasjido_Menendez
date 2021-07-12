@@ -39,23 +39,51 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container" >
-                <div class="navbar-header">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: url('https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1')">
+
+                <div class="navbar-header" style="text-align:center">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/Inicio">INICIO</a>
+                    <a class="navbar-brand" runat="server" href="~/Inicio" style="color: #FFF">RESTO.APP</a>
                 </div>
                 <div class="navbar-collapse collapse">
+                    <asp:UpdatePanel runat="server" ID="NavUpdate" UpdateMode="Conditional">
+                        <ContentTemplate>
                     <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Inicio">INICIO</a></li>
                         <li><a runat="server" href="~/Menu">MENU</a></li>
+                        <%if (OPCMESERO.Visible == true && OPCGERENTE.Visible == false)
+                            {%>
+                        <li>
+                            <a runat="server" href="~/Mesero.aspx">
+                            <asp:Label ID="OPCMESERO" Text="MESERO" runat="server"/></a>
+                        </li>
+                        <%} else if (OPCMESERO.Visible == false && OPCGERENTE.Visible == true){%>
+                        <li>
+                            <a runat="server" href="~/Gerente.aspx">
+                            <asp:Label ID="OPCGERENTE" Text="GERENTE" runat="server"/></a>
+                        </li>
+                        <li>
+                            <a runat="server" href="~/Gerente-Personal.aspx">
+                            <asp:Label ID="OPCGERENTE_1" Text="PERSONAL" runat="server"/></a>
+                        </li>
+                        <li>
+                            <a runat="server" href="~/Gerente-Stock.aspx">
+                            <asp:Label ID="OPCGERENTE_2" Text="STOCK" runat="server"/></a>
+                        </li>
+                        <li>
+                            <a runat="server" href="~/Gerente-Menu.aspx">
+                            <asp:Label ID="OPCGERENTE_3" Text="INSUMOS" runat="server"/></a>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
             </div>
-        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

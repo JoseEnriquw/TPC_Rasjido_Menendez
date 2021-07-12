@@ -8,7 +8,8 @@
     </div>
     <div class="contenido">
 
-                <h1 class="text-center" style="top:0; color:#222; background: #009ffd; border: 2px solid #000;">Seleccione una de las siguientes opciones!</h1>
+    
+        <h1 class="text-center" style="top:0; color:#fff; background-image: url('https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1'); border: 2px solid #000;">Seleccione una de las siguientes opciones!</h1>
 
     <div class="col-sm-6 col-lg-4 mb-2 interior">
                         <a href="Gerente-Stock.aspx">
@@ -56,7 +57,7 @@
                     </div>
 
      <div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 10px">
-                        <a href="Gerente.aspx" >
+                        <a href="javascript:abrirventanaEmerg()" >
                         <div class="portfolio-wrapper" >
                             <div class="portfolio-image">
                                 <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 80px; object-fit:cover;"/>
@@ -82,7 +83,44 @@
                             </div>
                         </div></a>
                     </div>     
+    </div>
+
+
+    <div id="ventanaEmergente" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 47%;
+    width: 30%;
+    height: 30%;
+    left: 35%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+	">
+		<h1 style="color: #fca014">AGREGA TUS CAMBIOS!</h1>
+        Actualmente cuentas con un total de: <%=cantidadMesas%> Mesas
+        <p>quieres hacer algun cambio?</p>
+
+
+        <asp:TextBox ID="NewCant" runat="server" ForeColor="Black" TextMode="Number" Text="0" Font-Bold="true"/>
+
+        <p>Advertencia todo cambio afectara a la base de datos<br />Esto afectara las mesas existentes!</p>
+
+		<asp:Button  ID="si" runat="server" Text="CONTINUAR" class="btn btn-theme" OnClick="NewMesas"/>
+		<asp:Button  ID="no" runat="server" Text="CANCELAR!" class="btn btn-theme"  />
 
     </div>
+	
+
+    <script>
+        function abrirventanaEmerg() {
+            document.getElementById("ventanaEmergente").style.display = "block";
+            document.body.style.visibility = "visible: false";
+        }
+    </script>
     </asp:Content>
 

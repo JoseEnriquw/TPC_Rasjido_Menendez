@@ -14,6 +14,21 @@ namespace RestoApp2
         public List<Insumo> InsumoLista = new List<Insumo>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
             Consultas GerenteMenu = new Consultas();
             try
             {
@@ -155,6 +170,26 @@ namespace RestoApp2
                 }
                 cont++;
             }
+        }
+
+        protected void agregar(object sender, EventArgs e)
+        {
+            Consultas personal = new Consultas();
+            Insumo aux = new Insumo();
+            if (InsumoNew.Text != "" && TipoNew.Text != "" && PrecioNew.Text != "" && UrlNew.Text != "")
+            {
+                aux.Nombre = InsumoNew.Text;
+                aux.Categoria.Id = int.Parse(TipoNew.Text);
+                aux.Precio = decimal.Parse(PrecioNew.Text);
+                aux.UrlImagen = UrlNew.Text;
+                aux.Tipo.Id = 1;
+            }
+            else
+            {
+                string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
+            }
+
         }
     }
 }
