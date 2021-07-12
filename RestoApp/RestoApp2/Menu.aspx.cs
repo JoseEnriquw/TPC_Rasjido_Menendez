@@ -20,7 +20,7 @@ namespace RestoApp2
             {
                 ListaMenu = new List<Insumo>();
                 ListaMenu = query.ListarInsumos("");
-                Session.Add("ListadoMenu", ListaMenu);
+                Session["ListadoMenu"]= ListaMenu;
                 if (!IsPostBack) { 
                 
 

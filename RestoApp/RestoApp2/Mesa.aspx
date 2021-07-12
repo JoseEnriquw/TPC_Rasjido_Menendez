@@ -38,27 +38,28 @@
 
 
 
-
+			<asp:Repeater ID="RepeaterMesa" runat="server">
+                     <ItemTemplate>
 
 
 						<tr>
 							<td>
-                                <img src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/08/13202915/Gastronomia-del-mundo-111.jpg" alt="..." class="item-mesa"/>
+                                <img src="<%# Eval("Item.UrlImagen") %>" alt="..." class="item-mesa"/>
 							</td>
 							<td>
-                                NOMBRE DEL PLATO
+                                <%# Eval("Item.Nombre") %>
 							</td>
 							<td>
-								MESA N°1
+								<%# mesa.Nombre%>
 							</td>
 							<td>
-								PENDIENTE
+								
 							</td>
 							<td>
-                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtCantidad" runat="server"  ></asp:TextBox>
 							</td>
 							<td>
-								$99.99
+								<%#Eval("PrecioSubTotal") %>
 							</td>
 							<td class="text-right">
 								<asp:Button ID="Button1" runat="server" Text="ENTREGADO" class="btn btn-theme"/>
@@ -69,32 +70,9 @@
 
 
 
-												<tr>
-							<td>
-                                <img src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/08/13202915/Gastronomia-del-mundo-111.jpg" alt="..." class="item-mesa"/>
-							</td>
-							<td>
-                                NOMBRE DEL PLATO
-							</td>
-							<td>
-								MESA N°1
-							</td>
-							<td>
-								PENDIENTE
-							</td>
-							<td>
-                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-							</td>
-							<td>
-								$99.99
-							</td>
-							<td class="text-right">
-								<asp:Button ID="Button4" runat="server" Text="ENTREGADO" class="btn btn-theme"/>
-								<asp:Button ID="Button5" runat="server" Text="PAGADO" class="btn btn-theme"/>
-								<asp:Button ID="Button6" runat="server" Text="ELIMINAR" class="btn btn-theme"/>
-							</td>
-						</tr>
-
+							
+						</ItemTemplate>
+             </asp:Repeater>
 
 
 

@@ -27,7 +27,18 @@ namespace RestoApp2
                
                     //Esta funcion esta de prueba (usar el session del inicio.aspx.cs
                    ListaMesas = VistaMesero(listaprueba,id);
-             
+
+                if (Session["MesasMesero"] == null)
+                {
+                    Session["MesasMesero"] = ListaMesas;
+                }
+                else
+                {
+                    Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasMesero"]), id);
+                }
+
+
+
                     RepeaterMesero.DataSource = ListaMesas;
                     RepeaterMesero.DataBind();
                
@@ -45,7 +56,8 @@ namespace RestoApp2
             int pos = ((List<Dominio.Mesa>)Session["MesasGerente"]).FindIndex(x => x.NumeroMesa == argument);
             ((List<Dominio.Mesa>)Session["MesasGerente"])[pos].Estado ="abierto";
             ((List<Dominio.Mesa>)Session["MesasGerente"])[pos].Mesero = ((Dominio.Persona)Session["UserLog"]);
-
+            Session["MesaActual"] = ((List<Dominio.Mesa>)Session["MesasGerente"])[pos];
+            
             Response.Redirect("Mesa.aspx");
         }
 
