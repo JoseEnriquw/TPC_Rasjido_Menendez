@@ -15,6 +15,22 @@ namespace RestoApp2
         public List<Insumo> ListaMenu;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+
             Consultas query = new Consultas();
             try
             {
@@ -64,7 +80,7 @@ namespace RestoApp2
             string Buscar = TB_Buscar.Text;
             int IDCategoria = int.Parse(DDL_Categorias.SelectedItem.Value);
             int IDTipo = int.Parse(DDL_Tipo_Insumo.SelectedItem.Value);
-
+         
            
             //Los 3 tienen datos
             if (IDCategoria != 0 && IDTipo != 0 && Buscar != " ")
@@ -108,6 +124,23 @@ namespace RestoApp2
                 ListaMenu = ((List<Insumo>)Session["ListadoMenu"]);
             }
         }
+      public bool VerficarIdInsumo(int id)
+        {
+            bool resultado = false;
+            Dominio.Mesa mesa = new Dominio.Mesa();
+            mesa = ((Dominio.Mesa)Session["MesaActual"]);
 
+            if (mesa.Pedidos.ListaItems!=null)
+            {
+                foreach (ItemsPedidos item in mesa.Pedidos.ListaItems)
+                {
+                    if (item.Item.Id == id) resultado = true;
+
+                }
+            }
+            
+
+            return resultado;
+        }
     }
 }

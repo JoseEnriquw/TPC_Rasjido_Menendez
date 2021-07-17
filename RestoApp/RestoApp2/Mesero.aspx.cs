@@ -16,9 +16,24 @@ namespace RestoApp2
         public string prueba = " ";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+           
             try
             {
-
                 int id = ((Dominio.Persona)Session["UserLog"]).Id;
                 List<Dominio.Mesa> listaprueba = new List<Dominio.Mesa>();
                 listaprueba = ((List<Dominio.Mesa>)Session["MesasGerente"]);
@@ -31,23 +46,42 @@ namespace RestoApp2
                 if (Session["MesasMesero"] == null)
                 {
                     Session["MesasMesero"] = ListaMesas;
-                }
+                      
+                    }
                 else
                 {
                     Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasMesero"]), id);
                 }
-
-
-
                     RepeaterMesero.DataSource = ListaMesas;
                     RepeaterMesero.DataBind();
-               
+
+
+                int cont = 0;
+                foreach (Dominio.Mesa item in ListaMesas)
+                {
+                    if (item.Estado.ToUpper() == "LIBRE")
+                    {
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = true;
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "ABRIR MESA";
+                    }else if (item.Estado.ToUpper() == "ABIERTO")
+                    {
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = true;
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "VER PEDIDOS";
+                    }
+                    else
+                    {
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = false;
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "MESA EN ATENCION";
+                    }
+                    cont++;
+                }
             }
             catch (Exception ex)
             {
                Response.Redirect("Error.aspx");
                 throw ex;
             }
+
         }
 
         protected void AbrirMesa(object sender, EventArgs e)
@@ -77,5 +111,7 @@ namespace RestoApp2
             }
             return lista;
         }
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Mesa" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mesa.aspx.cs" Inherits="RestoApp2.Mesa" %>
+﻿<%@ Page Title="Mesa" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" enableEventValidation="false" CodeBehind="Mesa.aspx.cs" Inherits="RestoApp2.Mesa" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -7,27 +7,80 @@
         <p class="lead">Visualiza tu mesa, pedidos y gestiona mejor tus entregas!</p>
     </div>
 
-	<a href="Mesero.aspx">
-    <div class="volver-atras-izquierda">
-        <div class="texto-atras-izquierda">VER MAS<br /> MESAS</div>
-    </div>
-	</a>
+    
 
-	<a href="Menu.aspx">
-	<div class="volver-atras-derecha-1">
-        <div class="texto-atras-derecha">AGREGAR<br /> DEL MENU</div>
-    </div>
-    </a>
+    <div class="contenido" style="margin-top:25%;">
 
-    <div class="contenido">
+        <div id="BOTONES"">
+		<div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 0; margin-bottom:5%; margin-top: 0">
+                        <a href="Mesero.aspx" >
+                        <div class="portfolio-wrapper" >
+                            <div class="portfolio-image">
+                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h4>VOLVER A MESAS</h4>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
 
-				<table class="table user-list">
+          <div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 0; margin-bottom:5%; margin-top: 0">
+                        <a href="Menu.aspx" >
+                        <div class="portfolio-wrapper" >
+                            <div class="portfolio-image">
+                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h4>AGREGAR DEL MENU</h4>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>     
+			</div>
+
+
+		
+									<table class="table user-list" style="margin-bottom:0; border-bottom: none;">
+					<thead>
+						<tr style="background: #232528; color: #fff">
+							<th><span>MESERO A CARGO</span></th>
+							<th class="text-center"><span>MESA ABIERTA</span></th>
+							<th class="text-center"><span>CANTIDAD DE INSUMOS</span></th>
+							<th class="text-center"><span>COSTO TOTAL</span></th>
+							<th class="text-right"><span>OPCIONES</span></th>
+						</tr>
+					</thead>
+					<tbody>
+
+		<tr style="background: #ddd; font-size: 15px">
+							<td>
+                                <%= mesa.Mesero.Nombre %>
+							</td>
+							<td class="text-center">
+								<%= mesa.Nombre %>
+							</td>
+							<td class="text-center">
+								<%= CantTotalInsumos %>
+							</td>
+							<td class="text-center">
+								$<%= mesa.Pedidos.PrecioTotal %>
+							</td>
+							<td class="text-right">
+								<asp:Button ID="Button1" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
+							</td>
+						</tr>
+
+						</tbody></table>
+
+				<table class="table user-list" style="margin-top:0">
 					<thead>
 						<tr>
 							<th><span>IMG</span></th>
 							<th><span>PEDIDO</span></th>
-							<th><span>MESA</span></th>
-							<th><span>ESTADO</span></th>
+						    <th><span>ESTADO</span></th>
 							<th><span>CANTIDAD</span></th>
 							<th><span>PRECIO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
@@ -35,6 +88,8 @@
 					</thead>
 					<tbody>
 
+
+						
 
 
 
@@ -49,21 +104,19 @@
 							<td>
                                 <%# Eval("Item.Nombre") %>
 							</td>
-							<td>
-								<%# mesa.Nombre%>
-							</td>
+							
 							<td>
 								
 							</td>
 							<td>
-                                <asp:TextBox ID="txtCantidad" runat="server"  ></asp:TextBox>
+                                <asp:TextBox ID="txtCantidad"  runat="server" TextMode="Number"   ></asp:TextBox>
+
 							</td>
 							<td>
-								<%#Eval("PrecioSubTotal") %>
+								$<%#Eval("PrecioSubTotal") %>
 							</td>
 							<td class="text-right">
 								<asp:Button ID="Button1" runat="server" Text="ENTREGADO" class="btn btn-theme"/>
-								<asp:Button ID="Button3" runat="server" Text="PAGADO" class="btn btn-theme"/>
 								<asp:Button ID="Button2" runat="server" Text="ELIMINAR" class="btn btn-theme"/>
 							</td>
 						</tr>
@@ -73,16 +126,6 @@
 							
 						</ItemTemplate>
              </asp:Repeater>
-
-
-
-
-
-
-
-
-
-
 
 
 

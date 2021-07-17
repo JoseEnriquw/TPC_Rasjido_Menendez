@@ -46,17 +46,7 @@
 							</td>
 							<td class="text-right">
 
-								
-							
-								<%if(prueba =="LIBRE"){%>
-								<asp:Button ID="Button1" runat="server" Text="ABRIR MESA!" class="btn btn-theme" CommandArgument='<%#Eval("NumeroMesa")%>' OnClick="AbrirMesa" />
-								<%}%>
-
-                                   <%else /*if (prueba == "ABIERTO")*/{%>
-								<asp:Button ID="Button2" runat="server" Text="SUS PEDIDOS" class="btn btn-theme"/>
-								<asp:Button ID="Button3" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
-								<%} %>
-
+								<asp:Button ID="ButtonOpc" runat="server" Text="ABRIR MESA!" class="btn btn-theme" CommandArgument='<%#Eval("NumeroMesa")%>' OnClick="AbrirMesa" />
 
 							</td>
 						</tr>

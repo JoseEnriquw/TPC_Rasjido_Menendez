@@ -14,16 +14,15 @@ namespace RestoApp2
         
        
         public Persona userLog = new Persona();
+        public bool redit;
         protected void Page_Load(object sender, EventArgs e)
         {
             Consultas Consulta = new Consultas();
-     
-
+            Consultas logueo = new Consultas();
             if (Session["MesasGerente"]==null)
             {
-                //Fijarse (no es publica la lista se debe intentar con session)
                 Session["MesasGerente"] = Consulta.CrearMesas();
-
+                
             }
         }
 
@@ -37,27 +36,37 @@ namespace RestoApp2
                     if (logueo.ValidarLogueo(TextBox1.Text, TextBox2.Text,ref userLog))
                     {
                         Session["UserLog"] = userLog;
+
                         if (userLog.Cargo.Descripcion == "Empleado")
                         {
                             Response.Redirect("Mesero.aspx");
                         }
                         else if (userLog.Cargo.Descripcion == "Gerente")
                         {
+                            ((UpdatePanel)Master.FindControl("NavUpdate")).Update();
+                            
                             Response.Redirect("Gerente.aspx");
                         }
                         else
                         {
-                            Response.Write("<script>alert('USUARIO NO ENCONTRADO!');</script>");
+                            msjError.Text = "USUARIO NO ENCONTRADO!";
+                            string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
+
                         }
                     }
                     else
                     {
-                        Response.Write("<script>alert('VERIFIQUE LOS CAMPOS!');</script>");
+                        msjError.Text = "VERIFIQUE LOS CAMPOS!";
+                        string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
                     }
                 }
                 else
                 {
-                    Response.Write("<script>alert('DEBES INGRESAR LOS CAMPOS!');</script>");
+                    msjError.Text = "DEBES INGRESAR LOS CAMPOS!";
+                    string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
                 }
             }
             catch (Exception ex)
@@ -67,6 +76,7 @@ namespace RestoApp2
 
 
         }
+
 
         protected void MenuVer(object sender, EventArgs e)
         {

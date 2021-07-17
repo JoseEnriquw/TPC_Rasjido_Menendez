@@ -16,3 +16,12 @@ C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.c
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.dll
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.pdb
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.dll
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.pdb
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.dll
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.pdb
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
+D:\Programacion\Visual\Private-TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb
