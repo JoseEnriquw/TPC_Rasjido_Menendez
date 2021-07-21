@@ -18,7 +18,6 @@ namespace RestoApp2
         protected void Page_Load(object sender, EventArgs e)
         {
             Consultas Consulta = new Consultas();
-            Consultas logueo = new Consultas();
             if (Session["MesasGerente"]==null)
             {
                 Session["MesasGerente"] = Consulta.CrearMesas();
@@ -80,7 +79,6 @@ namespace RestoApp2
 
         protected void MenuVer(object sender, EventArgs e)
         {
-            Consultas logueo = new Consultas();
             Response.Redirect("Menu.aspx");
         }
 

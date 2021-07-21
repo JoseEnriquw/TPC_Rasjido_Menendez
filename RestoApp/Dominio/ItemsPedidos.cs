@@ -12,5 +12,7 @@ namespace Dominio
         public Insumo Item { get; set; }
         public decimal PrecioSubTotal { get; set; }
         public int Cantidad { get; set; }
+
+        public bool estado { get; set; }
     }
 }
