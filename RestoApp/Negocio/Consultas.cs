@@ -125,11 +125,11 @@ namespace Negocio
 
                 if (opcion == true)
                 {
-                    accessdata.setearConsulta("update Personas set" + id + " and" + cargo + " and" + dni + " and" + nombre + " and" + apellido);
+                    accessdata.setearConsulta("update Personas set" + cargo + " ," + dni + " ," + nombre + " ," + apellido + " where"+ id);
                 }
                 else
                 {
-                    accessdata.setearConsulta("delete from Personas where" + id + " and" + cargo + " and" + dni + " and" + nombre + " and" + apellido);
+                    accessdata.setearConsulta("delete from Personas where" + id);
                 }
 
                 accessdata.ejectutarAccion();
@@ -182,11 +182,11 @@ namespace Negocio
 
                 if (opcion == true)
                 {
-                    accessdata.setearConsulta("update Personas set" + id + " and" + nombre + " and" + idcategoria + " and" + idtipo + " and" + precio + " and" + stock + " and" + url);
+                    accessdata.setearConsulta("update Insumos set"+ stock + " where" + id);
                 }
                 else
                 {
-                    accessdata.setearConsulta("delete from Personas where" + id + " and" + nombre + " and" + idcategoria + " and" + idtipo + " and" + precio + " and" + stock + " and" + url);
+                    accessdata.setearConsulta("delete from Insumos where" + id);
                 }
 
                 accessdata.ejectutarAccion();

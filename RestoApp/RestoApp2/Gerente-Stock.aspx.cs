@@ -11,7 +11,7 @@ namespace RestoApp2
 {
     public partial class Gerente_Stock : System.Web.UI.Page
     {
-        public List<Insumo> StockLista = new List<Insumo>();
+        public List<Insumo> StockLista;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
@@ -30,8 +30,11 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
             Consultas GerenteMenu = new Consultas();
+
+            if (!IsPostBack) { 
             try
             {
+                StockLista = new List<Insumo>();
                 StockLista = GerenteMenu.ListarInsumos("");
                 Session.Add("ListadoStock", StockLista);
 
@@ -49,6 +52,7 @@ namespace RestoApp2
             {
                 Session.Add("Error", ex.ToString());
 
+            }
             }
         }
 
@@ -115,33 +119,7 @@ namespace RestoApp2
             Insumo aux = new Insumo();
 
             int cont = 0;
-            foreach (Insumo item in StockLista)
-            {
-                if (argument == item.Id.ToString()
-                    && ((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text != "")
-                {
-                    aux.Id = item.Id;
-                    aux.Nombre = item.Nombre;
-                    aux.Categoria = item.Categoria;
-                    aux.Tipo = item.Tipo;
-                    aux.UrlImagen = item.UrlImagen;
-                    aux.Precio = item.Precio;
-                    aux.Stock = short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text);
-
-                    insumos.actualizarInsumo(false, aux);
-                }
-                cont++;
-            }
-        }
-
-        protected void borrar(object sender, EventArgs e)
-        {
-            var argument = ((Button)sender).CommandArgument;
-            Consultas insumos = new Consultas();
-            Insumo aux = new Insumo();
-
-            int cont = 0;
-            foreach (Insumo item in StockLista)
+            foreach (Insumo item in ((List<Insumo>)Session["ListadoStock"]))
             {
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text != "")
@@ -155,6 +133,32 @@ namespace RestoApp2
                     aux.Stock = short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text);
 
                     insumos.actualizarInsumo(true, aux);
+                }
+                cont++;
+            }
+        }
+
+        protected void borrar(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+            Consultas insumos = new Consultas();
+            Insumo aux = new Insumo();
+
+            int cont = 0;
+            foreach (Insumo item in ((List<Insumo>)Session["ListadoStock"]))
+            {
+                if (argument == item.Id.ToString()
+                    && ((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text != "")
+                {
+                    aux.Id = item.Id;
+                    aux.Nombre = item.Nombre;
+                    aux.Categoria = item.Categoria;
+                    aux.Tipo = item.Tipo;
+                    aux.UrlImagen = item.UrlImagen;
+                    aux.Precio = item.Precio;
+                    aux.Stock = short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("Cantidad")).Text);
+
+                    insumos.actualizarInsumo(false, aux);
                 }
                 cont++;
             }

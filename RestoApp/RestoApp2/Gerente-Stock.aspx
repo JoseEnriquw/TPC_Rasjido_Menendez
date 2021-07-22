@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Stock" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Stock.aspx.cs" Inherits="RestoApp2.Gerente_Stock" %>
+﻿<%@ Page Title="Gerente-Stock" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Stock.aspx.cs" Inherits="RestoApp2.Gerente_Stock" EnableEventValidation="false"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -9,9 +9,9 @@
 
 <table class="filter">
               <tr>
-                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:TextBox></td>
-                  <td class="item-filter">PRECIO: <asp:DropDownList ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
-                  <td class="item-filter">CANTIDAD: <asp:DropDownList ID="TB_Cantidad" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
+                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
+                  <td class="item-filter">PRECIO: <asp:DropDownList ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number"></asp:DropDownList></td>
+                  <td class="item-filter">CANTIDAD: <asp:DropDownList ID="TB_Cantidad" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number"></asp:DropDownList></td>
               </tr>
           </table>
     </div>
@@ -64,7 +64,7 @@
 								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
 							<td>
-								<asp:TextBox ID="Cantidad" runat="server" TextMode="Number"></asp:TextBox>
+								<asp:TextBox ID="Cantidad" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="Button1" runat="server" Text="RENOVAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>

@@ -16,13 +16,14 @@
               </tr>
           </table>
 </div>
-
+    <%if (((Dominio.Persona)Session["UserLog"]) != null)
+        {%>
     <a href="Mesa.aspx">
     <div class="volver-atras-izquierda">
         <div class="texto-atras-izquierda">GESTIONA<br />TUS PEDIDOS</div>
     </div>
 	</a>
-
+    <%}%>
 
     <div class="contenido">
         <ul>
@@ -31,12 +32,16 @@
 
             
             <li class="col-md-6 col-lg-4 project" data-groups="[&quot;skill1&quot;]">
-          
+                            
+                            <%if (((Dominio.Persona)Session["UserLog"]) != null)
+                                {%>
                             <a href="Mesa.aspx?id=<%=item.Id %>" class="hovereffect" >
-                                
+                                <%}%>
                                 <img class="img-responsive" src="<% =item.UrlImagen %>"  alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px;">
+                            <%if (((Dominio.Persona)Session["UserLog"]) != null)
+                                {%>
                             </a>
-                 
+                            <%}%>
           
 
                     <div class="card-body">

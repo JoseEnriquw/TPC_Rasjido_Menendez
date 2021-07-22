@@ -11,7 +11,7 @@ namespace RestoApp2
 {
     public partial class Gerente_Menu : System.Web.UI.Page
     {
-        public List<Insumo> InsumoLista = new List<Insumo>();
+        public List<Insumo> InsumoLista;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
@@ -29,7 +29,46 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
+
+            
+            Consultas query = new Consultas();
+            if (!IsPostBack)
+            {
+                InsumoLista = new List<Insumo>();
+                InsumoLista = query.ListarInsumos("");
+                //Categoria DropDownList
+                //Extracción de información de la base de Datos
+                List<Categorias> listaCate = new List<Categorias>();
+                Categorias AuxCate = new Categorias(0, "None");
+                listaCate.Add(AuxCate);
+                listaCate.AddRange(query.FiltrosCategorias());
+
+                //Se agregan los datos de la lista DropDonwList
+                DDL_Categorias.DataSource = listaCate;
+                DDL_Categorias.DataTextField = "Descripcion";
+                DDL_Categorias.DataValueField = "Id";
+                DDL_Categorias.DataBind();
+
+
+                //Tipo de Insumo DropDownList 
+                //Extracción de información de la base de Datos
+                List<TipoInsumo> listaTipoInsumo = new List<TipoInsumo>();
+                TipoInsumo AuxTI = new TipoInsumo(0, "None");
+                listaTipoInsumo.Add(AuxTI);
+                listaTipoInsumo.AddRange(query.FiltrosTipoInsumo());
+
+                //Se agregan los datos de la lista DropDonwList
+                DDL_Tipo_Insumo.DataSource = listaTipoInsumo;
+                DDL_Tipo_Insumo.DataTextField = "Descripcion";
+                DDL_Tipo_Insumo.DataValueField = "Id";
+                DDL_Tipo_Insumo.DataBind();
+
+            }
+            
+
             Consultas GerenteMenu = new Consultas();
+
+            if (!IsPostBack) { 
             try
             {
                 InsumoLista = GerenteMenu.ListarInsumos("");
@@ -54,61 +93,56 @@ namespace RestoApp2
                 Session.Add("Error", ex.ToString());
 
             }
+            }
         }
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
             string Insumo = TB_Insumo.Text;
-            string Precio = TB_Precio.Text;
-            string Tipo = TB_Tipo.Text;
+            int IDCategoria = int.Parse(DDL_Categorias.SelectedItem.Value);
+            int IDTipo = int.Parse(DDL_Tipo_Insumo.SelectedItem.Value);
 
             //Los 3 tienen datos
-            if (Insumo != " " && Precio != " " && Tipo != " ")
+            if (IDCategoria != 0 && IDTipo != 0 && Insumo != " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(Tipo.ToUpper()));
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
 
             }
-            //INSUMO no tiene Datos y los demas si
-            else if (Insumo == " " && Precio != " " && Tipo != " ")
+            //Cate no tiene Datos y los demas si
+            else if (IDCategoria == 0 && IDTipo != 0 && Insumo != " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(Tipo.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
             }
-            //PRECIO no tine datos y los demas si
-            else if (Insumo != " " && Precio == " " && Tipo != " ")
+            //Tipo no tine datos y los demas si
+            else if (IDCategoria != 0 && IDTipo == 0 && Insumo != " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Categoria.Descripcion.ToUpper().Contains(Tipo.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
             }
-            //TIPO no tiene datos y los demas si 
-            else if (Insumo != " " && Precio != " " && Tipo == " ")
+            //Buscar no tiene datos y los demas si 
+            else if (IDCategoria != 0 && IDTipo != 0 && Insumo == " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria);
             }
-            //Solo INSUMO tiene datos
-            else if (Insumo != " " && Precio == " " && Tipo == " ")
+            //Solo buscar tiene datos
+            else if (IDCategoria == 0 && IDTipo == 0 && Insumo != " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper()));
             }
-            //Solo PRECIO tiene datos
-            else if (Insumo == " " && Precio != " " && Tipo == " ")
+            //Solo Cate tiene datos
+            else if (IDCategoria != 0 && IDTipo == 0 && Insumo == " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Categoria.Id == IDCategoria);
             }
-            //Solo TIPO tiene datos
-            else if (Insumo == " " && Precio == " " && Tipo != " ")
+            //Solo Tipo tiene datos
+            else if (IDCategoria == 0 && IDTipo != 0 && Insumo == " ")
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Categoria.Descripcion.ToUpper().Contains(Tipo.ToUpper()));
-
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo);
             }
             else
             {
-                InsumoLista = ((List<Insumo>)Session["ListadoInsumo"]);
+                //ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
+                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]);
             }
-
         }
 
 
@@ -119,7 +153,7 @@ namespace RestoApp2
             Insumo aux = new Insumo();
 
             int cont = 0;
-            foreach (Insumo item in InsumoLista)
+            foreach (Insumo item in ((List<Insumo>)Session["ListadoInsumo"]))
             {
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text != ""
@@ -129,36 +163,7 @@ namespace RestoApp2
                 {
                     aux.Id = item.Id;
                     aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
-                    aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
-                    aux.Categoria.Id = item.Categoria.Id;
-                    aux.Tipo = item.Tipo;
-                    aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
-                    aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
-                    aux.Stock = item.Stock;
-
-                    insumos.actualizarInsumo(false, aux);
-                }
-                cont++;
-            }
-        }
-
-        protected void borrar(object sender, EventArgs e)
-        {
-            var argument = ((Button)sender).CommandArgument;
-            Consultas insumos = new Consultas();
-            Insumo aux = new Insumo();
-
-            int cont = 0;
-            foreach (Insumo item in InsumoLista)
-            {
-                if (argument == item.Id.ToString()
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
-                {
-                    aux.Id = item.Id;
-                    aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
+                    aux.Categoria = new Categorias();
                     aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
                     aux.Categoria.Id = item.Categoria.Id;
                     aux.Tipo = item.Tipo;
@@ -170,6 +175,39 @@ namespace RestoApp2
                 }
                 cont++;
             }
+            Response.Redirect("Gerente-Menu.aspx");
+        }
+
+        protected void borrar(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+            Consultas insumos = new Consultas();
+            Insumo aux = new Insumo();
+
+            int cont = 0;
+            foreach (Insumo item in ((List<Insumo>)Session["ListadoInsumo"]))
+            {
+                if (argument == item.Id.ToString()
+                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text != ""
+                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text != ""
+                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text != ""
+                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
+                {
+                    aux.Id = item.Id;
+                    aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
+                    aux.Categoria = new Categorias();
+                    aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
+                    aux.Categoria.Id = item.Categoria.Id;
+                    aux.Tipo = item.Tipo;
+                    aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
+                    aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
+                    aux.Stock = item.Stock;
+
+                    insumos.actualizarInsumo(false, aux);
+                }
+                cont++;
+            }
+            Response.Redirect("Gerente-Menu.aspx");
         }
 
         protected void agregar(object sender, EventArgs e)
@@ -179,6 +217,7 @@ namespace RestoApp2
             if (InsumoNew.Text != "" && TipoNew.Text != "" && PrecioNew.Text != "" && UrlNew.Text != "")
             {
                 aux.Nombre = InsumoNew.Text;
+                aux.Categoria = new Categorias();
                 aux.Categoria.Id = int.Parse(TipoNew.Text);
                 aux.Precio = decimal.Parse(PrecioNew.Text);
                 aux.UrlImagen = UrlNew.Text;
@@ -189,7 +228,7 @@ namespace RestoApp2
                 string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
             }
-
+            Response.Redirect("Gerente-Menu.aspx");
         }
     }
 }

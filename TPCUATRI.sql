@@ -87,6 +87,14 @@ Create View VW_Personas as
 select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido from Personas P inner join Cargos C on C.ID=P.IDCargo
 go
 
+create table historial(
+ID int not null primary key identity(1,1),
+IdMesero int not null foreign key references Personas(ID),
+total money not null check(total >0),
+fechaHora datetime not null
+)
+go
+
 create Trigger TR_Verificar_Mesero on Mesas
 After insert
 as

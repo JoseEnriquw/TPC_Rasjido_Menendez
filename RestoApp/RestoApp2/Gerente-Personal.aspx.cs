@@ -11,7 +11,7 @@ namespace RestoApp2
 {
     public partial class Gerente_Personal : System.Web.UI.Page
     {
-        public List<Persona> PersonaLista = new List<Persona>();
+        public List<Persona> PersonaLista;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
@@ -29,28 +29,39 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
-            Consultas personal = new Consultas();
-            try
+            if (!IsPostBack)
             {
-                PersonaLista = personal.ListarPersona("");
-                Session.Add("ListadoPersonal", PersonaLista);
-
-                repeaterPersonal.DataSource = PersonaLista;
-                repeaterPersonal.DataBind();
-
-                int cont = 0;
-                foreach (Persona item in PersonaLista)
+                Consultas personal = new Consultas();
+                try
                 {
-                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text = item.Nombre.ToUpper();
-                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text = item.Apellido.ToUpper();
-                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text = item.Dni;
-                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text = item.Cargo.Descripcion.ToUpper();
-                    cont++;
+
+                    PersonaLista = personal.ListarPersona("");
+                    Session.Add("ListadoPersonal", PersonaLista);
+
+                    repeaterPersonal.DataSource = PersonaLista;
+                    repeaterPersonal.DataBind();
+
+                    int cont = 0;
+                    foreach (Persona item in PersonaLista)
+                    {
+                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text = item.Nombre.ToUpper();
+                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text = item.Apellido.ToUpper();
+                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text = item.Dni;
+                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text = item.Cargo.Descripcion.ToUpper();
+                        if (item.Cargo.Descripcion.ToUpper() == "GERENTE" && item.Id != ((Dominio.Persona)Session["UserLog"]).Id)
+                        {
+                            ((Button)repeaterPersonal.Items[cont].FindControl("ButtonA")).Visible = false;
+                            ((Button)repeaterPersonal.Items[cont].FindControl("ButtonA")).Enabled = false;
+                            ((Button)repeaterPersonal.Items[cont].FindControl("ButtonD")).Visible = false;
+                            ((Button)repeaterPersonal.Items[cont].FindControl("ButtonD")).Enabled = false;
+                        }
+                        cont++;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex.ToString());
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex.ToString());
+                }
             }
         }
 
@@ -105,11 +116,8 @@ namespace RestoApp2
             }
             else
             {
-
                 PersonaLista = ((List<Persona>)Session["ListadoPersonal"]);
             }
-
-
         }
 
 
@@ -120,7 +128,7 @@ namespace RestoApp2
             Persona aux = new Persona();
 
             int cont = 0;
-            foreach (Persona item in PersonaLista)
+            foreach (Persona item in ((List<Persona>)Session["ListadoPersonal"]))
             {
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text != ""
@@ -132,13 +140,15 @@ namespace RestoApp2
                     aux.Nombre = ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text;
                     aux.Apellido = ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text;
                     aux.Dni = ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text;
-                    aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text;
-                    if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
+                    aux.Cargo = new Cargo();
+                    aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text.ToUpper();
+                    if (aux.Cargo.Descripcion == "GERENTE") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
 
                     personal.actualizarPersona(true, aux);
                 }
                 cont++;
             }
+            Response.Redirect("Gerente-Personal.aspx");
         }
 
         protected void borrar(object sender, EventArgs e)
@@ -148,7 +158,7 @@ namespace RestoApp2
             Persona aux = new Persona();
 
             int cont = 0;
-            foreach (Persona item in PersonaLista)
+            foreach (Persona item in ((List<Persona>)Session["ListadoPersonal"]))
             {
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text != ""
@@ -160,6 +170,7 @@ namespace RestoApp2
                     aux.Nombre = ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text;
                     aux.Apellido = ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text;
                     aux.Dni = ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text;
+                    aux.Cargo = new Cargo();
                     aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text;
                     if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
 
@@ -167,6 +178,7 @@ namespace RestoApp2
                 }
                 cont++;
             }
+            Response.Redirect("Gerente-Personal.aspx");
         }
 
         protected void agregar(object sender, EventArgs e)
@@ -178,15 +190,17 @@ namespace RestoApp2
                 aux.Nombre = NombreNew.Text;
                 aux.Apellido = ApellidoNew.Text;
                 aux.Dni = DniNew.Text;
+                aux.Cargo = new Cargo();
                 aux.Cargo.Descripcion = CargoNew.Text;
                 if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
+                personal.agregarPersonal(aux);
             }
             else
             {
                 string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
             }
-            
+            Response.Redirect("Gerente-Personal.aspx");
         }
     }
 }

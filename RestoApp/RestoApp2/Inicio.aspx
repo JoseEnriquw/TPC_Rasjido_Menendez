@@ -26,7 +26,7 @@
                <td class="login-menue">
                    <div>
                         <h3 class="text-white mb-4">QUE HAY EN EL MENU?</h3>
-                        <asp:Button ID="Button2" runat="server" Text="VER MENU" CssClass="btn btn-theme"/>
+                        <asp:Button ID="Button2" runat="server" Text="VER MENU" CssClass="btn btn-theme" OnClick="MenuVer"/>
                    </div>
                </td>
            </tr>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Personal" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Personal.aspx.cs" Inherits="RestoApp2.Gerente_Personal" %>
+﻿<%@ Page Title="Gerente-Personal" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Personal.aspx.cs" Inherits="RestoApp2.Gerente_Personal" EnableEventValidation="false"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -9,9 +9,9 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
-                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
-                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" ></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" " TextMode="Number"></asp:TextBox></td>
+                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
+                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
               </tr>
           </table>
     </div>
@@ -38,6 +38,21 @@
 
 
     <div class="contenido">
+
+						<div class="col-sm-6 col-lg-4 mb-2 interior" style="width:100%; height: 0; margin-bottom:5%; margin-top: 0">
+                        <a href="Mesero.aspx" >
+                        <div class="portfolio-wrapper" >
+                            <div class="portfolio-image">
+                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h4>VER PEDIDOS DE LOS EMPLEADOS</h4>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
+
 
 				<table class="table user-list">
 					<thead>
@@ -78,21 +93,20 @@
 
                         <tr style="background: #eee;">
 							<td>
-								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server" TextMode="Number"></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="ACTUALIZAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
-								<asp:Button  ID="Button2" runat="server" Text="VER SUS PEDIDOS" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
-								<asp:Button  ID="Button3" runat="server" Text="ELIMINAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="ACTUALIZAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button  ID="ButtonD" runat="server" Text="ELIMINAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
 							</td>
 						</tr>
 

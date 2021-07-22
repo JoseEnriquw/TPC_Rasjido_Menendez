@@ -119,7 +119,7 @@
 							<td>
 								$<%#Eval("PrecioSubTotal") %></td>
 							<td class="text-right">
-								<asp:Button ID="ButtonUpdate" runat="server" Text="ACTUALIZAR" class="btn btn-theme"/>
+								<asp:Button ID="ButtonUpdate" runat="server" Text="ACTUALIZAR" class="btn btn-theme" OnClick="Actualizar" CommandArgument='<%#Eval("Item.Id")%>'/>
 								<asp:Button ID="ButtonEntrega" runat="server" Text="ENTREGADO" class="btn btn-theme" OnClick="Entregado" CommandArgument='<%#Eval("Item.Id")%>'/>
 								<asp:Button ID="ButtonDelete" runat="server" Text="ELIMINAR" class="btn btn-theme" OnClick="Eliminar" CommandArgument='<%#Eval("Item.Id")%>'/>
 							</td>

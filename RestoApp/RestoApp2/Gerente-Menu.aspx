@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Menu" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Menu.aspx.cs" Inherits="RestoApp2.Gerente_Menu" %>
+﻿<%@ Page Title="Gerente-Menu" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Menu.aspx.cs" Inherits="RestoApp2.Gerente_Menu" EnableEventValidation="false"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -9,9 +9,9 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:TextBox></td>
-                  <td class="item-filter">CATEGORIA: <asp:DropDownList ID="TB_Tipo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
-                  <td class="item-filter">PRECIO: <asp:DropDownList ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros"></asp:DropDownList></td>
+                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" " AutoPostBack="true"></asp:TextBox></td>
+                  <td class="item-filter">CATEGORIA: <asp:DropDownList ID="DDL_Categorias" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" AutoPostBack="true"></asp:DropDownList></td>
+                  <td class="item-filter">TIPO DE INSUMO: <asp:DropDownList ID="DDL_Tipo_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" AutoPostBack="true"></asp:DropDownList></td>
                   
               </tr>
           </table>
@@ -63,7 +63,7 @@
 								<asp:TextBox ID="TipoNew" runat="server" style="z-index: 1;" TextMode="Number"></asp:TextBox>
 							</td>
 							<td>
-                                <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;" TextMode="Number"></asp:TextBox>
+                                <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;"></asp:TextBox>
 							</td>
 							<td class="text-right">
 								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme"/>
@@ -80,25 +80,25 @@
 								<asp:Image ID="Img" runat="server" CssClass="item-list" style="z-index: 1;"/>
 							</td>
 							<td>
-                                <asp:TextBox ID="Insumo"  runat="server" style="z-index: 1;" TextMode="SingleLine"></asp:TextBox>
+                                <asp:TextBox ID="Insumo"  runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Tipo" runat="server" style="z-index: 1;" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="Tipo" runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-                                <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" TextMode="Number"></asp:TextBox>
+                                <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="Button1" runat="server" Text="RENOVAR" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button ID="Button1" runat="server" Text="RENOVAR" class="btn btn-theme" OnClick="actualizar" CommandArgument='<%#Eval("Id")%>' />
 							</td>
 
 						</tr>
 						<tr style="background: #bbb;">
 							<td></td><td>URL
-                            <asp:TextBox ID="Url" runat="server" class="url" style="z-index: 1;" TextMode="Url"></asp:TextBox>
+                            <asp:TextBox ID="Url" runat="server" class="url" style="z-index: 1;" TextMode="Url" AutoPostBack="true"></asp:TextBox>
 							</td><td></td><td></td>
 							<td class="text-right">
-							<asp:Button ID="Button3" runat="server" Text="REMOVER"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/></td>
+							<asp:Button ID="Button3" runat="server" Text="REMOVER"  class="btn btn-theme" OnClick="borrar" CommandArgument='<%#Eval("Id")%>' /></td>
 						</tr>
 
 

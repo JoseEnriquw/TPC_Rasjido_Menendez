@@ -14,7 +14,7 @@ namespace RestoApp2
         public Dominio.Mesa mesa;
         public int CantTotalInsumos;
         public int idInsumo;
-      
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,124 +37,126 @@ namespace RestoApp2
             mesa = new Dominio.Mesa();
             mesa = ((Dominio.Mesa)Session["MesaActual"]);
 
-           
-            //Se obtiene el ID_Insumo
-            if(Request.QueryString["id"] != null || idInsumo != 0)
+            if (!IsPostBack)
             {
-                idInsumo = int.Parse(Request.QueryString["id"]);
-            }
-            else
-            {
-                idInsumo = 0;
-            }
-            int cant = 0;
 
-            //Se obtiene la cantidad de Items en la mesa actual
-            if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems != null)
-            {
-                cant = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems.Count();
-            }
-            else
-            {
-                cant = 0;
-            }
-            
-
-            if (idInsumo != 0)//Comprueba si se selecciono algo
-            {
-                ItemsPedidos AuxItem = new ItemsPedidos();
-                AuxItem.Item = new Insumo();
-                Insumo ItemAux = new Insumo();
-
-                if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems == null) //Si esta vacia - el primer obj
+                //Se obtiene el ID_Insumo
+                if (Request.QueryString["id"] != null || idInsumo != 0)
                 {
-
-                    CantTotalInsumos = 0;
-
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos = new Pedido();
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems = new List<ItemsPedidos>();
-
-                    AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
-                    AuxItem.Cantidad++;
-
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.PrecioTotal = AuxItem.PrecioSubTotal = AuxItem.Item.Precio;
-
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.FechaHora = DateTime.Now;
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.Estado = true;
-
-                    int auxpos = 0;
-                    int pos = 0;
-                    foreach(ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
-                    {
-                        if(items.Id == idInsumo) { auxpos = pos; }
-                        pos++;
-                    }
-                    cant = 1;
-
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems.Add(AuxItem);
-
-                    ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
-
+                    idInsumo = int.Parse(Request.QueryString["id"]);
                 }
-                else //En caso de haber seleccionado un obj
+                else
                 {
-                    AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
+                    idInsumo = 0;
+                }
+                int cant = 0;
 
-                    bool igual = false;
+                //Se obtiene la cantidad de Items en la mesa actual
+                if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems != null)
+                {
+                    cant = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems.Count();
+                }
+                else
+                {
+                    cant = 0;
+                }
 
-                    foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
+                if (idInsumo != 0)//Comprueba si se selecciono algo
+                {
+                    ItemsPedidos AuxItem = new ItemsPedidos();
+                    AuxItem.Item = new Insumo();
+                    Insumo ItemAux = new Insumo();
+
+                    if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems == null) //Si esta vacia - el primer obj
                     {
-                        if (items.Item.Id == idInsumo) {
-                            igual = true; 
-                        }
-                    }
 
-                    if (igual)//Es repetido
-                    {
-                        int auxpos = 0;
-                        int pos = 0;
+                        CantTotalInsumos = 0;
 
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos = new Pedido();
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems = new List<ItemsPedidos>();
 
-                        foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
-                        {
-                            if (items.Item.Id == idInsumo)
-                            {
-                                auxpos = pos;
-                            }
-                            pos++;
-                        }
-                        cant = pos;
-
-                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad++;
-                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
-                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].PrecioSubTotal = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad * AuxItem.Item.Precio;
-                    }
-                    else//Es un nuevo obj
-                    {
                         AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
                         AuxItem.Cantidad++;
 
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.PrecioTotal = AuxItem.PrecioSubTotal = AuxItem.Item.Precio;
+
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.FechaHora = DateTime.Now;
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.Estado = true;
+
                         int auxpos = 0;
                         int pos = 0;
+                        foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
+                        {
+                            if (items.Id == idInsumo) { auxpos = pos; }
+                            pos++;
+                        }
+                        cant = 1;
 
                         ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems.Add(AuxItem);
+
+                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
+
+                    }
+                    else //En caso de haber seleccionado un obj
+                    {
+                        AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
+
+                        bool igual = false;
 
                         foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
                         {
                             if (items.Item.Id == idInsumo)
                             {
-                                auxpos = pos;
+                                igual = true;
                             }
-                            pos++;
                         }
-                        cant = pos;
 
-                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
+                        if (igual)//Es repetido
+                        {
+                            int auxpos = 0;
+                            int pos = 0;
 
-                        ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].PrecioSubTotal = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad * ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Item.Precio;
+
+                            foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
+                            {
+                                if (items.Item.Id == idInsumo)
+                                {
+                                    auxpos = pos;
+                                }
+                                pos++;
+                            }
+                            cant = pos;
+
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad++;
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].PrecioSubTotal = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad * AuxItem.Item.Precio;
+                        }
+                        else//Es un nuevo obj
+                        {
+                            AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
+                            AuxItem.Cantidad++;
+
+                            int auxpos = 0;
+                            int pos = 0;
+
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems.Add(AuxItem);
+
+                            foreach (ItemsPedidos items in ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems)
+                            {
+                                if (items.Item.Id == idInsumo)
+                                {
+                                    auxpos = pos;
+                                }
+                                pos++;
+                            }
+                            cant = pos;
+
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
+
+                            ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].PrecioSubTotal = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad * ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Item.Precio;
+                        }
                     }
                 }
-            }
 
             Dominio.Mesa auxRepeater = new Dominio.Mesa();
             auxRepeater = ((Dominio.Mesa)Session["MesaActual"]);
@@ -204,15 +206,15 @@ namespace RestoApp2
             int posicion = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
             ((List<Dominio.Mesa>)Session["MesasMesero"])[posicion] = ((Dominio.Mesa)Session["MesaActual"]);
 
+            
             if (idInsumo != 0) { Response.Redirect("Mesa.aspx?id=0"); }
+            }
         }
 
         
         protected void Actualizar(object sender, EventArgs e)
         {
-            /*
-            var argument = ((TextBox)sender).CssClass;
-
+            var argument = ((Button)sender).CommandArgument;
 
             int pos = mesa.Pedidos.ListaItems.FindIndex(x => x.Item.Id == int.Parse(argument));
 
@@ -224,7 +226,7 @@ namespace RestoApp2
             int posicion = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
             ((List<Dominio.Mesa>)Session["MesasMesero"])[posicion] = mesa;
 
-            Response.Redirect("Mesa.aspx?id=0");*/
+            Response.Redirect("Mesa.aspx?id=0");
         }
 
         protected void Entregado(object sender, EventArgs e)

@@ -38,23 +38,35 @@ namespace RestoApp2
                 List<Dominio.Mesa> listaprueba = new List<Dominio.Mesa>();
                 listaprueba = ((List<Dominio.Mesa>)Session["MesasGerente"]);
                     ListaMesas = new List<Dominio.Mesa>();
-                    
-               
-                    //Esta funcion esta de prueba (usar el session del inicio.aspx.cs
-                   ListaMesas = VistaMesero(listaprueba,id);
 
+
+
+
+                if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion != "Gerente")
+                {
+                    ListaMesas = VistaMesero(listaprueba,id);
                 if (Session["MesasMesero"] == null)
                 {
                     Session["MesasMesero"] = ListaMesas;
-                      
-                    }
+                }
                 else
                 {
                     Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasMesero"]), id);
                 }
-                    RepeaterMesero.DataSource = ListaMesas;
+                }
+                else
+                {
+                        ListaMesas = ((List<Dominio.Mesa>)Session["MesasGerente"]);
+                }
+
+
+
+
+                RepeaterMesero.DataSource = ListaMesas;
                     RepeaterMesero.DataBind();
 
+
+               
 
                 int cont = 0;
                 foreach (Dominio.Mesa item in ListaMesas)
@@ -73,6 +85,11 @@ namespace RestoApp2
                         ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = false;
                         ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "MESA EN ATENCION";
                     }
+                    if(item.Estado.ToUpper()== "ABIERTO" && ((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+                    {
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = true;
+                        ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "VER PEDIDOS DE "+ item.Mesero.Nombre.ToUpper() + " " + item.Mesero.Apellido.ToUpper();
+                    }
                     cont++;
                 }
             }
@@ -89,7 +106,9 @@ namespace RestoApp2
             int argument = int.Parse(((Button)sender).CommandArgument);
             int pos = ((List<Dominio.Mesa>)Session["MesasGerente"]).FindIndex(x => x.NumeroMesa == argument);
             ((List<Dominio.Mesa>)Session["MesasGerente"])[pos].Estado ="abierto";
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion != "Gerente") { 
             ((List<Dominio.Mesa>)Session["MesasGerente"])[pos].Mesero = ((Dominio.Persona)Session["UserLog"]);
+            }
             Session["MesaActual"] = ((List<Dominio.Mesa>)Session["MesasGerente"])[pos];
             
             Response.Redirect("Mesa.aspx");
