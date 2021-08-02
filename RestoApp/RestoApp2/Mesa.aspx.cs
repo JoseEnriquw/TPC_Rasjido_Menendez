@@ -192,9 +192,12 @@ namespace RestoApp2
                 else
                 {
                     ((Label)RepeaterMesa.Items[cont].FindControl("LabelEstado")).Text = "ENTREGADO";
+                        ((Button)RepeaterMesa.Items[cont].FindControl("ButtonDelete")).Text = "CAMBIAR";
                     ((Button)RepeaterMesa.Items[cont].FindControl("ButtonEntrega")).Enabled = false;
                     ((Button)RepeaterMesa.Items[cont].FindControl("ButtonEntrega")).Visible = false;
-                    ((TextBox)RepeaterMesa.Items[cont].FindControl("txtCantidad")).Enabled = false;
+                        ((Button)RepeaterMesa.Items[cont].FindControl("ButtonUpdate")).Enabled = false;
+                        ((Button)RepeaterMesa.Items[cont].FindControl("ButtonUpdate")).Visible = false;
+                        ((TextBox)RepeaterMesa.Items[cont].FindControl("txtCantidad")).Enabled = false;
                     ((Label)RepeaterMesa.Items[cont].FindControl("LabelEstado")).ForeColor = System.Drawing.Color.ForestGreen;
                 }
 
@@ -243,6 +246,7 @@ namespace RestoApp2
 
         protected void Eliminar(object sender, EventArgs e)
         {
+
             var argument = ((Button)sender).CommandArgument;
             int pos = mesa.Pedidos.ListaItems.FindIndex(x => x.Item.Id == int.Parse(argument));
             ItemsPedidos elim = mesa.Pedidos.ListaItems.Find(x => x.Item.Id == int.Parse(argument));
@@ -252,7 +256,12 @@ namespace RestoApp2
             int posicion = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
             ((List<Dominio.Mesa>)Session["MesasMesero"])[posicion] = mesa;
 
-            Response.Redirect("Mesa.aspx?id=0");
+            if (((Button)sender).Text == "ELIMINAR") { Response.Redirect("Mesa.aspx?id=0"); }
+            else 
+            {
+                ((Button)sender).Text = "ELIMINAR";
+                Response.Redirect("Menu.aspx");
+            }
         }
 
         protected void Cambio(object sender, EventArgs e)
