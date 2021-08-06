@@ -45,6 +45,7 @@
 							<th><span>INSUMO</span></th>
 							<th><span>PRECIO</span></th>
 							<th><span>CANTIDAD</span></th>
+							<th><span>INGRESO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
@@ -64,11 +65,15 @@
 								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
 							<td>
-								<asp:TextBox ID="Cantidad" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+								<%#Eval("Stock").ToString()%>
 							</td>
+							<td>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+							</td>
+
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="RENOVAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
-								<asp:Button  ID="Button3" runat="server" Text="REMOVER"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								
 							</td>
 						</tr>
 
