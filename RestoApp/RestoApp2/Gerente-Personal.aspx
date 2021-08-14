@@ -105,8 +105,8 @@
 								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="ACTUALIZAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
-								<asp:Button  ID="ButtonD" runat="server" Text="ELIMINAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
 							</td>
 						</tr>
 

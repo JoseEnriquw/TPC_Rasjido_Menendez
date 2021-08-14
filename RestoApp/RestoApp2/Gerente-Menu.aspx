@@ -89,7 +89,7 @@
                                 <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="Button1" runat="server" Text="RENOVAR" class="btn btn-theme" OnClick="actualizar" CommandArgument='<%#Eval("Id")%>' />
+								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="actualizar" CommandArgument='<%#Eval("Id")%>' />
 							</td>
 
 						</tr>
@@ -98,7 +98,7 @@
                             <asp:TextBox ID="Url" runat="server" class="url" style="z-index: 1;" TextMode="Url" AutoPostBack="true"></asp:TextBox>
 							</td><td></td><td></td>
 							<td class="text-right">
-							<asp:Button ID="Button3" runat="server" Text="REMOVER"  class="btn btn-theme" OnClick="borrar" CommandArgument='<%#Eval("Id")%>' /></td>
+							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="borrar" CommandArgument='<%#Eval("Id")%>' /></td>
 						</tr>
 
 

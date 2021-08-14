@@ -97,6 +97,7 @@ namespace Negocio
                     aux.Precio = (decimal)accessdata.Lector["Precio"];
                     aux.Stock = (short)accessdata.Lector["Stock"];
                     aux.UrlImagen = (string)accessdata.Lector.GetString(8);
+                    aux.Baja = (bool)accessdata.Lector["Baja"];
 
                     lista.Add(aux);
                 }
@@ -122,10 +123,11 @@ namespace Negocio
                 string dni = " DNI='" + aux.Dni + "'";
                 string nombre = " Nombre='" + aux.Nombre + "'";
                 string apellido = " Apellido='" + aux.Apellido + "'";
+                string baja = " Baja=" + Convert.ToByte(aux.Baja).ToString();
 
                 if (opcion == true)
                 {
-                    accessdata.setearConsulta("update Personas set" + cargo + " ," + dni + " ," + nombre + " ," + apellido + " where"+ id);
+                    accessdata.setearConsulta("update Personas set" + cargo + " ," + dni + " ," + nombre + " ," + apellido + " ,"+ baja+" where"+ id);
                 }
                 else
                 {
@@ -153,8 +155,9 @@ namespace Negocio
                 string dni = aux.Dni;
                 string nombre = aux.Nombre;
                 string apellido = aux.Apellido;
+                string baja = Convert.ToByte(aux.Baja).ToString();
 
-                accessdata.setearConsulta("insert into Personas values(" + cargo + ",'" + dni + "','" + nombre + "','" + apellido + "')");  
+                accessdata.setearConsulta("insert into Personas values(" + cargo + ",'" + dni + "','" + nombre + "','" + apellido + "'"+baja+")");  
                 accessdata.ejectutarAccion();
             }
             catch (Exception ex)
@@ -178,11 +181,11 @@ namespace Negocio
                 string precio = " Precio=" + aux.Precio.ToString();
                 string stock = " Stock=" + aux.Stock.ToString();
                 string url = " UrlImg='" + aux.UrlImagen + "'";
-
+                string baja = " Baja=" + Convert.ToByte(aux.Baja).ToString();
 
                 if (opcion == true)
                 {
-                    accessdata.setearConsulta("update Insumos set"+ stock + " where" + id);
+                    accessdata.setearConsulta("update Insumos set"+ stock +","+baja+ " where" + id);
                 }
                 else
                 {
@@ -212,8 +215,9 @@ namespace Negocio
                 string precio = aux.Precio.ToString();
                 string stock = aux.Stock.ToString();
                 string url = aux.UrlImagen;
+                string baja = Convert.ToByte(aux.Baja).ToString();
 
-                accessdata.setearConsulta("insert into Insumos values('" + nombre + "'," + idcategoria + "," + idtipo + "," + precio + "," + stock + ",'" + url + "')");
+                accessdata.setearConsulta("insert into Insumos values('" + nombre + "'," + idcategoria + "," + idtipo + "," + precio + "," + stock + ",'" + url + " ,"+baja+")");
                 accessdata.ejectutarAccion();
             }
             catch (Exception ex)
@@ -242,6 +246,7 @@ namespace Negocio
                     aux.Dni = accessdata.Lector.GetString(3);
                     aux.Nombre = accessdata.Lector.GetString(4);
                     aux.Apellido = accessdata.Lector.GetString(5);
+                    aux.Baja = (bool)accessdata.Lector["Baja"];
 
                     lista.Add(aux);
                 }
@@ -273,6 +278,7 @@ namespace Negocio
                     aux.Id = (int)accessdata.Lector["ID"];
                     aux.Dni = (string)accessdata.Lector["DNI"];
                     aux.Contraseña = (string)accessdata.Lector["Contraseña"];
+                    aux.Baja = (bool)accessdata.Lector["Baja"];
 
                     lista.Add(aux);
                 }
@@ -297,7 +303,7 @@ namespace Negocio
             {
                 accessdata.cerrarConexion();
                 List<Persona> lista = ListarPersona(" where DNI='" + _dni + "'");
-                if (lista.Count == 1)
+                if (lista.Count == 1 && lista[0].Baja==true)
                 {
                     userLog.Id = lista[0].Id;
                     userLog.Nombre = lista[0].Nombre;

@@ -170,6 +170,7 @@ namespace RestoApp2
                     aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
                     aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
                     aux.Stock = item.Stock;
+                    aux.Baja = true;
 
                     insumos.actualizarInsumo(true, aux);
                 }
@@ -194,14 +195,7 @@ namespace RestoApp2
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
                 {
                     aux.Id = item.Id;
-                    aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
-                    aux.Categoria = new Categorias();
-                    aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
-                    aux.Categoria.Id = item.Categoria.Id;
-                    aux.Tipo = item.Tipo;
-                    aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
-                    aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
-                    aux.Stock = item.Stock;
+                    aux.Baja = false;
 
                     insumos.actualizarInsumo(false, aux);
                 }

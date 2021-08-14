@@ -11,5 +11,6 @@ namespace Dominio
         public int Id { get; set; }
         public string Dni { get; set; }
         public string Contraseña { get; set; }
+        public bool Baja { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace Dominio
         public decimal Precio { get; set; }
         public short Stock { get; set; }
         public string UrlImagen { get; set; }
-
+        public bool Baja { get; set; }
     }
 }
