@@ -43,5 +43,19 @@ namespace RestoApp2
             }
             Page_Load(sender, e);
         }
+
+        protected void Historial(object sender, EventArgs e)
+        {
+            string javaScript = "abrirlistaEmerg()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+
+        }
+
+        protected void Mesas(object sender, EventArgs e)
+        {
+            string javaScript = "abrirventanaEmerg()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+
     }
 }

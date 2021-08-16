@@ -56,7 +56,7 @@ go
 
 create table Mesas(
 ID  int not null primary key identity(1,1),
-IDMesero int not null foreign key references Personas(ID),
+Descripcion varchar(30) null,
 )
 go
 
@@ -86,8 +86,9 @@ inner join TipoInsumos T on T.ID=I.IDTipo
 inner join Categorias C on C.ID=I.IDCategoria
 go
 Create View VW_Personas as
-select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido from Personas P inner join Cargos C on C.ID=P.IDCargo
+select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido,P.Baja from Personas P inner join Cargos C on C.ID=P.IDCargo
 go
+
 
 create table historial(
 ID int not null primary key identity(1,1),
@@ -97,24 +98,6 @@ fechaHora datetime not null
 )
 go
 
-create Trigger TR_Verificar_Mesero on Mesas
-After insert
-as
-begin 
- 
- declare @ID int
- declare @Cargo varchar(20)
-
- select @ID=IDMesero from inserted
- select @Cargo=Cargo from VW_Personas where ID=@ID
-
- if @Cargo!='Empleado' begin
- rollback transaction
- raiserror('Error!El ID que se ingresó no pertenece a un Mesero',16,1)
- end
-
-end
-go
 
 
 select *from VW_Personas
@@ -126,7 +109,7 @@ SELECT * from Categorias
 
 insert into Cargos values ('Gerente'),('Empleado')
 insert into Personas values (1,'11222333','Adriel','Rasjido',1),(2,'11222444','Jose','Menendez',1),(1,'11222555','Elian','Rasjido',1),(2,'11222666','Enrique','Menendez',1)
-insert into Mesas values (2),(2),(2),(2),(2),(2),(2),(2),(2)
+insert into Mesas values ('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none')
 insert into Usuarios values ('11222333','11222333',1),('11222444','11222444',1),('11222555','11222555',1),('11222666','11222666',1)
 insert into Categorias values ('Plato'),('Bebida')
 insert into TipoInsumos values ('Entrada'),('Ensalada'),('Principal'),('Postre'),('Jugo'),('Alcohol'),('Gaseosa'),('Agua')

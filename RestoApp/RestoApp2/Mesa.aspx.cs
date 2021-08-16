@@ -269,5 +269,15 @@ namespace RestoApp2
             /*
             Response.Redirect("Error.aspx");*/
         }
+
+        protected void volverMenu(object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx");
+        }
+
+        protected void volverMesero(object sender, EventArgs e)
+        {
+            Response.Redirect("Mesero.aspx");
+        }
     }
 }

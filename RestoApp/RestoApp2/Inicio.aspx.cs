@@ -26,9 +26,9 @@ namespace RestoApp2
         }
 
         protected void ingreso(object sender, EventArgs e)
-        {
+        {/*
             try
-            {
+            {*/
                 Consultas logueo = new Consultas();
                 if (TextBox1.Text != "" && TextBox2.Text != "")
                 {
@@ -67,11 +67,11 @@ namespace RestoApp2
                     string script = @"<script type='text/javascript'>abrirventanaEmerg();</script>";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
                 }
-            }
+            /*}
             catch (Exception ex)
             {
                 Session.Add("Error", ex.ToString());
-            }
+            }*/
 
 
         }

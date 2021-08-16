@@ -55,34 +55,17 @@
                             </div>
                         </div></a>
                     </div>
+         </div>
 
-     <div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 10px">
-                        <a href="javascript:abrirventanaEmerg()" >
-                        <div class="portfolio-wrapper" >
-                            <div class="portfolio-image">
-                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 80px; object-fit:cover;"/>
-                            </div>
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h4>CANTIDAD DE MESAS</h4>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>
-
-          <div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 10px">
-                        <a href="Gerente.aspx" >
-                        <div class="portfolio-wrapper" >
-                            <div class="portfolio-image">
-                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 80px; object-fit:cover;"/>
-                            </div>
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h4>VER HISTORIAL</h4>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>     
+        <div style="text-align:center">
+        <asp:Button Text="CANTIDAD DE MESAS" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px; 
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1);" OnClick="Mesas"
+            />
+        <asp:Button Text="VER HISTORIAL" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px;
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="Historial"
+            />  
     </div>
 
 
@@ -122,5 +105,55 @@
             document.body.style.visibility = "visible: false";
         }
     </script>
+
+
+    
+    <div id="listaEmergente" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 39%;
+    width: 80%;
+    height: 55%;
+    left: 10%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+	">
+		<h1 style="color: #fca014">TU VENTAS REGISTRADAS!</h1>
+        
+        <div style="margin:1%; overflow:scroll; height:75%; scrollbar-face-color:#009ffd">
+
+        <asp:GridView ID="listaPedidos" runat="server" Width="100%" BackColor="#cccccc" AlternatingRowStyle-BackColor="#ffffff"
+        ForeColor="Black" HeaderStyle-BackColor="#0099ff" AutoGenerateColumns="false"  
+        RowStyle-HorizontalAlign="Left"
+        >
+        <Columns>
+        <asp:BoundField DataField="Id" HeaderText="PersonalNumero" />
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+        <asp:BoundField DataField="Dni" HeaderText="DNI" />
+        <asp:BoundField DataField="Cargo.Descripcion" HeaderText="Cargo" />
+        </Columns>
+        
+        </asp:GridView>
+        </div>
+
+		<asp:Button  ID="Button1" runat="server" Text="CONTINUAR" class="btn btn-theme" />
+
+    </div>
+	
+
+    <script>
+        function abrirlistaEmerg() {
+            document.getElementById("listaEmergente").style.display = "block";
+            document.body.style.visibility = "visible: false";
+        }
+    </script>
+
+
     </asp:Content>
 

@@ -11,34 +11,24 @@
 
     <div class="contenido" style="margin-top:25%;">
 
-        <div id="BOTONES"">
-		<div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 0; margin-bottom:5%; margin-top: 0">
-                        <a href="Mesero.aspx" >
-                        <div class="portfolio-wrapper" >
-                            <div class="portfolio-image">
-                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
-                            </div>
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h4>VOLVER A MESAS</h4>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>
+        <div id="BOTONES" style="margin-bottom:1%">
 
-          <div class="col-sm-6 col-lg-4 mb-2 interior" style="width:50%; height: 0; margin-bottom:5%; margin-top: 0">
-                        <a href="Menu.aspx" >
-                        <div class="portfolio-wrapper" >
-                            <div class="portfolio-image">
-                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
-                            </div>
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h4>AGREGAR DEL MENU</h4>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>     
+			<div style="text-align:center">
+        <asp:Button Text="VOLVER A MESAS" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px; 
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1);" OnClick="volverMesero"
+            />
+        <asp:Button Text="AGREGAR DEL MENU" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px;
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="volverMenu"
+            />  
+    </div>
+
+
+
+
+
+		
 			</div>
 
 

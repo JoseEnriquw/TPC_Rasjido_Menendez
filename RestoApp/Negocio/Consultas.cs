@@ -246,6 +246,7 @@ namespace Negocio
                     aux.Dni = accessdata.Lector.GetString(3);
                     aux.Nombre = accessdata.Lector.GetString(4);
                     aux.Apellido = accessdata.Lector.GetString(5);
+
                     aux.Baja = (bool)accessdata.Lector["Baja"];
 
                     lista.Add(aux);
