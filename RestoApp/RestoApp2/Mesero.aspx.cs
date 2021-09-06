@@ -56,7 +56,7 @@ namespace RestoApp2
                 }
                 else
                 {
-                        ListaMesas = ((List<Dominio.Mesa>)Session["MesasGerente"]);
+                        ListaMesas =VistaGerente( ((List<Dominio.Mesa>)Session["MesasGerente"]));
                 }
 
 
@@ -131,6 +131,20 @@ namespace RestoApp2
             return lista;
         }
 
+        public List<Dominio.Mesa> VistaGerente(List<Dominio.Mesa> lista)
+        {
+            for (int i = 0; i < lista.Count(); i++)
+            {
+
+                if (lista[i].Estado == "cerrado")
+                {
+                    lista[i].Estado = "abierto";
+                }
+         
+
+            }
+            return lista;
+        }
 
     }
 }

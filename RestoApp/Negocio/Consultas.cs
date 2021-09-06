@@ -97,7 +97,7 @@ namespace Negocio
                     aux.Precio = (decimal)accessdata.Lector["Precio"];
                     aux.Stock = (short)accessdata.Lector["Stock"];
                     aux.UrlImagen = (string)accessdata.Lector.GetString(8);
-                    aux.Baja = (bool)accessdata.Lector["Baja"];
+                    aux.Baja = accessdata.Lector.GetBoolean(9);
 
                     lista.Add(aux);
                 }
@@ -246,8 +246,7 @@ namespace Negocio
                     aux.Dni = accessdata.Lector.GetString(3);
                     aux.Nombre = accessdata.Lector.GetString(4);
                     aux.Apellido = accessdata.Lector.GetString(5);
-
-                    aux.Baja = (bool)accessdata.Lector["Baja"];
+                    aux.Baja = accessdata.Lector.GetBoolean(6);
 
                     lista.Add(aux);
                 }
@@ -279,7 +278,7 @@ namespace Negocio
                     aux.Id = (int)accessdata.Lector["ID"];
                     aux.Dni = (string)accessdata.Lector["DNI"];
                     aux.Contraseña = (string)accessdata.Lector["Contraseña"];
-                    aux.Baja = (bool)accessdata.Lector["Baja"];
+                    aux.Baja = accessdata.Lector.GetBoolean(3);
 
                     lista.Add(aux);
                 }

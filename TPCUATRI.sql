@@ -81,10 +81,11 @@ Cantidad smallint not null check(Cantidad >0)
 go
 
 Create View VW_Insumos as
-select I.ID,Nombre,IDCategoria,C.Descripcion as Categoria,IDTipo,T.Descripcion as Tipo,Precio,Stock,UrlImg from Insumos I
+select I.ID,Nombre,IDCategoria,C.Descripcion as Categoria,IDTipo,T.Descripcion as Tipo,Precio,Stock,UrlImg,Baja from Insumos I
 inner join TipoInsumos T on T.ID=I.IDTipo
 inner join Categorias C on C.ID=I.IDCategoria
 go
+
 Create View VW_Personas as
 select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido,P.Baja from Personas P inner join Cargos C on C.ID=P.IDCargo
 go
@@ -100,10 +101,6 @@ go
 
 
 
-select *from VW_Personas
-select * from VW_Insumos order by Precio asc
-select * from TipoInsumos
-SELECT * from Categorias
 
 
 
@@ -136,3 +133,8 @@ insert into Insumos values
 ('Cerveza'		    ,  2,   5,  270,   70,'https://thefoodtech.com/wp-content/uploads/2020/05/cerveza-1.jpg',1),
 ('Vino'			    ,  2,   5,  720,   50,'https://www.65ymas.com/uploads/s1/21/56/6/bigstock-wine-glass-wine-bottle-and-gr-239880082.jpeg',1),
 ('Coca-Cola'		,  2,   7,  150,   50,'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/158px-15-09-26-RalfR-WLC-0098.jpg',1)
+
+select *from VW_Personas
+select * from VW_Insumos order by Precio asc
+select * from TipoInsumos
+SELECT * from Categorias
