@@ -134,7 +134,7 @@ namespace Negocio
                     accessdata.setearConsulta("delete from Personas where" + id);
                 }
 
-                accessdata.ejectutarAccion();
+                accessdata.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -158,7 +158,7 @@ namespace Negocio
                 string baja = Convert.ToByte(aux.Baja).ToString();
 
                 accessdata.setearConsulta("insert into Personas values(" + cargo + ",'" + dni + "','" + nombre + "','" + apellido + "'"+baja+")");  
-                accessdata.ejectutarAccion();
+                accessdata.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -192,7 +192,7 @@ namespace Negocio
                     accessdata.setearConsulta("delete from Insumos where" + id);
                 }
 
-                accessdata.ejectutarAccion();
+                accessdata.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -218,7 +218,7 @@ namespace Negocio
                 string baja = Convert.ToByte(aux.Baja).ToString();
 
                 accessdata.setearConsulta("insert into Insumos values('" + nombre + "'," + idcategoria + "," + idtipo + "," + precio + "," + stock + ",'" + url + " ,"+baja+")");
-                accessdata.ejectutarAccion();
+                accessdata.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -328,17 +328,15 @@ namespace Negocio
               accessdata.ejecutarLectura();
               while (accessdata.Lector.Read())
                 {
-                Mesa aux = new Mesa();
 
-                aux.NumeroMesa = (int)accessdata.Lector["ID"];
-                if ((String)accessdata.Lector["Descripcion"] == "none") { aux.Nombre = "N°" + cont.ToString(); }
-                else { aux.Nombre = (String)accessdata.Lector["Descripcion"]; }
+                int NumeroMesa = (int)accessdata.Lector["ID"];
+                string Nombre;
+                if ((String)accessdata.Lector["Descripcion"] == "none") { Nombre = "N°" + cont.ToString(); }
+                else { Nombre = (String)accessdata.Lector["Descripcion"]; }
 
-                aux.Mesero = new Persona();
-                aux.Mesero.Nombre = "S/";
-                aux.Mesero.Apellido = "mesero";
-                aux.Pedidos = new Pedido();
-                aux.Estado = "libre";
+                Mesa aux = new Mesa(NumeroMesa,Nombre);
+               
+
                 lista.Add(aux);
                 cont++;
             }
@@ -367,16 +365,69 @@ namespace Negocio
                 for (int i = 0; i < (cantidadNueva - cantidadAnterior); i++)
                 {
                     accessdata.setearConsulta("insert into Mesas values ('none')");
-                    accessdata.ejectutarAccion();
+                    accessdata.ejecutarAccion();
                     accessdata.cerrarConexion();
                 }
             }
             else
             {
                 accessdata.setearConsulta("delete Mesas where ID = (select top(" + dif + ") ID from Mesas order by ID desc)");
-                accessdata.ejectutarAccion();
+                accessdata.ejecutarAccion();
                 accessdata.cerrarConexion();
             }
         }
+
+        public void IngresarPedido(Mesa aux)
+        {
+            accessdata.setearConsulta(" insert into Pedidos VALUES (@IDMesa, @IDMesero, @PrecioTotal, @FechaHora)");
+            accessdata.agregarParametro("@IDMesa", aux.NumeroMesa);
+            accessdata.agregarParametro("@IDMesero", aux.Mesero.Id);
+            accessdata.agregarParametro("@PrecioTotal", aux.Pedidos.PrecioTotal);
+            accessdata.agregarParametro("@FechaHora", DateTime.UtcNow);
+
+
+            accessdata.ejecutarAccion();
+
+            accessdata.cerrarConexion();
+            int id = 0;
+
+
+            accessdata.setearConsulta(" select top(1) ID from Pedidos order by ID DESC");
+            accessdata.ejecutarLectura();
+            if (accessdata.Lector.Read()) { id = (int)accessdata.Lector["ID"]; }
+            accessdata.cerrarConexion();
+
+            foreach (ItemsPedidos item in aux.Pedidos.ListaItems)
+            {
+               
+                accessdata.setearConsulta("insert into ItemsPedido " +
+                    " VALUES (@IDPedido,@IDInsumo,@PrecioSubTotal,@Cantidad)");
+                accessdata.agregarParametro("@IDPedido",  id);
+                accessdata.agregarParametro("@IDInsumo", item.Item.Id);
+                accessdata.agregarParametro("@PrecioSubTotal", item.PrecioSubTotal  );
+                accessdata.agregarParametro("@Cantidad", item.Cantidad);
+
+
+                accessdata.ejecutarAccion();
+                accessdata.cerrarConexion();
+
+                short auxcant = 0;
+                accessdata.setearConsulta("select Stock from Insumos  where ID=" + item.Item.Id);
+                accessdata.ejecutarLectura();
+                if (accessdata.Lector.Read()) { auxcant = (short)accessdata.Lector["Stock"]; }
+                accessdata.cerrarConexion();
+
+                accessdata.setearConsulta(" update Insumos set Stock="+(auxcant-item.Cantidad)+ " where ID="+ item.Item.Id);
+                accessdata.ejecutarAccion();
+                accessdata.cerrarConexion();
+
+            }
+
+           
+
+            
+
+        }
+
     }
 }

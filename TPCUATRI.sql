@@ -64,6 +64,7 @@ go
 create table Pedidos(
 ID  int not null primary key identity(1,1),
 IDMesa int not null foreign key references Mesas(ID),
+IDMesero int not null foreign key references Personas(ID),  
 PrecioTotal money not null check(PrecioTotal >0),
 FechaHora Datetime not null
 
@@ -138,3 +139,4 @@ select *from VW_Personas
 select * from VW_Insumos order by Precio asc
 select * from TipoInsumos
 SELECT * from Categorias
+SELECT * from Pedidos

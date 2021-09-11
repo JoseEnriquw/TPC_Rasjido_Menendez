@@ -51,7 +51,7 @@ namespace RestoApp2
                 }
                 else
                 {
-                    Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasMesero"]), id);
+                    Session["MesasMesero"] = VistaMesero(((List<Dominio.Mesa>)Session["MesasGerente"]), id);
                 }
                 }
                 else

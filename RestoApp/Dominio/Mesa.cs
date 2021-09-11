@@ -15,5 +15,18 @@ namespace Dominio
         
         public Pedido Pedidos { get; set; }
         public string Estado { get; set; }
+
+       public Mesa(int idMesa,string nombreMesa)
+        {
+            NumeroMesa = idMesa;
+            Nombre = nombreMesa;
+                Mesero = new Persona();
+                Mesero.Nombre = "S/";
+                Mesero.Apellido = "mesero";
+                Pedidos = new Pedido();
+                Estado = "libre";
+        }
     }
+
+
 }

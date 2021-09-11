@@ -34,7 +34,7 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
 
-            mesa = new Dominio.Mesa();
+           
             mesa = ((Dominio.Mesa)Session["MesaActual"]);
 
             if (!IsPostBack)
@@ -158,8 +158,8 @@ namespace RestoApp2
                     }
                 }
 
-            Dominio.Mesa auxRepeater = new Dominio.Mesa();
-            auxRepeater = ((Dominio.Mesa)Session["MesaActual"]);
+           
+                Dominio.Mesa auxRepeater = ((Dominio.Mesa)Session["MesaActual"]);
 
             List<ItemsPedidos> auxP = new List<ItemsPedidos>();
 
@@ -278,6 +278,25 @@ namespace RestoApp2
         protected void volverMesero(object sender, EventArgs e)
         {
             Response.Redirect("Mesero.aspx");
+        }
+
+        protected void CerrarMesa(object sender, EventArgs e)
+        {
+         Consultas aux=new Consultas();
+            
+        
+            int pos = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
+            aux.IngresarPedido(((List<Dominio.Mesa>)Session["MesasMesero"])[pos]);
+
+            int id = ((List<Dominio.Mesa>)Session["MesasMesero"])[pos].NumeroMesa;
+            string nombre = ((List<Dominio.Mesa>)Session["MesasMesero"])[pos].Nombre;
+
+            ((List<Dominio.Mesa>)Session["MesasMesero"])[pos] = new Dominio.Mesa(id, nombre);
+
+
+
+            Response.Redirect("Mesero.aspx");
+
         }
     }
 }

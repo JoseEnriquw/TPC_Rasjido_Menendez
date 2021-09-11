@@ -125,23 +125,6 @@ namespace RestoApp2
                 ListaMenu = ((List<Insumo>)Session["ListadoMenu"]);
             }
         }
-      public bool VerficarIdInsumo(int id)
-        {
-            bool resultado = false;
-            Dominio.Mesa mesa = new Dominio.Mesa();
-            mesa = ((Dominio.Mesa)Session["MesaActual"]);
-
-            if (mesa.Pedidos.ListaItems!=null)
-            {
-                foreach (ItemsPedidos item in mesa.Pedidos.ListaItems)
-                {
-                    if (item.Item.Id == id) resultado = true;
-
-                }
-            }
-            
-
-            return resultado;
-        }
+     
     }
 }

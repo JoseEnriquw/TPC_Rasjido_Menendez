@@ -61,7 +61,7 @@
 								$<%= mesa.Pedidos.PrecioTotal %>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="Button1" runat="server" Text="CERRAR MESA" class="btn btn-theme"/>
+								<asp:Button ID="Button1" runat="server" Text="CERRAR MESA" class="btn btn-theme" OnClick="CerrarMesa" CommandArgument="<% = mesa. %>" />
 							</td>
 						</tr>
 

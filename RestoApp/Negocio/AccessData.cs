@@ -47,10 +47,16 @@ namespace Negocio
         public SqlDataReader Lector{ get { return lector; }}
 
         //Ejecuta la accion
-        public void ejectutarAccion()
+        public void ejecutarAccion()
         {
             comando.Connection = conexion;
-            conexion.Open(); comando.ExecuteNonQuery();
+            conexion.Open(); 
+            comando.ExecuteNonQuery();
+        }
+
+        public void agregarParametro(string nombre, Object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
         }
     }
 }
