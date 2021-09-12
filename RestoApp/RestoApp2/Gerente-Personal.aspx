@@ -39,22 +39,31 @@
 
     <div class="contenido">
 
-						<div class="col-sm-6 col-lg-4 mb-2 interior" style="width:100%; height: 0; margin-bottom:5%; margin-top: 0">
-                        <a href="Mesero.aspx" >
-                        <div class="portfolio-wrapper" >
-                            <div class="portfolio-image">
-                                <img src="https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1" alt="..." style="width:100%; height: 40px; object-fit:cover;"/>
-                            </div>
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h4>VER PEDIDOS DE LOS EMPLEADOS</h4>
-                                </div>
-                            </div>
-                        </div></a>
+        <div class="row social">
+
+        <div class="col-md-6">
+            <a href="Mesero.aspx">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:25px; color: #fff">VER PEDIDOS DE TODOS LOS EMPLEADOS</small>
                     </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="Mesero.aspx">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:25px; color: #fff">VER EMPLEADOS DADOS DE BAJA</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
 
+                <%coloropc = 0;%>
 
-				<table class="table user-list">
+				<table class="table user-list" style="margin-bottom:0">
 					<thead>
 						<tr>
 							<th><span>NOMBRE</span></th>
@@ -66,9 +75,9 @@
 					</thead>
 					<tbody>
 
+                        
 
-
-						<tr style="background: #bbb;">
+						<tr style="background: #555;">
 							<td>
 								<asp:TextBox ID="NombreNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
@@ -85,13 +94,20 @@
                                 <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="agregar" />
 							</td>
 						</tr>
+                        </tbody></table>
 
 
+                        <div style="height: 280px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                        <table class="table user-list">
+                        
                         <asp:Repeater runat="server" ID="repeaterPersonal">
                             <ItemTemplate>
                         
 
-                        <tr style="background: #eee;">
+                       <%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
 							<td>
 								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
@@ -109,12 +125,11 @@
 								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
 							</td>
 						</tr>
-
+                        <%coloropc++;%>
                         </ItemTemplate>
                         </asp:Repeater>
 
-						</tbody>
-					</table>
+					</table></div>
 </div>
 
 	<div id="ventanaEmergente" class="ventanaEmerg" style="

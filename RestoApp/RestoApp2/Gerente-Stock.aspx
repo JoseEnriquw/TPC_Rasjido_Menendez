@@ -39,7 +39,7 @@
 
     <div class="contenido">
 
-				<table class="table user-list">
+				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
 						<tr>
 							<th><span>INSUMO</span></th>
@@ -49,15 +49,23 @@
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
-					<tbody>
+					</table>
 
+					<%coloropc = 0;%>
 
+					<div style="height: 380px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+					<table class="table user-list">
+
+					
 
                         <asp:Repeater runat="server" ID="repeaterStock">
                             <ItemTemplate>
 						
 
-						<tr style="background: #eee;">
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
 							<td>
 								<%#Eval("Nombre").ToString().ToUpper()%>
 							</td>
@@ -76,17 +84,10 @@
 								
 							</td>
 						</tr>
-
+						<%coloropc++;%>
 						</ItemTemplate>
                         </asp:Repeater>
-
-
-
-
-
-
-						</tbody>
-					</table>
+					</table></div>
 </div>
 </asp:Content>
 

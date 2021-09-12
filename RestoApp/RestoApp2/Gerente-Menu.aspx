@@ -36,11 +36,23 @@
     </a>
 
 
-
-
     <div class="contenido">
 
-				<table class="table user-list">
+				<div class="row social">
+
+        <div class="col-md-12">
+            <a href="Mesero.aspx">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:30px; color: #fff">VER LOS INSUMOS DESCONTINUADOS</small>
+                    </div>
+                </div>
+            </a>
+        </div></div>
+
+		<%coloropc = 0;%>
+
+				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
 						<tr>
 							<th><span>FOTO</span></th>
@@ -68,16 +80,21 @@
 							<td class="text-right">
 								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme"/>
 							</td>
+						</tr>
+					</tbody>
+					</table>
 
-						
-
-                        <asp:Repeater runat="server" ID="repeaterMenu">
+                        
+        <div style="height: 280px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+						<table class="table user-list" style="padding-bottom:0">
+						<asp:Repeater runat="server" ID="repeaterMenu" >
                             <ItemTemplate>
-
-						<tr style="background: #eee;">
-							<td>
-								<div class="img-item-vacio"></div>
-								<asp:Image ID="Img" runat="server" CssClass="item-list" style="z-index: 1;"/>
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td rowspan="2">
+								<asp:Image ID="Img" runat="server" style="z-index: 1; height:100px; width:100%; background-size:auto; border: 2px solid #000; background-color: black"/>
 							</td>
 							<td>
                                 <asp:TextBox ID="Insumo"  runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
@@ -93,25 +110,22 @@
 							</td>
 
 						</tr>
-						<tr style="background: #bbb;">
-							<td></td><td>URL
-                            <asp:TextBox ID="Url" runat="server" class="url" style="z-index: 1;" TextMode="Url" AutoPostBack="true"></asp:TextBox>
-							</td><td></td><td></td>
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td colspan="3">URL
+                            <asp:TextBox ID="Url" runat="server" style="z-index: 1;" TextMode="Url" AutoPostBack="true"></asp:TextBox>
 							<td class="text-right">
 							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="borrar" CommandArgument='<%#Eval("Id")%>' /></td>
 						</tr>
-
-
+						
+						<%coloropc++;%>
+						
 						</ItemTemplate>
                         </asp:Repeater>
-
-
-
-
-
-
-						</tbody>
 					</table>
+			</div>
 </div>
 
 		<div id="ventanaEmergente" class="ventanaEmerg" style="

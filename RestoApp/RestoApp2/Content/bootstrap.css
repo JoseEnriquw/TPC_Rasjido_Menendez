@@ -8674,10 +8674,9 @@ body {
 }
 
 .item-list {
-    position: absolute;
+
     height: 80px;
     width: 140px;
-    z-index: 1;
     background-size: cover;
     border: 2px solid #000;
 }

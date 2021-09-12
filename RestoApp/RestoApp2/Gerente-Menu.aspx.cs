@@ -12,6 +12,7 @@ namespace RestoApp2
     public partial class Gerente_Menu : System.Web.UI.Page
     {
         public List<Insumo> InsumoLista;
+        public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
