@@ -114,7 +114,7 @@ namespace Negocio
 
             return lista;
         }
-        public void actualizarPersona(bool opcion, Persona aux)
+        public void ActualizarPersona(bool opcion, Persona aux)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace Negocio
                 }
                 else
                 {
-                    accessdata.setearConsulta("delete from Personas where" + id);
+                    accessdata.setearConsulta("update Insumos set Baja = 0 where" + id);
                 }
 
                 accessdata.ejecutarAccion();
@@ -146,7 +146,7 @@ namespace Negocio
             }
         }
 
-        public void agregarPersonal(Persona aux)
+        public void AgregarPersonal(Persona aux)
         {
             try
             {
@@ -170,7 +170,7 @@ namespace Negocio
             }
         }
 
-        public void actualizarInsumo(bool opcion, Insumo aux)
+        public void ActualizarInsumo(bool opcion, Insumo aux)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Negocio
                 }
                 else
                 {
-                    accessdata.setearConsulta("delete from Insumos where" + id);
+                    accessdata.setearConsulta("update Insumos set Baja = 0 where" + id);
                 }
 
                 accessdata.ejecutarAccion();
@@ -204,7 +204,7 @@ namespace Negocio
             }
         }
 
-        public void agregarInsumo(Insumo aux)
+        public void AgregarInsumo(Insumo aux)
         {
             try
             {
@@ -343,7 +343,7 @@ namespace Negocio
            return lista;
         }
 
-        public int cantidadMesas()
+        public int CantidadMesas()
         {
             int cant = 0;
             accessdata.setearConsulta("select * from Mesas");

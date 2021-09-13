@@ -96,6 +96,15 @@ namespace RestoApp2
         protected global::System.Web.UI.WebControls.Repeater repeaterPersonal;
 
         /// <summary>
+        /// Control repeaterPersonal2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repeaterPersonal2;
+
+        /// <summary>
         /// Control Button3.
         /// </summary>
         /// <remarks>

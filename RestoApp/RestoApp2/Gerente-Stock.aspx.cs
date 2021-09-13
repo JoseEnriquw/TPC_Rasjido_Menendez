@@ -12,6 +12,8 @@ namespace RestoApp2
     public partial class Gerente_Stock : System.Web.UI.Page
     {
         public List<Insumo> StockLista;
+        public List<Insumo> StockListaACT;
+        public List<Insumo> StockListaINA;
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,11 +39,27 @@ namespace RestoApp2
                 try
                 {
                     StockLista = new List<Insumo>();
+                    StockListaACT = new List<Insumo>();
+                    StockListaINA = new List<Insumo>();
                     StockLista = GerenteMenu.ListarInsumos("");
                     Session.Add("ListadoStock", StockLista);
 
-                    repeaterStock.DataSource = StockLista;
+                    foreach (Insumo item in StockLista)
+                    {
+                        if (item.Baja)
+                        {
+                            StockListaACT.Add(item);
+                        }
+                        else
+                        {
+                            StockListaINA.Add(item);
+                        }
+                    }
+
+                    repeaterStock.DataSource = StockListaACT;
                     repeaterStock.DataBind();
+                    repeaterStock2.DataSource = StockListaINA;
+                    repeaterStock2.DataBind();
 
 
                 }
@@ -55,6 +73,7 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
+            /*
             string Insumo = TB_Insumo.Text;
             string Precio = TB_Precio.Text;
             string Cantidad = TB_Cantidad.Text;
@@ -105,11 +124,11 @@ namespace RestoApp2
             else
             {
                 StockLista = ((List<Insumo>)Session["ListadoStock"]);
-            }
+            }*/
 
         }
 
-        protected void actualizar(object sender, EventArgs e)
+        protected void Actualizar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
             Consultas insumos = new Consultas();
@@ -132,7 +151,7 @@ namespace RestoApp2
                     aux.Stock+= short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text);
 
                     pos = cont;
-                    insumos.actualizarInsumo(true, aux);
+                    insumos.ActualizarInsumo(true, aux);
                    
                 }
                 cont++;

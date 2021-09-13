@@ -29,7 +29,7 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
-            cantidadMesas = gerente.cantidadMesas();
+            cantidadMesas = gerente.CantidadMesas();
         }
 
         protected void NewMesas(object sender, EventArgs e)
@@ -40,6 +40,7 @@ namespace RestoApp2
             {
                 gerente.MesasInsert(nuevaCantidad, cantidadMesas);
                 Session["MesasGerente"] = gerente.CrearMesas();
+
             }
             Page_Load(sender, e);
         }

@@ -39,6 +39,20 @@
 
     <div class="contenido">
 
+
+		<div id="tablaactiva" style="display:block">
+<div class="row social">
+
+        <div class="col-md-12">
+            <a href="javascript:listaactiva()">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:30px; color: #fff">VER LOS INSUMOS SIN STOCK</small>
+                    </div>
+                </div>
+            </a>
+        </div></div>
+
 				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
 						<tr>
@@ -53,7 +67,7 @@
 
 					<%coloropc = 0;%>
 
-					<div style="height: 380px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+					<div style="height: 333px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
 					<table class="table user-list">
 
 					
@@ -80,7 +94,7 @@
 							</td>
 
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
 								
 							</td>
 						</tr>
@@ -89,5 +103,86 @@
                         </asp:Repeater>
 					</table></div>
 </div>
+
+
+
+<div id="tablainactiva" style="display:none">
+<div class="row social">
+
+        <div class="col-md-12">
+            <a href="javascript:listaactiva()">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:30px; color: #fff">VER LOS INSUMOS CON STOCK</small>
+                    </div>
+                </div>
+            </a>
+        </div></div>
+
+				<table class="table user-list" style="margin-bottom: 0">
+					<thead>
+						<tr>
+							<th><span>INSUMO</span></th>
+							<th><span>PRECIO</span></th>
+							<th><span>CANTIDAD</span></th>
+							<th><span>INGRESO</span></th>
+							<th class="text-right"><span>OPCIONES</span></th>
+						</tr>
+					</thead>
+					</table>
+
+					<%coloropc = 0;%>
+
+					<div style="height: 333px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+					<table class="table user-list">
+
+					
+
+                        <asp:Repeater runat="server" ID="repeaterStock2">
+                            <ItemTemplate>
+						
+
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td>
+								<%#Eval("Nombre").ToString().ToUpper()%>
+							</td>
+							<td>
+								<%#Eval("Precio").ToString().ToUpper()%>
+							</td>
+							<td>
+								<%#Eval("Stock").ToString()%>
+							</td>
+							<td>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+							</td>
+
+							<td class="text-right">
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
+								
+							</td>
+						</tr>
+						<%coloropc++;%>
+						</ItemTemplate>
+                        </asp:Repeater>
+					</table></div>
+</div>>
+
+
+    </div>
+		<script>
+        function listainactiva() {
+            document.getElementById("tablaactiva").style.display = "none";
+            document.getElementById("tablainactiva").style.display = "block";
+        }
+        </script>
+		<script>
+            function listainactiva() {
+                document.getElementById("tablaactiva").style.display = "none";
+                document.getElementById("tablainactiva").style.display = "block";
+            }
+        </script>
 </asp:Content>
 

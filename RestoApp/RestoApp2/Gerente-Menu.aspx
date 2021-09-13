@@ -17,6 +17,9 @@
           </table>
     </div>
 
+
+	<%/*PANELES DE NAVEGACION*/%>
+
 	<a href="Gerente.aspx">
     <div class="volver-atras-izquierda">
         <div class="texto-atras-izquierda">MENU <br /> GERENTE</div>
@@ -35,22 +38,31 @@
     </div>
     </a>
 
+<%/*INICIO DEL CONTENIDO*/%>
 
     <div class="contenido">
 
-				<div class="row social">
+
+
+
+<div id="tablaactiva" style="display:block">
+	<div class="row social">
 
         <div class="col-md-12">
-            <a href="Mesero.aspx">
-                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
-                    <div class="panel-body text-center">
-                        <small style="font-size:30px; color: #fff">VER LOS INSUMOS DESCONTINUADOS</small>
-                    </div>
-                </div>
+            <a href="javascript:listainactiva()">
+            <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+            <div class="panel-body text-center">
+                 <small style="font-size:30px; color: #fff">VER LOS INSUMOS DESCONTINUADOS</small>
+            </div>
+            </div>
             </a>
-        </div></div>
+        </div>
+	</div>
 
-		<%coloropc = 0;%>
+<%coloropc = 0;%>
+
+
+		
 
 				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
@@ -62,6 +74,9 @@
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
+
+					
+
 					<tbody>
 
 						<tr style="background: #555;">
@@ -78,7 +93,7 @@
                                 <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme"/>
+								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="Agregar"/>
 							</td>
 						</tr>
 					</tbody>
@@ -106,7 +121,7 @@
                                 <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="actualizar" CommandArgument='<%#Eval("Id")%>' />
+								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="Actualizar" CommandArgument='<%#Eval("Id")%>' />
 							</td>
 
 						</tr>
@@ -115,9 +130,9 @@
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
 							<td colspan="3">URL
-                            <asp:TextBox ID="Url" runat="server" style="z-index: 1;" TextMode="Url" AutoPostBack="true"></asp:TextBox>
+                            <asp:TextBox ID="Url" runat="server" style="z-index: 1;" TextMode="Url" AutoPostBack="true" Width="100%"></asp:TextBox>
 							<td class="text-right">
-							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="borrar" CommandArgument='<%#Eval("Id")%>' /></td>
+							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="Borrar" CommandArgument='<%#Eval("Id")%>' /></td>
 						</tr>
 						
 						<%coloropc++;%>
@@ -125,8 +140,94 @@
 						</ItemTemplate>
                         </asp:Repeater>
 					</table>
-			</div>
+					</div>
 </div>
+
+
+
+<%/*TABLA INACTIVA*/%>
+
+<div id="tablainactiva" style="display:none">
+<div class="row social">
+
+        <div class="col-md-12">
+            <a href="javascript:listaactiva()">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:30px; color: #fff">VER LOS INSUMOS ACTIVOS</small>
+                    </div>
+                </div>
+            </a>
+        </div></div>
+
+				<table class="table user-list" style="margin-bottom: 0">
+					<thead>
+						<tr>
+							<th><span>FOTO</span></th>
+							<th><span>INSUMO</span></th>
+							<th><span>CATEGORIA</span></th>
+							<th><span>PRECIO</span></th>
+							<th class="text-right"><span>OPCIONES</span></th>
+						</tr>
+					</thead>
+					</table>
+
+                        
+        <div style="height: 333px; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+						<table class="table user-list" style="padding-bottom:0">
+						<asp:Repeater runat="server" ID="repeaterMenu2" >
+                            <ItemTemplate>
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td rowspan="2">
+								<asp:Image ID="Img2" runat="server" style="z-index: 1; height:100px; width:100%; background-size:auto; border: 2px solid #000; background-color: black;"/>
+							</td>
+							<td>
+                                <asp:TextBox ID="Insumo2"  runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true" Enabled="false"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Tipo2" runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true" Enabled="false"></asp:TextBox>
+							</td>
+							<td>
+                                <asp:TextBox ID="Precio2" runat="server" style="z-index: 1;" AutoPostBack="true" Enabled="false"></asp:TextBox>
+							</td>
+							<td class="text-right">
+								<asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' />
+							</td>
+
+						</tr>
+						<%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td colspan="4">URL
+                            <asp:TextBox ID="Url2" runat="server" style="z-index: 1;" TextMode="Url" AutoPostBack="true" Enabled="false" Width="100%"></asp:TextBox>
+						</tr>
+						
+						<%coloropc++;%>
+						
+						</ItemTemplate>
+                        </asp:Repeater>
+					</table>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
 
 		<div id="ventanaEmergente" class="ventanaEmerg" style="
 	background: #232528;
@@ -154,6 +255,18 @@
         function abrirventanaEmerg() {
             document.getElementById("ventanaEmergente").style.display = "block";
             document.body.style.visibility = "visible: false";
+        }
+    </script>
+	<script>
+        function listaactiva() {
+			document.getElementById("tablaactiva").style.display = "block";
+			document.getElementById("tablainactiva").style.display = "none";
+        }
+    </script>
+	<script>
+        function listainactiva() {
+            document.getElementById("tablaactiva").style.display = "none";
+            document.getElementById("tablainactiva").style.display = "block";
         }
     </script>
 </asp:Content>

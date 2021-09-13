@@ -12,6 +12,8 @@ namespace RestoApp2
     public partial class Gerente_Menu : System.Web.UI.Page
     {
         public List<Insumo> InsumoLista;
+        public List<Insumo> InsumoListaACT;
+        public List<Insumo> InsumoListaINA;
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -72,23 +74,57 @@ namespace RestoApp2
             if (!IsPostBack) { 
             try
             {
+                /*VEREFICAR EL USO DEL SESSION*/
                 InsumoLista = GerenteMenu.ListarInsumos("");
                 Session.Add("ListadoInsumo", InsumoLista);
 
-                repeaterMenu.DataSource = InsumoLista;
-                repeaterMenu.DataBind();
-
-                int cont = 0;
+            
+                    InsumoListaACT = new List<Insumo>();
+                    InsumoListaINA = new List<Insumo>();
+                
                 foreach (Insumo item in InsumoLista)
                 {
-                    ((Image)repeaterMenu.Items[cont].FindControl("Img")).ImageUrl = item.UrlImagen;
-                    ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text = item.Nombre.ToUpper();
-                    ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text = item.Tipo.Descripcion.ToUpper();
-                    ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
-                    ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text = item.UrlImagen;
-                    cont++;
+                    if (item.Baja) 
+                    {
+                            InsumoListaACT.Add(item);
+                    }
+                    else 
+                    {
+                            InsumoListaINA.Add(item);
+
+                    }
+                    
                 }
-            }
+                    repeaterMenu.DataSource = InsumoListaACT;
+                    repeaterMenu.DataBind();
+                    repeaterMenu2.DataSource = InsumoListaINA;
+                    repeaterMenu2.DataBind();
+
+
+                    int cont = 0;
+                    foreach (Insumo item in InsumoListaACT)
+                    {
+
+                            ((Image)repeaterMenu.Items[cont].FindControl("Img")).ImageUrl = item.UrlImagen;
+                            ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text = item.Nombre.ToUpper();
+                            ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text = item.Tipo.Descripcion.ToUpper();
+                            ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
+                            ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text = item.UrlImagen;
+                            cont++;
+                    }
+                    cont = 0;
+                    foreach (Insumo item in InsumoListaINA)
+                    {
+
+                        ((Image)repeaterMenu2.Items[cont].FindControl("Img2")).ImageUrl = item.UrlImagen;
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Insumo2")).Text = item.Nombre.ToUpper();
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Tipo2")).Text = item.Tipo.Descripcion.ToUpper();
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = item.Precio.ToString();
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Url2")).Text = item.UrlImagen;
+                        cont++;
+                    }
+
+                }
             catch (Exception ex)
             {
                 Session.Add("Error", ex.ToString());
@@ -99,6 +135,7 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
+            /*
             string Insumo = TB_Insumo.Text;
             int IDCategoria = int.Parse(DDL_Categorias.SelectedItem.Value);
             int IDTipo = int.Parse(DDL_Tipo_Insumo.SelectedItem.Value);
@@ -143,11 +180,11 @@ namespace RestoApp2
             {
                 //ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
                 Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]);
-            }
+            }*/
         }
 
 
-        protected void actualizar(object sender, EventArgs e)
+        protected void Actualizar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
             Consultas insumos = new Consultas();
@@ -173,14 +210,14 @@ namespace RestoApp2
                     aux.Stock = item.Stock;
                     aux.Baja = true;
 
-                    insumos.actualizarInsumo(true, aux);
+                    insumos.ActualizarInsumo(true, aux);
                 }
                 cont++;
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
 
-        protected void borrar(object sender, EventArgs e)
+        protected void Borrar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
             Consultas insumos = new Consultas();
@@ -196,19 +233,20 @@ namespace RestoApp2
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
                 {
                     aux.Id = item.Id;
+
                     aux.Baja = false;
 
-                    insumos.actualizarInsumo(false, aux);
+                    insumos.ActualizarInsumo(false, aux);
                 }
                 cont++;
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
 
-        protected void agregar(object sender, EventArgs e)
+        protected void Agregar(object sender, EventArgs e)
         {
-            Consultas personal = new Consultas();
             Insumo aux = new Insumo();
+            Consultas query = new Consultas();
             if (InsumoNew.Text != "" && TipoNew.Text != "" && PrecioNew.Text != "" && UrlNew.Text != "")
             {
                 aux.Nombre = InsumoNew.Text;
@@ -217,6 +255,8 @@ namespace RestoApp2
                 aux.Precio = decimal.Parse(PrecioNew.Text);
                 aux.UrlImagen = UrlNew.Text;
                 aux.Tipo.Id = 1;
+                aux.Baja = true;
+                query.AgregarInsumo(aux);
             }
             else
             {

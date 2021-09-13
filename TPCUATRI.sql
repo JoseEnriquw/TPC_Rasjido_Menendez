@@ -101,10 +101,6 @@ fechaHora datetime not null
 go
 
 
-
-
-
-
 insert into Cargos values ('Gerente'),('Empleado')
 insert into Personas values (1,'11222333','Adriel','Rasjido',1),(2,'11222444','Jose','Menendez',1),(1,'11222555','Elian','Rasjido',1),(2,'11222666','Enrique','Menendez',1)
 insert into Mesas values ('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none')

@@ -37,8 +37,9 @@
 
 
 
-    <div class="contenido">
+<div class="contenido">
 
+		<div id="personasactivas" style="display:block">
         <div class="row social">
 
         <div class="col-md-6">
@@ -50,8 +51,10 @@
                 </div>
             </a>
         </div>
+
+
         <div class="col-md-6">
-            <a href="Mesero.aspx">
+            <a href="javascript:personasinactivas()">
                 <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
                     <div class="panel-body text-center">
                         <small style="font-size:25px; color: #fff">VER EMPLEADOS DADOS DE BAJA</small>
@@ -91,7 +94,7 @@
 								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td class="text-right">
-                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="agregar" />
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="Agregar" />
 							</td>
 						</tr>
                         </tbody></table>
@@ -121,15 +124,92 @@
 								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="actualizar"/>
-								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="borrar"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
+								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Borrar"/>
 							</td>
 						</tr>
                         <%coloropc++;%>
                         </ItemTemplate>
                         </asp:Repeater>
 
-					</table></div>
+					</table></div></div>
+
+        <div id="personasinactivas" style="display:none">
+
+
+		<div class="row social">
+
+        <div class="col-md-6">
+            <a href="Mesero.aspx">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:25px; color: #fff">VER PEDIDOS DE TODOS LOS EMPLEADOS</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="javascript:personasactivas()">
+                <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                    <div class="panel-body text-center">
+                        <small style="font-size:25px; color: #fff">VER EMPLEADOS ACTIVOS</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
+
+                <%coloropc = 0;%>
+
+				<table class="table user-list" style="margin-bottom:0">
+					<thead>
+						<tr>
+							<th><span>NOMBRE</span></th>
+							<th><span>APELLIDO</span></th>
+							<th><span>DNI</span></th>
+							<th><span>CARGO</span></th>
+							<th class="text-right"><span>OPCIONES</span></th>
+						</tr>
+					</thead>
+                    </table>
+
+                        <div style="height: 333PX; overflow: scroll; background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
+                        <table class="table user-list">
+                        
+                        <asp:Repeater runat="server" ID="repeaterPersonal2">
+                            <ItemTemplate>
+                        
+
+                       <%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee;"><%}else{%>
+						<tr style="background: #bbb;"><%}%>
+							<td>
+								<asp:TextBox ID="Nombre2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+							</td>
+							<td>
+								<asp:TextBox ID="Cargo2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+							</td>
+							<td class="text-right">
+								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
+
+							</td>
+						</tr>
+                        <%coloropc++;%>
+                        </ItemTemplate>
+                        </asp:Repeater>
+
+					</table></div></div>
+
+
+
 </div>
 
 	<div id="ventanaEmergente" class="ventanaEmerg" style="
@@ -160,4 +240,16 @@
             document.body.style.visibility = "visible: false";
         }
     </script>
+        <script>
+            function personasactivas() {
+                document.getElementById("personasactivas").style.display = "block";
+                document.getElementById("personasinactivas").style.display = "none";
+            }
+        </script>
+        <script>
+            function personasinactivas() {
+                document.getElementById("personasinactivas").style.display = "block";
+                document.getElementById("personasactivas").style.display = "none";
+            }
+        </script>
 </asp:Content>
