@@ -131,7 +131,7 @@ namespace Negocio
                 }
                 else
                 {
-                    accessdata.setearConsulta("update Insumos set Baja = 0 where" + id);
+                    accessdata.setearConsulta("update Personas set Baja = 0 where" + id);
                 }
 
                 accessdata.ejecutarAccion();

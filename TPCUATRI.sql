@@ -1,3 +1,5 @@
+DROP DATABASE TPC_Rasjido_Menendez_DB;
+
 create database TPC_Rasjido_Menendez_DB
 go
 
@@ -102,14 +104,14 @@ go
 
 
 insert into Cargos values ('Gerente'),('Empleado')
-insert into Personas values (1,'11222333','Adriel','Rasjido',1),(2,'11222444','Jose','Menendez',1),(1,'11222555','Elian','Rasjido',1),(2,'11222666','Enrique','Menendez',1)
+insert into Personas values (1,'11222333','Adriel','Rasjido',1),(2,'11222444','Jose','Menendez',1),(2,'11222555','Elian','Rasjido',1),(1,'11222666','Enrique','Menendez',1),(2,'11222888','Maximiliano','Fernandez',1),(2,'11222999','Fernandez','Maximiliano',1)
 insert into Mesas values ('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none')
 insert into Usuarios values ('11222333','11222333',1),('11222444','11222444',1),('11222555','11222555',1),('11222666','11222666',1)
 insert into Categorias values ('Plato'),('Bebida')
 insert into TipoInsumos values ('Entrada'),('Ensalada'),('Principal'),('Postre'),('Jugo'),('Alcohol'),('Gaseosa'),('Agua')
 insert into Insumos values 
 ('Chorizo criollo'	,  1,   1,  1600,  20,'https://decarolis.com.ar/wp-content/uploads/2020/07/12-chorizo-de-cerdo.jpg',1),
-('Provoleta'		    ,  1,   1,  490,   30,'http://thebrandsoup.com/wp-content/uploads/2018/07/provoleta2.jpg',1),
+('Provoleta'		    ,  1,   1,  490,   30,'http://thebrandsoup.com/wp-content/uploads/2018/07/provoleta2.jpg',0),
 ('Ensalada Cesar'	    ,  1,   2,  450,   50,'https://cdn.kiwilimon.com/recetaimagen/36391/45060.jpg',1),
 ('Ensalada caprese'	,  1,   2,  450,   60,'https://okdiario.com/img/2016/11/26/receta-de-ensalada-caprese.jpg',1),
 ('Papas fritas'		,  1,   2,  110,   50,'https://www.bbva.com/wp-content/uploads/2019/08/Dia_internacional_de_la_papa_frita_BBVA_opt-1024x559.png',1),
@@ -120,19 +122,21 @@ insert into Insumos values
 ('Churrasco'		    ,  1,   3,	1400,  70,'https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/el-churrasco-que-es-corte.jpg',1),
 
 ('Matambre'		    ,  1,   3,	1200,  80,'https://media.minutouno.com/p/756403023543082f7f63deba6587acac/adjuntos/150/imagenes/038/377/0038377613/540x405/smart/como-hacer-un-matambre-relleno.jpg',1),
-('Licuado'		    ,  2,   4,	320,   20,'https://cdn.kiwilimon.com/recetaimagen/20093/23942.jpg',1),
-('Panqueque'		    ,  1,   4,  460,   20,'https://cocina.guru/wp-content/uploads/2019/10/receta-de-panqueques.jpg',1),
-('Helado'		        ,  1,   4,  620,   50,'https://i.blogs.es/098b7c/helados1/1366_2000.jpg',1),
+('Licuado'		    ,  2,   4,	320,   20,'https://cdn.kiwilimon.com/recetaimagen/20093/23942.jpg',0),
+('Panqueque'		    ,  1,   4,  460,   20,'https://cocina.guru/wp-content/uploads/2019/10/receta-de-panqueques.jpg',0),
+('Helado'		        ,  1,   4,  620,   50,'https://i.blogs.es/098b7c/helados1/1366_2000.jpg',0),
 ('Creme brulee'		,  1,   4,  720,   20,'https://i.blogs.es/2d3efb/creme-brulee-kitchen-aid-como-preparar/840_560.jpg',1),
 ('Vaso de agua'		,  2,   8,  55,    20,'https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2017/06/istock-471488514.jpg',1),
 ('Gaseosa'		    ,  2,   7,  120,   50,'https://www.somoselagua.com.ar/blog/img/novedades/106.jpg',1),
 ('Jugo de naranja'	,  2,   6,  85,    20,'https://easyrecetas.com/wp-content/uploads/2020/04/Receta-de-Jugo-de-Naranja.jpg',1),
 ('Cerveza'		    ,  2,   5,  270,   70,'https://thefoodtech.com/wp-content/uploads/2020/05/cerveza-1.jpg',1),
 ('Vino'			    ,  2,   5,  720,   50,'https://www.65ymas.com/uploads/s1/21/56/6/bigstock-wine-glass-wine-bottle-and-gr-239880082.jpeg',1),
-('Coca-Cola'		,  2,   7,  150,   50,'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/158px-15-09-26-RalfR-WLC-0098.jpg',1)
+('Coca-Cola'		,  2,   7,  150,   50,'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/158px-15-09-26-RalfR-WLC-0098.jpg',0)
 
-select *from VW_Personas
+select * from VW_Personas
 select * from VW_Insumos order by Precio asc
 select * from TipoInsumos
 SELECT * from Categorias
 SELECT * from Pedidos
+
+

@@ -36,7 +36,7 @@ namespace RestoApp2
             try
             {
                 ListaMenu = new List<Insumo>();
-                ListaMenu = query.ListarInsumos("");
+                ListaMenu = query.ListarInsumos(" where Baja = 1");
                 Session["ListadoMenu"]= ListaMenu;
                 if (!IsPostBack) { 
                 
