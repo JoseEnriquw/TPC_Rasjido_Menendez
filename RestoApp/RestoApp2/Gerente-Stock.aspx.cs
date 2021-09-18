@@ -138,8 +138,9 @@ namespace RestoApp2
             int cont = 0;
             foreach (Insumo item in ((List<Insumo>)Session["ListadoStock"]))
             {
-                if (argument == item.Id.ToString()
-                    && ((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text != "")
+                string auxtext = ((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text;
+                if (int.Parse(argument) == item.Id
+                    && auxtext != "")
                 {
                     aux.Id = item.Id;
                     aux.Nombre = item.Nombre;
@@ -149,19 +150,21 @@ namespace RestoApp2
                     aux.Precio = item.Precio;
                     aux.Stock = item.Stock;
                     aux.Stock+= short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text);
+                    aux.Baja = item.Baja;
 
                     pos = cont;
                     insumos.ActualizarInsumo(true, aux);
-                   
+                    ((List<Insumo>)Session["ListadoStock"])[pos] = aux;
+
+                    repeaterStock.DataSource = ((List<Insumo>)Session["ListadoStock"]);
+                    repeaterStock.DataBind();
+                    Response.Redirect("Gerente-Stock.aspx");
+
                 }
-                cont++;
+                if(item.Baja) cont++;
             }
 
-            ((List<Insumo>)Session["ListadoStock"])[pos] = aux;
-
-            repeaterStock.DataSource = ((List<Insumo>)Session["ListadoStock"]);
-            repeaterStock.DataBind();
-            Response.Redirect("Gerente-Stock.aspx");
+          
         }
 
        
