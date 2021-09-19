@@ -198,7 +198,7 @@
 								<asp:TextBox ID="Cargo2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
+								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Reactivar_Persona"/>
 
 							</td>
 						</tr>

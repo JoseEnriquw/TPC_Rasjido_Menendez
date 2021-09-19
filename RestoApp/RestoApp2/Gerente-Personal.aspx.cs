@@ -232,5 +232,19 @@ namespace RestoApp2
             }
             Response.Redirect("Gerente-Personal.aspx");
         }
+
+        protected void Reactivar_Persona(object sender, EventArgs e)
+        {
+
+            Consultas consulta = new Consultas();
+            var argument = int.Parse(((Button)sender).CommandArgument);
+
+            ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument).Baja = true;
+
+            consulta.ActualizarPersona(true, ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument));
+
+            Response.Redirect("Gerente-Personal.aspx");
+        }
+
     }
 }
