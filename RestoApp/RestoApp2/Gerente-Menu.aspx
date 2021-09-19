@@ -194,7 +194,7 @@
                                 <asp:TextBox ID="Precio2" runat="server" style="z-index: 1;" AutoPostBack="true" Enabled="false"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' />
+								<asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Reactivar_Insumo" />
 							</td>
 
 						</tr>

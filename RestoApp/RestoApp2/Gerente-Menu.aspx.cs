@@ -265,5 +265,18 @@ namespace RestoApp2
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
+
+        protected void Reactivar_Insumo(object sender, EventArgs e)
+        {
+            Consultas consulta = new Consultas();
+            var argument = int.Parse(((Button)sender).CommandArgument);
+          
+            ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument).Baja = true;
+
+            consulta.ActualizarInsumo(true, ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument));
+
+            Response.Redirect("Gerente-Menu.aspx");
+        }
+
     }
 }
