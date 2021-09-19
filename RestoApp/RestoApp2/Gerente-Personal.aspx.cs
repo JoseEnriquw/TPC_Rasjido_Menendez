@@ -173,10 +173,11 @@ namespace RestoApp2
                     aux.Cargo = new Cargo();
                     aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text.ToUpper();
                     if (aux.Cargo.Descripcion == "GERENTE") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
+                    aux.Baja = true;
 
                     personal.ActualizarPersona(true, aux);
                 }
-                cont++;
+                if (item.Baja) cont++;
             }
             Response.Redirect("Gerente-Personal.aspx");
         }
@@ -206,9 +207,9 @@ namespace RestoApp2
 
                     personal.ActualizarPersona(false, aux);
                 }
-                cont++;
+                if (item.Baja) cont++;
             }
-            Response.Redirect("Gerente-Personal.aspx");
+            Response.Redirect("Gerente-Personal.aspx"); 
         }
 
         protected void Agregar(object sender, EventArgs e)

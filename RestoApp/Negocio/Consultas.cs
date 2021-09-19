@@ -185,7 +185,15 @@ namespace Negocio
 
                 if (opcion == true)
                 {
-                    accessdata.setearConsulta("update Insumos set"+ stock +","+baja+ " where" + id);
+                    accessdata.setearConsulta("update Insumos set" 
+                    + nombre + "," 
+                    + idcategoria + "," 
+                    + idtipo + "," 
+                    + precio + ","
+                    + stock + "," 
+                    + url + "," 
+                    + baja 
+                    + " where" + id);
                 }
                 else
                 {

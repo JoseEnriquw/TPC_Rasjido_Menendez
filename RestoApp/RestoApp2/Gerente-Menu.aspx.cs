@@ -199,12 +199,12 @@ namespace RestoApp2
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text != ""
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
                 {
-                    aux.Id = item.Id;
+                    aux = item;
+
                     aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
-                    aux.Categoria = new Categorias();
+
                     aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
-                    aux.Categoria.Id = item.Categoria.Id;
-                    aux.Tipo = item.Tipo;
+
                     aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
                     aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
                     aux.Stock = item.Stock;
@@ -212,7 +212,7 @@ namespace RestoApp2
 
                     insumos.ActualizarInsumo(true, aux);
                 }
-                cont++;
+                if (item.Baja) cont++;
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
@@ -233,12 +233,12 @@ namespace RestoApp2
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
                 {
                     aux.Id = item.Id;
-
+                    aux = item;
                     aux.Baja = false;
 
                     insumos.ActualizarInsumo(false, aux);
                 }
-                cont++;
+                if (item.Baja) cont++;
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
