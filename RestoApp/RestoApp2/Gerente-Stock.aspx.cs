@@ -127,9 +127,19 @@ namespace RestoApp2
             }*/
 
         }
+        protected void Confirmacion(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+
+            si.CommandArgument = argument;
+            string javaScript = "abrirventanaEmerg()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
 
         protected void Actualizar(object sender, EventArgs e)
         {
+
+
             var argument = ((Button)sender).CommandArgument;
             Consultas insumos = new Consultas();
             Insumo aux = new Insumo();

@@ -44,7 +44,7 @@
 <div class="row social">
 
         <div class="col-md-12">
-            <a href="javascript:listaactiva()">
+            <a href="javascript:listainactiva()">
                 <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
                     <div class="panel-body text-center">
                         <small style="font-size:30px; color: #fff">VER LOS INSUMOS SIN STOCK</small>
@@ -94,7 +94,7 @@
 							</td>
 
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Confirmacion"/>
 								
 							</td>
 						</tr>
@@ -160,7 +160,7 @@
 							</td>
 
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Confirmacion"/>
 								
 							</td>
 						</tr>
@@ -173,16 +173,51 @@
 
     </div>
 		<script>
-        function listainactiva() {
-            document.getElementById("tablaactiva").style.display = "none";
-            document.getElementById("tablainactiva").style.display = "block";
+        function listaactiva() {
+            document.getElementById("tablaactiva").style.display = "block";
+            document.getElementById("tablainactiva").style.display = "none";
         }
-        </script>
-		<script>
+
             function listainactiva() {
                 document.getElementById("tablaactiva").style.display = "none";
                 document.getElementById("tablainactiva").style.display = "block";
+			}
+
+        </script>
+
+
+	    <script>
+            function abrirventanaEmerg() {
+                document.getElementById("mensajeConf").style.display = "block";
+                document.body.style.visibility = "visible: false";
             }
         </script>
+
+
+	<div id="mensajeConf" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 47%;
+    width: 30%;
+    height: 30%;
+    left: 35%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+
+	">
+		<h1 style="color: #fca014">ESTAS POR REALIZAR CAMBIOS</h1>
+        <p>¿Estas seguro de querer aplicar estos cambios?</p>
+
+		<asp:Button  ID="si" runat="server" Text="CONTINUAR" class="btn btn-theme" OnClick="Actualizar"/>
+		<asp:Button  ID="no" runat="server" Text="CANCELAR!" class="btn btn-theme"  />
+
+    </div>
+
+
 </asp:Content>
 

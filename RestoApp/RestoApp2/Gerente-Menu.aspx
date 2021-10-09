@@ -93,7 +93,7 @@
                                 <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="Agregar"/>
+								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="ConfirmActualizar"/>
 							</td>
 						</tr>
 					</tbody>
@@ -121,7 +121,7 @@
                                 <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="Actualizar" CommandArgument='<%#Eval("Id")%>' />
+								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="ConfirmActualizar" CommandArgument='<%#Eval("Id")%>' />
 							</td>
 
 						</tr>
@@ -132,7 +132,7 @@
 							<td colspan="3">URL
                             <asp:TextBox ID="Url" runat="server" style="z-index: 1;" TextMode="Url" AutoPostBack="true" Width="100%"></asp:TextBox>
 							<td class="text-right">
-							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="Borrar" CommandArgument='<%#Eval("Id")%>' /></td>
+							<asp:Button ID="Button3" runat="server" Text="DAR DE BAJA"  class="btn btn-theme" OnClick="ConfirmActualizar" CommandArgument='<%#Eval("Id")%>' /></td>
 						</tr>
 						
 						<%coloropc++;%>
@@ -194,7 +194,7 @@
                                 <asp:TextBox ID="Precio2" runat="server" style="z-index: 1;" AutoPostBack="true" Enabled="false"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Reactivar_Insumo" />
+								<asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar" />
 							</td>
 
 						</tr>
@@ -269,4 +269,41 @@
             document.getElementById("tablainactiva").style.display = "block";
         }
     </script>
+
+	<script>
+        function abrirventanaEmerg_Borrar() {
+
+            document.getElementById("mensajeConf_borrar").style.display = "block";
+            document.body.style.visibility = "visible: false";
+
+        }
+    </script>
+
+
+	<div id="mensajeConf_borrar" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 47%;
+    width: 30%;
+    height: 30%;
+    left: 35%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+
+	">
+		<h1 style="color: #fca014">ESTAS POR REALIZAR CAMBIOS</h1>
+        <p>¿Estas seguro de querer aplicar estos cambios?</p>
+
+		<asp:Button  ID="jsBorrar" runat="server" Text="BORRAR" class="btn btn-theme" OnClick="Borrar"/>
+        <asp:Button  ID="jsActualizar" runat="server" Text="ACTUALIZAR" class="btn btn-theme" OnClick="Actualizar"/>
+        <asp:Button  ID="jsReactivar" runat="server" Text="REACTIVAR" class="btn btn-theme" OnClick="Reactivar_Insumo"/>
+        <asp:Button  ID="jsAgregar" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="Actualizar"/>
+		<asp:Button  ID="no" runat="server" Text="CANCELAR!" class="btn btn-theme"  />
+
+    </div>
 </asp:Content>

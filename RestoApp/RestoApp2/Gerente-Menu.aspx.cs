@@ -183,6 +183,62 @@ namespace RestoApp2
             }*/
         }
 
+        protected void ConfirmBorrar(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+
+            jsBorrar.CommandArgument = argument;
+            jsBorrar.Visible = true;
+            jsActualizar.Visible = false;
+            jsReactivar.Visible = false;
+            jsAgregar.Visible = false;
+
+            string javaScript = "abrirventanaEmerg_Borrar()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+        protected void ConfirmReactivar(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+
+            jsReactivar.CommandArgument = argument;
+            jsBorrar.Visible = false;
+            jsActualizar.Visible = false;
+            jsReactivar.Visible = true;
+            jsAgregar.Visible = false;
+
+            string javaScript = "abrirventanaEmerg_Borrar()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+        protected void ConfirmActualizar(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+
+            jsActualizar.CommandArgument = argument;
+            jsBorrar.Visible = false;
+            jsActualizar.Visible = true;
+            jsReactivar.Visible = false;
+            jsAgregar.Visible = false;
+
+            string javaScript = "abrirventanaEmerg_Borrar()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+        protected void ConfirmAgregar(object sender, EventArgs e)
+        {
+            jsBorrar.Visible = false;
+            jsActualizar.Visible = false;
+            jsReactivar.Visible = false;
+            jsAgregar.Visible = true;
+
+
+            string javaScript = "abrirventanaEmerg_Borrar()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+
+
+
+
+
+
 
         protected void Actualizar(object sender, EventArgs e)
         {

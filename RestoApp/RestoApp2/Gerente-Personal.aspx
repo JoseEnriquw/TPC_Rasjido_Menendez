@@ -94,7 +94,7 @@
 								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td class="text-right">
-                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="Agregar" />
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="ConfirmAgregar" />
 							</td>
 						</tr>
                         </tbody></table>
@@ -124,8 +124,8 @@
 								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Actualizar"/>
-								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Borrar"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar"/>
+								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmBorrar"/>
 							</td>
 						</tr>
                         <%coloropc++;%>
@@ -198,7 +198,7 @@
 								<asp:TextBox ID="Cargo2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Reactivar_Persona"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmReactivar"/>
 
 							</td>
 						</tr>
@@ -252,4 +252,41 @@
                 document.getElementById("personasactivas").style.display = "none";
             }
         </script>
+
+    	    <script>
+                function abrirventanaEmerg_Borrar() {
+
+                    document.getElementById("mensajeConf_borrar").style.display = "block";
+                    document.body.style.visibility = "visible: false";
+
+                }
+            </script>
+
+
+	<div id="mensajeConf_borrar" class="ventanaEmerg" style="
+	background: #232528;
+    border: 6px solid #009ffd;
+    color: #fff;
+    position: absolute;
+    top: 47%;
+    width: 30%;
+    height: 30%;
+    left: 35%;
+	text-align: center;
+    z-index: 10;
+	display: none;
+    animation-direction:reverse;
+    animation-delay: 10s;
+
+	">
+		<h1 style="color: #fca014">ESTAS POR REALIZAR CAMBIOS</h1>
+        <p>¿Estas seguro de querer aplicar estos cambios?</p>
+
+		<asp:Button  ID="jsBorrar" runat="server" Text="BORRAR" class="btn btn-theme" OnClick="Borrar"/>
+        <asp:Button  ID="jsActualizar" runat="server" Text="ACTUALIZAR" class="btn btn-theme" OnClick="Actualizar"/>
+        <asp:Button  ID="jsReactivar" runat="server" Text="REACTIVAR" class="btn btn-theme" OnClick="Reactivar_Persona"/>
+        <asp:Button  ID="jsAgregar" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="Agregar"/>
+		<asp:Button  ID="no" runat="server" Text="CANCELAR!" class="btn btn-theme"  />
+
+    </div>
 </asp:Content>
