@@ -100,8 +100,30 @@
 							</td>
 							<td>
 
-                                <asp:TextBox ID="txtCantidad" name="tb_Cantidad" runat="server" AutoPostBack="true"  ></asp:TextBox>
+                                <asp:TextBox ID="txtCantidad" name="tb_Cantidad" runat="server" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
 								
+								<script>
+                                    function solonumeros(e) {
+
+                                        var key;
+
+                                        if (window.event) // IE
+                                        {
+                                            key = e.keyCode;
+                                        }
+                                        else if (e.which) // Netscape/Firefox/Opera
+                                        {
+                                            key = e.which;
+                                        }
+
+                                        if (key < 48 || key > 57) {
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }
+                                </script>
+
 								
 							</td>
 							<td>

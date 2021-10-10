@@ -9,8 +9,32 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" " TextMode="Number"></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" " TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox></td>
+
+                   <script>
+                       function solonumeros(e) {
+
+                           var key;
+
+                           if (window.event) // IE
+                           {
+                               key = e.keyCode;
+                           }
+                           else if (e.which) // Netscape/Firefox/Opera
+                           {
+                               key = e.which;
+                           }
+
+                           if (key < 48 || key > 57) {
+                               return false;
+                           }
+
+                           return true;
+                       }
+                   </script>
+
                   <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
+                  
                   <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
               </tr>
           </table>
@@ -88,7 +112,30 @@
 								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="DniNew" runat="server" TextMode="Number" ></asp:TextBox>
+								<asp:TextBox ID="DniNew" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+
+                                  <script>
+                                      function solonumeros(e) {
+
+                                          var key;
+
+                                          if (window.event) // IE
+                                          {
+                                              key = e.keyCode;
+                                          }
+                                          else if (e.which) // Netscape/Firefox/Opera
+                                          {
+                                              key = e.which;
+                                          }
+
+                                          if (key < 48 || key > 57) {
+                                              return false;
+                                          }
+
+                                          return true;
+                                      }
+                                  </script>
+
 							</td>
 							<td>
 								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
@@ -118,7 +165,30 @@
 								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+
+                                <script>
+                                    function solonumeros(e) {
+
+                                        var key;
+
+                                        if (window.event) // IE
+                                        {
+                                            key = e.keyCode;
+                                        }
+                                        else if (e.which) // Netscape/Firefox/Opera
+                                        {
+                                            key = e.which;
+                                        }
+
+                                        if (key < 48 || key > 57) {
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }
+                                </script>
+
 							</td>
 							<td>
 								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
@@ -192,7 +262,30 @@
 								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+
+                                <script>
+                                    function solonumeros(e) {
+
+                                        var key;
+
+                                        if (window.event) // IE
+                                        {
+                                            key = e.keyCode;
+                                        }
+                                        else if (e.which) // Netscape/Firefox/Opera
+                                        {
+                                            key = e.which;
+                                        }
+
+                                        if (key < 48 || key > 57) {
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }
+                                </script>
+
 							</td>
 							<td>
 								<asp:TextBox ID="Cargo2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>

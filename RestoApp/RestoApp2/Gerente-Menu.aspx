@@ -88,9 +88,31 @@
 							</td>
 							<td>
 								<asp:TextBox ID="TipoNew" runat="server" style="z-index: 1;" TextMode="Number"></asp:TextBox>
+
 							</td>
 							<td>
-                                <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;"></asp:TextBox>
+                                <asp:TextBox ID="PrecioNew" runat="server" style="z-index: 1;" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<script>
+                                    function solonumeros(e) {
+
+                                        var key;
+
+                                        if (window.event) // IE
+                                        {
+                                            key = e.keyCode;
+                                        }
+                                        else if (e.which) // Netscape/Firefox/Opera
+                                        {
+                                            key = e.which;
+                                        }
+
+                                        if ((key != 44 && key < 48 )|| key > 57  ) {
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }
+                                </script>
 							</td>
 							<td class="text-right">
 								<asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="ConfirmActualizar"/>
@@ -118,7 +140,30 @@
 								<asp:TextBox ID="Tipo" runat="server" style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td>
-                                <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="Precio" runat="server" style="z-index: 1;" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+
+								<script>
+                                    function solonumeros(e) {
+
+                                        var key;
+
+                                        if (window.event) // IE
+                                        {
+                                            key = e.keyCode;
+                                        }
+                                        else if (e.which) // Netscape/Firefox/Opera
+                                        {
+                                            key = e.which;
+                                        }
+
+                                        if ((key != 44 && key < 48) || key > 57) {
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }
+                                </script>
+
 							</td>
 							<td class="text-right">
 								<asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="ConfirmActualizar" CommandArgument='<%#Eval("Id")%>' />
