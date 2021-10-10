@@ -61,13 +61,15 @@ namespace RestoApp2
                     cant = 0;
                 }
 
-                if (idInsumo != 0)//Comprueba si se selecciono algo
+                //Comprueba si se selecciono algo
+                if (idInsumo != 0)
                 {
                     ItemsPedidos AuxItem = new ItemsPedidos();
                     AuxItem.Item = new Insumo();
                     Insumo ItemAux = new Insumo();
 
-                    if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems == null) //Si esta vacia - el primer obj
+                    //Si esta vacia - el primer obj
+                    if (((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems == null) 
                     {
 
                         CantTotalInsumos = 0;
@@ -97,7 +99,8 @@ namespace RestoApp2
                         ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
 
                     }
-                    else //En caso de haber seleccionado un obj
+                    //En caso de haber seleccionado un obj
+                    else
                     {
                         AuxItem.Item = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == idInsumo);
 
@@ -110,8 +113,8 @@ namespace RestoApp2
                                 igual = true;
                             }
                         }
-
-                        if (igual)//Es repetido
+                        //Es repetido
+                        if (igual)
                         {
                             int auxpos = 0;
                             int pos = 0;
@@ -126,10 +129,11 @@ namespace RestoApp2
                                 pos++;
                             }
                             cant = pos;
-
+                          if(verificarStock(1, ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Item.Id)) { 
                             ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad++;
                             ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].estado = true;
                             ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].PrecioSubTotal = ((Dominio.Mesa)Session["MesaActual"]).Pedidos.ListaItems[auxpos].Cantidad * AuxItem.Item.Precio;
+                          }
                         }
                         else//Es un nuevo obj
                         {
@@ -214,21 +218,22 @@ namespace RestoApp2
             }
         }
 
-        
+        //Actualiza la cantidad del Pedido con la cantidad que hay en TextBox
         protected void Actualizar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
 
             int pos = mesa.Pedidos.ListaItems.FindIndex(x => x.Item.Id == int.Parse(argument));
-
+            
             int cantAux = int.Parse(((TextBox)RepeaterMesa.Items[pos].FindControl("txtCantidad")).Text);
-            mesa.Pedidos.ListaItems[pos].Cantidad = cantAux;
+            if (verificarStock(cantAux-mesa.Pedidos.ListaItems[pos].Cantidad, mesa.Pedidos.ListaItems[pos].Item.Id)) { 
+                mesa.Pedidos.ListaItems[pos].Cantidad = cantAux;
 
             mesa.Pedidos.ListaItems[pos].PrecioSubTotal = cantAux * mesa.Pedidos.ListaItems[pos].Item.Precio;
 
             int posicion = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
             ((List<Dominio.Mesa>)Session["MesasMesero"])[posicion] = mesa;
-
+            }
             Response.Redirect("Mesa.aspx?id=0");
         }
 
@@ -297,6 +302,32 @@ namespace RestoApp2
 
             Response.Redirect("Mesero.aspx");
 
+        }
+
+        public bool verificarStock(int cantpedida,int id)
+        {
+            bool result = false;
+            int stock = ((List<Insumo>)Session["ListadoMenu"]).Find(x=> x.Id==id).Stock;
+            int pos = 0;
+
+            foreach (var item in ((List<Dominio.Mesa>)Session["MesasMesero"]))
+            {
+
+                    if (item.Pedidos.ListaItems != null) { 
+                    if((pos=item.Pedidos.ListaItems.FindIndex(x=> x.Item.Id == id)) >= 0)
+                    {
+                        stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                    }
+                    }
+
+               
+
+            }
+
+            result =((stock-cantpedida)>=0);
+
+
+            return result;
         }
     }
 }

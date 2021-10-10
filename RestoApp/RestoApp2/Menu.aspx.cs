@@ -38,6 +38,7 @@ namespace RestoApp2
                 ListaMenu = new List<Insumo>();
                 ListaMenu = query.ListarInsumos(" where Baja = 1");
                 Session["ListadoMenu"]= ListaMenu;
+
                 if (!IsPostBack) { 
                 
 
@@ -125,6 +126,33 @@ namespace RestoApp2
                 ListaMenu = ((List<Insumo>)Session["ListadoMenu"]);
             }
         }
-     
+
+        public bool verificarStock(int cantpedida, int id)
+        {
+            bool result = false;
+            int stock = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == id).Stock;
+            int pos = 0;
+
+            foreach (var item in ((List<Dominio.Mesa>)Session["MesasMesero"]))
+            {
+
+                if (item.Pedidos.ListaItems != null)
+                {
+                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id)) >= 0)
+                    {
+                        stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                    }
+                }
+
+
+
+            }
+
+            result = ((stock - cantpedida) >= 0);
+
+
+            return result;
+        }
+
     }
 }

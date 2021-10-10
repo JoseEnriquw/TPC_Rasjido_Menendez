@@ -100,7 +100,8 @@
 							</td>
 							<td>
 
-                                <asp:TextBox ID="txtCantidad"  runat="server" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txtCantidad" name="tb_Cantidad" runat="server" AutoPostBack="true"  ></asp:TextBox>
+								
 								
 							</td>
 							<td>
