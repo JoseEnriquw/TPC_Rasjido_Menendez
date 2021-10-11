@@ -50,6 +50,7 @@ namespace RestoApp2
 
         protected void HistorialMensual(object sender, EventArgs e)
         {
+            btnHistorialOPC.Text = "CONTINUAR";
             List<HistorialPedido> list = new List<HistorialPedido>();
             list = gerente.ListarHistorialPedido("where MONTH(FechaHora) = MONTH(GETDATE()) and YEAR(FechaHora) = YEAR(GETDATE())");
             repeaterHistorial.DataSource = list;
@@ -70,6 +71,7 @@ namespace RestoApp2
 
         protected void HistorialSemanal(object sender, EventArgs e)
         {
+            btnHistorialOPC.Text = "CONTINUAR";
             List<HistorialPedido> list = new List<HistorialPedido>();
             list = gerente.ListarHistorialPedido("where DATEPART(WEEK,FechaHora) = datepart(week,GETDATE())");
             repeaterHistorial.DataSource = list;
@@ -83,7 +85,6 @@ namespace RestoApp2
                 cont_2 += item.Total;
             }
             informacion.Text = "En la Semana hubo " + cont_1 + " ventas, recuadando un total de $" + cont_2;
-            repeaterHistorial.DataBind();
 
             string javaScript = "abrirlistaEmerg()";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
@@ -91,6 +92,7 @@ namespace RestoApp2
 
         protected void HistorialDiario(object sender, EventArgs e)
         {
+            btnHistorialOPC.Text = "CONTINUAR";
             List<HistorialPedido> list = new List<HistorialPedido>();
             list = gerente.ListarHistorialPedido("where CAST(FechaHora as date) = CAST(GETDATE() as date)");
             repeaterHistorial.DataSource = list;
@@ -104,10 +106,44 @@ namespace RestoApp2
                 cont_2 += item.Total;
             }
             informacion.Text = "En el dia hubo " + cont_1 + " ventas, recuadando un total de $" + cont_2;
-            repeaterHistorial.DataBind();
 
             string javaScript = "abrirlistaEmerg()";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+
+        protected void HistorialItems(object sender, EventArgs e)
+        {
+            var argument = ((Button)sender).CommandArgument;
+
+            List <HistorialItem> list = new List<HistorialItem>();
+
+            list = gerente.ListarHistorialItem(int.Parse(argument));
+            repeaterItemH.DataSource = list;
+            repeaterItemH.DataBind();
+
+            int cont_1 = 0;
+            decimal cont_2 = 0;
+            foreach (HistorialItem item in list)
+            {
+                cont_1++;
+                cont_2 += item.Subtotal;
+            }
+            informacion.Text = "En este pedido se encuentran " + cont_1 + " insumos, recuadando un total de $" + cont_2;
+
+            btnHistorialOPC.Text = "VOLVER";
+
+            string javaScript = "abrirlistaEmerg_2()";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+        }
+
+        protected void HistorialVolver(object sender, EventArgs e)
+        {
+            if(btnHistorialOPC.Text != "CONTINUAR")
+            {
+                btnHistorialOPC.Text = "CONTINUAR";
+                string javaScript = "abrirlistaEmerg()";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+            }
         }
 
         protected void Mesas(object sender, EventArgs e)

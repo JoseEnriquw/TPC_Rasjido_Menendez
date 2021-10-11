@@ -276,6 +276,37 @@ namespace Negocio
             return lista;
         }
 
+        public List<HistorialItem> ListarHistorialItem(int _ID)
+        {
+            List<HistorialItem> lista = new List<HistorialItem>();
+            try
+            {
+                accessdata.setearConsulta("select * from VW_HistorialItems where PEDIDO_ID = " + _ID );
+                accessdata.ejecutarLectura();
+                while (accessdata.Lector.Read())
+                {
+                    HistorialItem aux = new HistorialItem();
+                    aux.Id = accessdata.Lector.GetInt32(0);
+                    aux.Insumo = new Insumo();
+                    aux.Insumo.Nombre = accessdata.Lector.GetString(2);
+                    aux.Subtotal = accessdata.Lector.GetDecimal(3);
+                    aux.Cantidad = accessdata.Lector.GetInt16(4);
+
+                    lista.Add(aux);
+              }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+
+            return lista;
+        }
+
         public List<Persona> ListarPersona(string where)
         {
             List<Persona> lista = new List<Persona>();

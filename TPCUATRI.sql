@@ -114,6 +114,12 @@ inner join Personas c on c.ID = a.IDMesero
 inner join Cargos d on d.ID = c.IDCargo
 go
 
+Create View VW_HistorialItems as
+select a.ID,a.Pedido as PEDIDO_ID,b.Nombre, a.PrecioSubTotal, a.Cantidad
+from ItemsPedido a
+inner join Insumos b on b.ID = a.IDInsumo
+go
+
 create table historial(
 ID int not null primary key identity(1,1),
 IdMesero int not null foreign key references Personas(ID),
@@ -163,6 +169,5 @@ SELECT * from Categorias
 SELECT * from Pedidos
 select * from ItemsPedido
 
-select * from VW_HistorialPedidos where month(FechaHora) = MONTH(GETDATE()) and YEAR(FechaHora) = YEAR(GETDATE())
 
-
+select * from VW_HistorialItems where insumoId = 5

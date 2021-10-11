@@ -20,6 +20,6 @@ namespace Dominio
         public HistorialPedido Pedido { get; set; }
         public Insumo Insumo { get; set; }
         public decimal Subtotal { get; set; }
-        public int Cantidad { get; set; }
+        public short Cantidad { get; set; }
     }
 }

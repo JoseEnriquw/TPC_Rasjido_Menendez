@@ -171,7 +171,7 @@
 								<asp:Label Text='<%#Eval("FechaHora")%>' runat="server" />
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="VerPedido" runat="server" Text="VER PEDIDO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
+								<asp:Button  ID="VerPedido" runat="server" Text="DETALLES DEL PEDIDO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="HistorialItems"/>
 
 							</td>
 						</tr>
@@ -182,10 +182,46 @@
 					</table>
         </div>
         <div style="margin:1%; overflow:scroll; height:65%; scrollbar-face-color:#009ffd" id="List_02">
+             <%coloropc = 0;%>
+            <table class="table user-list" style="margin-bottom:0">
+					<thead>
+						<tr>
+							<th><span>ID</span></th>
+							<th><span>INSUMO</span></th>
+							<th><span>SUBTOTAL</span></th>
+							<th><span>CANTIDAD</span></th>
+						</tr>
+					</thead>
 
+                        <asp:Repeater runat="server" ID="repeaterItemH">
+                            <ItemTemplate>
+
+                       <%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee; color:black"><%}else{%>
+						<tr style="background: #bbb; color:black"><%}%>
+							<td>
+                                <asp:Label Text='<%#Eval("Id")%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Insumo.Nombre")%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Subtotal")%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Cantidad")%>' runat="server" />
+							</td>
+						</tr>
+                        <%coloropc++;%>
+                        </ItemTemplate>
+                        </asp:Repeater>
+
+					</table>
         </div>
+
         <asp:Label Text="Informacion" runat="server" ID="informacion"/><br /><br />
-		<asp:Button  ID="Button1" runat="server" Text="CONTINUAR" class="btn btn-theme"/>
+		<asp:Button  ID="btnHistorialOPC" runat="server" Text="CONTINUAR" class="btn btn-theme" OnClick="HistorialVolver"/>
 
     </div>
 	
