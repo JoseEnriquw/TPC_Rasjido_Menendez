@@ -62,9 +62,17 @@
             runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px; 
             background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1);" OnClick="Mesas"
             />
-        <asp:Button Text="VER HISTORIAL" 
+        <asp:Button Text="VENTAS DE HOY" 
             runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px;
-            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="Historial"
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="HistorialDiario"
+            /> 
+        <asp:Button Text="ULTIMA SEMANA" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px;
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="HistorialDiario"
+            />  
+        <asp:Button Text="HISTORIAL MENSUAL" 
+            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px;
+            background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)" OnClick="HistorialMensual"
             />  
     </div>
 
@@ -125,24 +133,59 @@
 	">
 		<h1 style="color: #fca014">TU VENTAS REGISTRADAS!</h1>
         
-        <div style="margin:1%; overflow:scroll; height:75%; scrollbar-face-color:#009ffd">
+        <div style="margin:1%; overflow:scroll; height:65%; scrollbar-face-color:#009ffd" id="List_01">
 
-        <asp:GridView ID="listaPedidos" runat="server" Width="100%" BackColor="#cccccc" AlternatingRowStyle-BackColor="#ffffff"
-        ForeColor="Black" HeaderStyle-BackColor="#0099ff" AutoGenerateColumns="false"  
-        RowStyle-HorizontalAlign="Left"
-        >
-        <Columns>
-        <asp:BoundField DataField="Id" HeaderText="PersonalNumero" />
-        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-        <asp:BoundField DataField="Dni" HeaderText="DNI" />
-        <asp:BoundField DataField="Cargo.Descripcion" HeaderText="Cargo" />
-        </Columns>
-        
-        </asp:GridView>
+            <%coloropc = 0;%>
+            <table class="table user-list" style="margin-bottom:0">
+					<thead>
+						<tr>
+							<th><span>ID</span></th>
+							<th><span>MESERO</span></th>
+							<th><span>MESA</span></th>
+							<th><span>TOTAL</span></th>
+                            <th><span>FECHA</span></th>
+							<th class="text-right"><span>OPCIONES</span></th>
+						</tr>
+					</thead>
+
+                        <asp:Repeater runat="server" ID="repeaterHistorial">
+                            <ItemTemplate>
+
+                       <%if (coloropc % 2 == 0)
+                            {%>
+						<tr style="background: #eee; color:black"><%}else{%>
+						<tr style="background: #bbb; color:black"><%}%>
+							<td>
+                                <asp:Label Text='<%#Eval("Id")%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Mesero.Nombre").ToString() + " " + Eval("Mesero.Apellido").ToString()%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Mesa.Nombre")%>' runat="server" />
+							</td>
+							<td>
+								<asp:Label Text='<%#Eval("Total")%>' runat="server" />
+							</td>
+                            <td>
+								<asp:Label Text='<%#Eval("FechaHora")%>' runat="server" />
+							</td>
+							<td class="text-right">
+								<asp:Button  ID="VerPedido" runat="server" Text="VER PEDIDO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>'/>
+
+							</td>
+						</tr>
+                        <%coloropc++;%>
+                        </ItemTemplate>
+                        </asp:Repeater>
+
+					</table>
         </div>
+        <div style="margin:1%; overflow:scroll; height:65%; scrollbar-face-color:#009ffd" id="List_02">
 
-		<asp:Button  ID="Button1" runat="server" Text="CONTINUAR" class="btn btn-theme" />
+        </div>
+        <asp:Label Text="Informacion" runat="server" ID="informacion"/><br /><br />
+		<asp:Button  ID="Button1" runat="server" Text="CONTINUAR" class="btn btn-theme"/>
 
     </div>
 	
@@ -150,6 +193,14 @@
     <script>
         function abrirlistaEmerg() {
             document.getElementById("listaEmergente").style.display = "block";
+            document.getElementById("List_01").style.display = "block";
+            document.getElementById("List_02").style.display = "none";
+            document.body.style.visibility = "visible: false";
+        }
+        function abrirlistaEmerg_2() {
+            document.getElementById("listaEmergente").style.display = "block";
+            document.getElementById("List_01").style.display = "none";
+            document.getElementById("List_02").style.display = "block";
             document.body.style.visibility = "visible: false";
         }
     </script>

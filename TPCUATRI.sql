@@ -93,6 +93,26 @@ Create View VW_Personas as
 select P.ID,P.IDCargo,C.Descripcion as Cargo,P.DNI,P.Nombre,P.Apellido,P.Baja from Personas P inner join Cargos C on C.ID=P.IDCargo
 go
 
+Create View VW_HistorialPedidos as
+select 
+a.ID as Id,
+a.IDMesa as Mesa_ID,
+b.Descripcion as Mesa_Descripcion,
+a.IDMesero as Mesero_Id,
+c.IDCargo as Mesero_Cargo_Id,
+d.Descripcion as Mesero_Cargo_Descripcion,
+c.DNI as Mesero_Dni,
+c.Nombre as Mesero_Nombre,
+c.Apellido as Mesero_Apellido,
+c.Baja as Mesero_Baja,
+a.PrecioTotal as PrecioTotal,
+a.FechaHora as FechaHora 
+
+from Pedidos a
+inner join Mesas b on b.ID = a.IDMesa 
+inner join Personas c on c.ID = a.IDMesero
+inner join Cargos d on d.ID = c.IDCargo
+go
 
 create table historial(
 ID int not null primary key identity(1,1),
@@ -101,6 +121,9 @@ total money not null check(total >0),
 fechaHora datetime not null
 )
 go
+
+
+
 
 
 insert into Cargos values ('Gerente'),('Empleado')
@@ -138,5 +161,8 @@ select * from VW_Insumos order by Precio asc
 select * from TipoInsumos
 SELECT * from Categorias
 SELECT * from Pedidos
+select * from ItemsPedido
+
+select * from VW_HistorialPedidos where month(FechaHora) = MONTH(GETDATE()) and YEAR(FechaHora) = YEAR(GETDATE())
 
 

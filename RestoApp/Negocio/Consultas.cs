@@ -238,6 +238,44 @@ namespace Negocio
             }
         }
 
+        public List<HistorialPedido> ListarHistorialPedido(string where)
+        {
+            List<HistorialPedido> lista = new List<HistorialPedido>();
+
+            try
+            {
+                accessdata.setearConsulta("select * from VW_HistorialPedidos " + where);
+                accessdata.ejecutarLectura();
+                while (accessdata.Lector.Read())
+                {
+                    HistorialPedido aux = new HistorialPedido();
+                    aux.Id = accessdata.Lector.GetInt32(0);
+                    aux.Mesa = new Mesa(accessdata.Lector.GetInt32(1), accessdata.Lector.GetString(2));
+                    aux.Mesero = new Persona();
+                    aux.Mesero.Id = accessdata.Lector.GetInt32(3);
+                    aux.Mesero.Cargo = new Cargo(accessdata.Lector.GetInt32(4), accessdata.Lector.GetString(5));
+                    aux.Mesero.Dni = accessdata.Lector.GetString(6);
+                    aux.Mesero.Nombre = accessdata.Lector.GetString(7);
+                    aux.Mesero.Apellido = accessdata.Lector.GetString(8);
+                    aux.Mesero.Baja = accessdata.Lector.GetBoolean(9);
+                    aux.Total = accessdata.Lector.GetDecimal(10);
+                    aux.FechaHora = accessdata.Lector.GetDateTime(11);
+
+                    lista.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessdata.cerrarConexion();
+            }
+
+            return lista;
+        }
+
         public List<Persona> ListarPersona(string where)
         {
             List<Persona> lista = new List<Persona>();

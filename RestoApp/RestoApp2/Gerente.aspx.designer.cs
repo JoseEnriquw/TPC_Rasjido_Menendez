@@ -42,13 +42,22 @@ namespace RestoApp2
         protected global::System.Web.UI.WebControls.Button no;
 
         /// <summary>
-        /// Control listaPedidos.
+        /// Control repeaterHistorial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView listaPedidos;
+        protected global::System.Web.UI.WebControls.Repeater repeaterHistorial;
+
+        /// <summary>
+        /// Control informacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label informacion;
 
         /// <summary>
         /// Control Button1.
