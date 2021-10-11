@@ -78,6 +78,12 @@
                             <asp:Label ID="OPCGERENTE_3" Text="INSUMOS" runat="server"/></a>
                         </li>
                         <%}%>
+                         <%if (OPCMESERO.Visible == true && OPCGERENTE.Visible == false || OPCMESERO.Visible == false && OPCGERENTE.Visible == true)
+                            {%>
+                        <li>
+                            <asp:LinkButton Text="CERRAR SESION" runat="server" OnClick="CerrarSesion"/>
+                        </li>
+                         <%}%>
                     </ul>
                 </div>
                     </ContentTemplate>

@@ -23,6 +23,23 @@ namespace RestoApp2
                 Session["MesasGerente"] = Consulta.CrearMesas();
                 
             }
+            if (((Dominio.Persona)Session["UserLog"]) != null) { 
+            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+            }
+            else
+            {
+                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+            }
+            }
         }
 
         protected void ingreso(object sender, EventArgs e)
