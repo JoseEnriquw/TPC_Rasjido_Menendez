@@ -17,6 +17,7 @@ namespace RestoApp2
         public bool redit;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["UserLog"] = null;
             Consultas Consulta = new Consultas();
             if (Session["MesasGerente"]==null)
             {

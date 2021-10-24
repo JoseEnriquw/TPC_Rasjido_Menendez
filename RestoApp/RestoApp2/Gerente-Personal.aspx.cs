@@ -17,21 +17,41 @@ namespace RestoApp2
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+
+            try
             {
+                if (Session["UserLog"]!=null)
+                {
+
+                if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+                {
                 ((Label)Master.FindControl("OPCMESERO")).Visible = true;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
-            }
-            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
-            {
+                Response.Redirect("Inicio.aspx");
+                }
+                else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+                {
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
-            }
-            else
-            {
+                }
+                }
+                else
+                {
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                Response.Redirect("Inicio.aspx");
+
+                }
+            
             }
+            catch (Exception)
+            {
+                //Acción cerrar Sesion
+                Session["UserLog"] = null;
+                Response.Redirect("Inicio.aspx");
+            }
+         
+
             if (!IsPostBack)
             {
                 Consultas personal = new Consultas();

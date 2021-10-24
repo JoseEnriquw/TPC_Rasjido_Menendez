@@ -17,20 +17,37 @@ namespace RestoApp2
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            try
             {
-                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
-                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                if (Session["UserLog"] != null)
+                {
+
+                    if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+                    {
+                        ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                        ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                        Response.Redirect("Inicio.aspx");
+                    }
+                    else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+                    {
+                        ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                        ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+                    }
+                }
+                else
+                {
+                    ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                    ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                    Response.Redirect("Inicio.aspx");
+
+                }
+
             }
-            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+            catch (Exception)
             {
-                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
-                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
-            }
-            else
-            {
-                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
-                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                //Acción cerrar Sesion
+                Session["UserLog"] = null;
+                Response.Redirect("Inicio.aspx");
             }
             Consultas GerenteMenu = new Consultas();
 

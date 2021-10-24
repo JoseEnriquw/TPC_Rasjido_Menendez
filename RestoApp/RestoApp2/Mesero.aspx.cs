@@ -16,20 +16,35 @@ namespace RestoApp2
         public string prueba = " ";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+            try
             {
-                ((Label)Master.FindControl("OPCMESERO")).Visible = true;
-                ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
-            }
-            else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
-            {
+                if (Session["UserLog"]!= null)
+                {
+
+                    if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
+                    {
+                        ((Label)Master.FindControl("OPCMESERO")).Visible = true;
+                        ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                    }
+                    else if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente")
+                    {
+                        ((Label)Master.FindControl("OPCMESERO")).Visible = false;
+                        ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
+                    }
+                }
+                else
+                {
                 ((Label)Master.FindControl("OPCMESERO")).Visible = false;
-                ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
-            }
-            else
-            {
-                ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
+                Response.Redirect("Inicio.aspx");
+                }
+            }
+            catch (Exception)
+            {
+                //Acción cerrar Sesion
+                Session["UserLog"] = null;
+                Response.Redirect("Inicio.aspx");
+
             }
            
             try
