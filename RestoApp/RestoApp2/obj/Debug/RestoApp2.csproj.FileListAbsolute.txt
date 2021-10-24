@@ -405,5 +405,6 @@ C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Deb
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.Properties.Resources.resources
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.csproj.GenerateResource.cache
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.csproj.CoreCompileInputs.cache
+C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.csproj.CopyComplete
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.dll
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\RestoApp2\obj\Debug\RestoApp2.pdb

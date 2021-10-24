@@ -58,6 +58,11 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
+
+        public void LimpiarParametros()
+        {
+            comando.Parameters.Clear();
+        }
     }
 }
 

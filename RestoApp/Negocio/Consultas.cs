@@ -476,17 +476,7 @@ namespace Negocio
 
             foreach (ItemsPedidos item in aux.Pedidos.ListaItems)
             {
-               
-                accessdata.setearConsulta("insert into ItemsPedido " +
-                    " VALUES (@IDPedido,@IDInsumo,@PrecioSubTotal,@Cantidad)");
-                accessdata.agregarParametro("@IDPedido",  id);
-                accessdata.agregarParametro("@IDInsumo", item.Item.Id);
-                accessdata.agregarParametro("@PrecioSubTotal", item.PrecioSubTotal  );
-                accessdata.agregarParametro("@Cantidad", item.Cantidad);
-
-
-                accessdata.ejecutarAccion();
-                accessdata.cerrarConexion();
+                IngresarItemPedido(id,item.Item.Id,item.PrecioSubTotal,item.Cantidad);
 
                 short auxcant = 0;
                 accessdata.setearConsulta("select Stock from Insumos  where ID=" + item.Item.Id);
@@ -498,6 +488,8 @@ namespace Negocio
                 accessdata.ejecutarAccion();
                 accessdata.cerrarConexion();
 
+                accessdata.LimpiarParametros();
+
             }
 
            
@@ -506,6 +498,22 @@ namespace Negocio
 
         }
 
-     
+        private void IngresarItemPedido(int idPedido,int idInsumo,decimal PrecioSubTotal,int Cantidad)
+        {
+
+            accessdata.setearConsulta("insert into ItemsPedido " +
+           
+                " VALUES (@IDPedido,@IDInsumo,@PrecioSubTotal,@Cantidad)");
+            accessdata.agregarParametro("@IDPedido", idPedido);
+            accessdata.agregarParametro("@IDInsumo", idInsumo);
+            accessdata.agregarParametro("@PrecioSubTotal", PrecioSubTotal);
+            accessdata.agregarParametro("@Cantidad", Cantidad);
+
+
+            accessdata.ejecutarAccion();
+            accessdata.cerrarConexion();
+        }
+
+
     }
 }

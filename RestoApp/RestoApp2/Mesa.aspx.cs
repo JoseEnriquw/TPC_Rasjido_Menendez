@@ -17,7 +17,9 @@ namespace RestoApp2
 
 
         protected void Page_Load(object sender, EventArgs e)
+
         {
+            try { 
             if (((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Empleado")
             {
                 ((Label)Master.FindControl("OPCMESERO")).Visible = true;
@@ -34,6 +36,12 @@ namespace RestoApp2
                 ((Label)Master.FindControl("OPCGERENTE")).Visible = false;
             }
 
+            }catch( Exception )
+            {
+                //Acción cerrar Sesion
+                
+                Response.Redirect("Inicio.aspx");
+            }
            
             mesa = ((Dominio.Mesa)Session["MesaActual"]);
 

@@ -89,7 +89,9 @@ namespace RestoApp2
                     {
                         ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Enabled = true;
                         ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Text = "VER PEDIDOS DE "+ item.Mesero.Nombre.ToUpper() + " " + item.Mesero.Apellido.ToUpper();
+                       
                     }
+                    if(item.Estado.ToUpper() != "ABIERTO" && ((Dominio.Persona)Session["UserLog"]).Cargo.Descripcion == "Gerente") ((Button)RepeaterMesero.Items[cont].FindControl("ButtonOpc")).Visible = false;
                     cont++;
                 }
             }
