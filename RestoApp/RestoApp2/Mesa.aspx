@@ -39,7 +39,8 @@
 							<th><span>MESERO A CARGO</span></th>
 							<th class="text-center"><span>MESA ABIERTA</span></th>
 							<th class="text-center"><span>CANTIDAD DE INSUMOS</span></th>
-							<th class="text-center"><span>COSTO TOTAL</span></th>
+							<th class="text-center"><span>COSTO TOTAL ESTIMADO</span></th>
+							<th class="text-center"><span>COSTO TOTAL A PAGAR</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
@@ -54,8 +55,11 @@
 							<td class="text-center">
 								<%= mesa.Nombre %>
 							</td>
-							<td class="text-center">
+			                <td class="text-center">
 								<%= CantTotalInsumos %>
+							</td>
+							<td class="text-center">
+								$<%= CostoEstimadoTotal %>
 							</td>
 							<td class="text-center">
 								$<%= mesa.Pedidos.PrecioTotal %>

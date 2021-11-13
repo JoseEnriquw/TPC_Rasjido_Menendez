@@ -138,7 +138,11 @@ namespace RestoApp2
 
                 if (item.Pedidos.ListaItems != null)
                 {
-                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id)) >= 0)
+                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == true)) >= 0)
+                    {
+                        stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                    }
+                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == false)) >= 0)
                     {
                         stock -= item.Pedidos.ListaItems[pos].Cantidad;
                     }

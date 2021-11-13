@@ -476,6 +476,10 @@ namespace Negocio
 
             foreach (ItemsPedidos item in aux.Pedidos.ListaItems)
             {
+				if (item.estado)
+				{
+
+				
                 IngresarItemPedido(id,item.Item.Id,item.PrecioSubTotal,item.Cantidad);
 
                 short auxcant = 0;
@@ -489,7 +493,7 @@ namespace Negocio
                 accessdata.cerrarConexion();
 
                 accessdata.LimpiarParametros();
-
+                }
             }
 
            

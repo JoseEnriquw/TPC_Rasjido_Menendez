@@ -31,6 +31,5 @@ C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.pdb
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb
