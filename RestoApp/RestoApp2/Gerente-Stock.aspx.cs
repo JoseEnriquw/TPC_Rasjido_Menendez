@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Dominio.Filtros;
 using Negocio;
 
 namespace RestoApp2
@@ -50,15 +51,17 @@ namespace RestoApp2
                 Response.Redirect("Inicio.aspx");
             }
             Consultas GerenteMenu = new Consultas();
-
+            NegocioInsumos negocioInsumos = new NegocioInsumos();
             if (!IsPostBack)
             {
                 try
                 {
+                    FiltrosInsumos filtros = new FiltrosInsumos();
+                    filtros.baja = true;
                     StockLista = new List<Insumo>();
                     StockListaACT = new List<Insumo>();
                     StockListaINA = new List<Insumo>();
-                    StockLista = GerenteMenu.ListarInsumos("");
+                    StockLista = negocioInsumos.GetAllInsumos(filtros);
                     Session.Add("ListadoStock", StockLista);
 
                     foreach (Insumo item in StockLista)

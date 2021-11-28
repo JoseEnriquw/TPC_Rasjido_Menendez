@@ -16,5 +16,11 @@ namespace Dominio
         public short Stock { get; set; }
         public string UrlImagen { get; set; }
         public bool Baja { get; set; }
+
+		public Insumo()
+		{
+            Categoria = new Categorias();
+            Tipo = new TipoInsumo();
+		}
     }
 }

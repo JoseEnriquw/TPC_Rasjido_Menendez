@@ -78,42 +78,7 @@ namespace Negocio
         }
 
         //Insumos
-        public List<Insumo> ListarInsumos(string where)
-        {
-            List<Insumo> lista = new List<Insumo>();
-
-            try
-            {
-                accessdata.setearConsulta("select * from VW_Insumos " + where + " order by Precio asc");
-                accessdata.ejecutarLectura();
-                while (accessdata.Lector.Read())
-                {
-                    Insumo aux = new Insumo();
-                    aux.Id = (int)accessdata.Lector.GetInt32(0);
-                    aux.Nombre = (string)accessdata.Lector.GetString(1);
-
-                    aux.Categoria = new Categorias(accessdata.Lector.GetInt32(2), accessdata.Lector.GetString(3));
-                    aux.Tipo = new TipoInsumo((int)accessdata.Lector.GetInt32(4), accessdata.Lector.GetString(5));
-                    aux.Precio = (decimal)accessdata.Lector["Precio"];
-                    aux.Stock = (short)accessdata.Lector["Stock"];
-                    aux.UrlImagen = (string)accessdata.Lector.GetString(8);
-                    aux.Baja = accessdata.Lector.GetBoolean(9);
-
-                    lista.Add(aux);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            } 
-
-            return lista;
-        }
+       
         public void ActualizarPersona(bool opcion, Persona aux)
         {
             try

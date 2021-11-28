@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Dominio.Filtros;
 using Negocio;
 
 namespace RestoApp2
@@ -15,6 +16,11 @@ namespace RestoApp2
         public List<Insumo> InsumoListaACT;
         public List<Insumo> InsumoListaINA;
         public int coloropc;
+        public FiltrosInsumos filtros;
+        private NegocioInsumos negocioInsumos;
+        private NegocioCategoria negocioCategoria;
+        private NegocioTipoInsumo negocioTipoInsumo;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -50,58 +56,82 @@ namespace RestoApp2
                 Response.Redirect("Inicio.aspx");
             }
 
-            
-            Consultas query = new Consultas();
+
+          
+            negocioInsumos = new NegocioInsumos();
+            negocioCategoria = new NegocioCategoria();
+            negocioTipoInsumo = new NegocioTipoInsumo();
+
             if (!IsPostBack)
             {
+                filtros = new FiltrosInsumos();
+                filtros.baja = true;
                 InsumoLista = new List<Insumo>();
-                InsumoLista = query.ListarInsumos("");
+                InsumoLista = negocioInsumos.GetAllInsumos(filtros);
                 //Categoria DropDownList
                 //Extracción de información de la base de Datos
                 List<Categorias> listaCate = new List<Categorias>();
                 Categorias AuxCate = new Categorias(0, "None");
                 listaCate.Add(AuxCate);
-                listaCate.AddRange(query.FiltrosCategorias());
+                listaCate.AddRange(negocioCategoria.GetAllCategorias());
 
-                //Se agregan los datos de la lista DropDonwList
+                //Se agregan los datos de la lista DropDonwList de Categorias
                 DDL_Categorias.DataSource = listaCate;
                 DDL_Categorias.DataTextField = "Descripcion";
                 DDL_Categorias.DataValueField = "Id";
                 DDL_Categorias.DataBind();
 
+                //Se agregan los datos de la lista DropDonwList de Categorias Agregar
+                listaCate[0].Descripcion = "";
+                DDL_Categorias_Agregar.DataSource = listaCate;
+                DDL_Categorias_Agregar.DataTextField = "Descripcion";
+                DDL_Categorias_Agregar.DataValueField = "Id";
+                DDL_Categorias_Agregar.DataBind();
 
                 //Tipo de Insumo DropDownList 
                 //Extracción de información de la base de Datos
                 List<TipoInsumo> listaTipoInsumo = new List<TipoInsumo>();
                 TipoInsumo AuxTI = new TipoInsumo(0, "None");
                 listaTipoInsumo.Add(AuxTI);
-                listaTipoInsumo.AddRange(query.FiltrosTipoInsumo());
+                listaTipoInsumo.AddRange(negocioTipoInsumo.GetAllTipoInsumo());
 
-                //Se agregan los datos de la lista DropDonwList
+                //Se agregan los datos de la lista DropDonwList TipoInsumo
                 DDL_Tipo_Insumo.DataSource = listaTipoInsumo;
                 DDL_Tipo_Insumo.DataTextField = "Descripcion";
                 DDL_Tipo_Insumo.DataValueField = "Id";
                 DDL_Tipo_Insumo.DataBind();
 
+                //Se agregan los datos de la lista DropDonwList TipoInsumo_Agregar
+                listaTipoInsumo[0].Descripcion = "";
+                DDL_TipoInsumo_Agregar.DataSource = listaTipoInsumo;
+                DDL_TipoInsumo_Agregar.DataTextField = "Descripcion";
+                DDL_TipoInsumo_Agregar.DataValueField = "Id";
+                DDL_TipoInsumo_Agregar.DataBind();
+
             }
             
 
-            Consultas GerenteMenu = new Consultas();
+           
 
             if (!IsPostBack) { 
             try
             {
-                /*VEREFICAR EL USO DEL SESSION*/
-                InsumoLista = GerenteMenu.ListarInsumos("");
-                Session.Add("ListadoInsumo", InsumoLista);
+                    /*VEREFICAR EL USO DEL SESSION*/
+                    FiltrosInsumos filtros = new FiltrosInsumos();
+                    filtros.baja = true;
+                    InsumoLista = negocioInsumos.GetAllInsumos(filtros);
+                    Session.Add("ListadoInsumo", InsumoLista);
+                    List<Categorias> listaCate = new List<Categorias>();
+                    listaCate.AddRange(negocioCategoria.GetAllCategorias());
+                    List<TipoInsumo> listaTipoInsumo = new List<TipoInsumo>();
+                    listaTipoInsumo.AddRange(negocioTipoInsumo.GetAllTipoInsumo());
 
-            
                     InsumoListaACT = new List<Insumo>();
                     InsumoListaINA = new List<Insumo>();
                 
                 foreach (Insumo item in InsumoLista)
                 {
-                    if (item.Baja) 
+                    if (!item.Baja) 
                     {
                             InsumoListaACT.Add(item);
                     }
@@ -124,8 +154,24 @@ namespace RestoApp2
 
                             ((Image)repeaterMenu.Items[cont].FindControl("Img")).ImageUrl = item.UrlImagen;
                             ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text = item.Nombre.ToUpper();
-                            ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text = item.Tipo.Descripcion.ToUpper();
-                            ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
+
+                        //Se agregan los datos de la lista DropDonwList de Categorias Item
+                       
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataSource = listaCate;
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataTextField = "Descripcion";
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataValueField = "Id";
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataBind();
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).SelectedValue = item.Categoria.Id.ToString();
+
+                        //Se agregan los datos de la lista DropDonwList TipoInsumo
+
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataSource = listaTipoInsumo;
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataTextField = "Descripcion";
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataValueField = "Id";
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataBind();
+                        ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).SelectedValue = item.Tipo.Id.ToString();
+
+                        ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
                             ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text = item.UrlImagen;
                             cont++;
                     }
@@ -135,7 +181,8 @@ namespace RestoApp2
 
                         ((Image)repeaterMenu2.Items[cont].FindControl("Img2")).ImageUrl = item.UrlImagen;
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("Insumo2")).Text = item.Nombre.ToUpper();
-                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Tipo2")).Text = item.Tipo.Descripcion.ToUpper();
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("txt_Categorias_Item2")).Text = item.Categoria.Descripcion;
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("txt_TipoInsumo_Item2")).Text = item.Tipo.Descripcion;
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = item.Precio.ToString();
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("Url2")).Text = item.UrlImagen;
                         cont++;
@@ -152,52 +199,78 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
-            /*
-            string Insumo = TB_Insumo.Text;
-            int IDCategoria = int.Parse(DDL_Categorias.SelectedItem.Value);
-            int IDTipo = int.Parse(DDL_Tipo_Insumo.SelectedItem.Value);
+            filtros = new FiltrosInsumos();
+            filtros.baja = true;
+            InsumoListaACT = new List<Insumo>();
+            InsumoListaINA = new List<Insumo>();
+            filtros.buscarPorTodo = TB_Insumo.Text;
+            filtros.categoria = DDL_Categorias.SelectedItem.Text == "None" ? " " : DDL_Categorias.SelectedItem.Text;
+            filtros.tipoInsumo = DDL_Tipo_Insumo.SelectedItem.Text == "None" ? " " : DDL_Tipo_Insumo.SelectedItem.Text;
+            List<Categorias> listaCate = new List<Categorias>();
+            listaCate.AddRange(negocioCategoria.GetAllCategorias());
+            List<TipoInsumo> listaTipoInsumo = new List<TipoInsumo>();
+            listaTipoInsumo.AddRange(negocioTipoInsumo.GetAllTipoInsumo());
 
-            //Los 3 tienen datos
-            if (IDCategoria != 0 && IDTipo != 0 && Insumo != " ")
+            InsumoLista = negocioInsumos.GetAllInsumos(filtros);
+            foreach (Insumo item in InsumoLista)
             {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
+                if (!item.Baja)
+                {
+                    InsumoListaACT.Add(item);
+                }
+                else
+                {
+                    InsumoListaINA.Add(item);
+
+                }
 
             }
-            //Cate no tiene Datos y los demas si
-            else if (IDCategoria == 0 && IDTipo != 0 && Insumo != " ")
+            repeaterMenu.DataSource = InsumoListaACT;
+            repeaterMenu.DataBind();
+            repeaterMenu2.DataSource = InsumoListaINA;
+            repeaterMenu2.DataBind();
+
+
+            int cont = 0;
+            foreach (Insumo item in InsumoListaACT)
             {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
+
+                ((Image)repeaterMenu.Items[cont].FindControl("Img")).ImageUrl = item.UrlImagen;
+                ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text = item.Nombre.ToUpper();
+
+                //Se agregan los datos de la lista DropDonwList de Categorias Item
+
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataSource = listaCate;
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataTextField = "Descripcion";
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataValueField = "Id";
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).DataBind();
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).SelectedValue = item.Categoria.Id.ToString();
+
+                //Se agregan los datos de la lista DropDonwList TipoInsumo
+
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataSource = listaTipoInsumo;
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataTextField = "Descripcion";
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataValueField = "Id";
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataBind();
+                ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).SelectedValue = item.Tipo.Id.ToString();
+
+                ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
+                ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text = item.UrlImagen;
+                cont++;
             }
-            //Tipo no tine datos y los demas si
-            else if (IDCategoria != 0 && IDTipo == 0 && Insumo != " ")
+            cont = 0;
+            foreach (Insumo item in InsumoListaINA)
             {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Categoria.Id == IDCategoria && (x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper())));
+
+                ((Image)repeaterMenu2.Items[cont].FindControl("Img2")).ImageUrl = item.UrlImagen;
+                ((TextBox)repeaterMenu2.Items[cont].FindControl("Insumo2")).Text = item.Nombre.ToUpper();             
+                ((TextBox)repeaterMenu.Items[cont].FindControl("txt_Categorias_Item2")).Text = item.Categoria.Descripcion;
+                ((TextBox)repeaterMenu.Items[cont].FindControl("txt_TipoInsumo_Item2")).Text = item.Tipo.Descripcion;
+                ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = item.Precio.ToString();
+                ((TextBox)repeaterMenu2.Items[cont].FindControl("Url2")).Text = item.UrlImagen;
+                cont++;
             }
-            //Buscar no tiene datos y los demas si 
-            else if (IDCategoria != 0 && IDTipo != 0 && Insumo == " ")
-            {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo && x.Categoria.Id == IDCategoria);
-            }
-            //Solo buscar tiene datos
-            else if (IDCategoria == 0 && IDTipo == 0 && Insumo != " ")
-            {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(Insumo.ToUpper()) || x.Precio.ToString().ToUpper().Contains(Insumo.ToUpper()));
-            }
-            //Solo Cate tiene datos
-            else if (IDCategoria != 0 && IDTipo == 0 && Insumo == " ")
-            {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Categoria.Id == IDCategoria);
-            }
-            //Solo Tipo tiene datos
-            else if (IDCategoria == 0 && IDTipo != 0 && Insumo == " ")
-            {
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]).FindAll(x => x.Tipo.Id == IDTipo);
-            }
-            else
-            {
-                //ListaMenu = ((List<Insumo>)Session["ListadoMenu"]).FindAll(x => x.Nombre.Contains(Buscar) || x.Tipo.Descripcion.Contains(Buscar) || x.Categoria.Descripcion.Contains(Buscar) || x.Precio.ToString().Contains(Buscar));
-                Session["ListadoInsumo"] = ((List<Insumo>)Session["ListadoInsumo"]);
-            }*/
+
         }
 
         protected void ConfirmBorrar(object sender, EventArgs e)
@@ -260,7 +333,6 @@ namespace RestoApp2
         protected void Actualizar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
-            Consultas insumos = new Consultas();
             Insumo aux = new Insumo();
 
             int cont = 0;
@@ -268,7 +340,6 @@ namespace RestoApp2
             {
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text != ""
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text != ""
                     && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
                 {
@@ -276,60 +347,45 @@ namespace RestoApp2
 
                     aux.Nombre = ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text;
 
-                    aux.Categoria.Descripcion = ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text;
-
+                    aux.Categoria.Id = int.Parse(((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_Categorias_Item")).SelectedValue);
+                    aux.Tipo.Id = int.Parse(((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).SelectedValue);
                     aux.Precio = decimal.Parse(((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text);
                     aux.UrlImagen = ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text;
                     aux.Stock = item.Stock;
-                    aux.Baja = true;
+                    aux.Baja = false;
 
-                    insumos.ActualizarInsumo(true, aux);
+                    negocioInsumos.UpdateInsumo(aux);
                 }
-                if (item.Baja) cont++;
+                if (!item.Baja) cont++;
             }
             Response.Redirect("Gerente-Menu.aspx");
         }
 
         protected void Borrar(object sender, EventArgs e)
         {
-            var argument = ((Button)sender).CommandArgument;
-            Consultas insumos = new Consultas();
-            Insumo aux = new Insumo();
+            var argument = int.Parse(((Button)sender).CommandArgument);
 
-            int cont = 0;
-            foreach (Insumo item in ((List<Insumo>)Session["ListadoInsumo"]))
-            {
-                if (argument == item.Id.ToString()
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Insumo")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Tipo")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text != ""
-                    && ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text != "")
-                {
-                    aux.Id = item.Id;
-                    aux = item;
-                    aux.Baja = false;
+            ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument).Baja = true;
 
-                    insumos.ActualizarInsumo(false, aux);
-                }
-                if (item.Baja) cont++;
-            }
+            negocioInsumos.UpdateInsumo(((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument));
+
             Response.Redirect("Gerente-Menu.aspx");
         }
 
         protected void Agregar(object sender, EventArgs e)
         {
             Insumo aux = new Insumo();
-            Consultas query = new Consultas();
-            if (InsumoNew.Text != "" && TipoNew.Text != "" && PrecioNew.Text != "" && UrlNew.Text != "")
+           
+
+            if (InsumoNew.Text != "" && DDL_Categorias_Agregar.SelectedItem.Text != "" && PrecioNew.Text != "" && UrlNew.Text != "" && DDL_TipoInsumo_Agregar.SelectedItem.Text != "")
             {
                 aux.Nombre = InsumoNew.Text;
-                aux.Categoria = new Categorias();
-                aux.Categoria.Id = int.Parse(TipoNew.Text);
+                aux.Categoria.Id = int.Parse(DDL_Categorias_Agregar.SelectedItem.Value);
                 aux.Precio = decimal.Parse(PrecioNew.Text);
                 aux.UrlImagen = UrlNew.Text;
-                aux.Tipo.Id = 1;
-                aux.Baja = true;
-                query.AgregarInsumo(aux);
+                aux.Tipo.Id = int.Parse(DDL_TipoInsumo_Agregar.SelectedItem.Value);
+                aux.Baja = false;
+                negocioInsumos.InsertInsumo(aux);
             }
             else
             {
@@ -341,12 +397,12 @@ namespace RestoApp2
 
         protected void Reactivar_Insumo(object sender, EventArgs e)
         {
-            Consultas consulta = new Consultas();
+            
             var argument = int.Parse(((Button)sender).CommandArgument);
           
-            ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument).Baja = true;
+            ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument).Baja = false;
 
-            consulta.ActualizarInsumo(true, ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument));
+            negocioInsumos.UpdateInsumo( ((List<Insumo>)Session["ListadoInsumo"]).Find(x => x.Id == argument));
 
             Response.Redirect("Gerente-Menu.aspx");
         }
