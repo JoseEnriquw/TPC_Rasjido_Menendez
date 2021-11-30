@@ -40,6 +40,9 @@ namespace RestoApp2
                         ((Label)Master.FindControl("OPCMESERO")).Visible = false;
                         ((Label)Master.FindControl("OPCGERENTE")).Visible = true;
                     }
+                    Persona auxSession = new Persona();
+                    auxSession = ((Dominio.Persona)Session["UserLog"]);
+                    Session["UserLog"] = auxSession;
                 }
                 else
                 {

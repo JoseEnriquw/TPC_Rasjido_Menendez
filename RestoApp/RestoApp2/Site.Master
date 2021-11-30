@@ -17,7 +17,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body >
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -39,7 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: url('https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1')">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: url('https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1');">
 
                 <div class="navbar-header" style="text-align:center">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,11 +49,11 @@
                     </button>
                     <a class="navbar-brand" runat="server" href="~/Inicio" style="color: #FFF">RESTO.APP</a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse" style="text-align:center">
                     <asp:UpdatePanel runat="server" ID="NavUpdate" UpdateMode="Conditional">
                         <ContentTemplate>
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Inicio">INICIO</a></li>
+                        
                         <%if (OPCMESERO.Visible == true && OPCGERENTE.Visible == false)
                             {%>
                         <li>

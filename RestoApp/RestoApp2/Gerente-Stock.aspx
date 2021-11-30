@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Stock" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Stock.aspx.cs" Inherits="RestoApp2.Gerente_Stock" EnableEventValidation="false"%>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Stock.aspx.cs" Inherits="RestoApp2.Gerente_Stock" EnableEventValidation="false"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -56,8 +56,8 @@
 				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
 						<tr>
-							<th><span>INSUMO</span></th>
-							<th><span>PRECIO</span></th>
+							<th style="width: 50%"><span>INSUMO</span></th>
+							<th style="width: 10%"><span>PRECIO</span></th>
 							<th><span>CANTIDAD</span></th>
 							<th><span>INGRESO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
@@ -80,17 +80,17 @@
                             {%>
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
-							<td>
+							<td style="width: 50%">
 								<%#Eval("Nombre").ToString().ToUpper()%>
 							</td>
-							<td>
+							<td style="width: 13%">
 								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
-							<td>
+							<td style="width: 7%">
 								<%#Eval("Stock").ToString()%>
 							</td>
 							<td>
-								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
 
 								<script>
                                     function solonumeros(e) {
@@ -117,7 +117,7 @@
 							</td>
 
 							<td class="text-right">
-								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Confirmacion"/>
+								<asp:Button  ID="Button1" runat="server" Text="AGREGAR"  class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="Confirmacion" />
 								
 							</td>
 						</tr>
@@ -145,8 +145,8 @@
 				<table class="table user-list" style="margin-bottom: 0">
 					<thead>
 						<tr>
-							<th><span>INSUMO</span></th>
-							<th><span>PRECIO</span></th>
+							<th style="width: 50%"><span>INSUMO</span></th>
+							<th style="width: 10%"><span>PRECIO</span></th>
 							<th><span>CANTIDAD</span></th>
 							<th><span>INGRESO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
@@ -169,17 +169,17 @@
                             {%>
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
-							<td>
+							<td style="width: 50%">
 								<%#Eval("Nombre").ToString().ToUpper()%>
 							</td>
-							<td>
+							<td style="width: 13%">
 								<%#Eval("Precio").ToString().ToUpper()%>
 							</td>
-							<td>
+							<td style="width: 7%">
 								<%#Eval("Stock").ToString()%>
 							</td>
 							<td>
-								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
 
                                <script>
                                    function solonumeros(e) {

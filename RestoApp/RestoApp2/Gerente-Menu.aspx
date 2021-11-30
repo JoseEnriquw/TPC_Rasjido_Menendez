@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Menu" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Menu.aspx.cs" Inherits="RestoApp2.Gerente_Menu" EnableEventValidation="false" %>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Menu.aspx.cs" Inherits="RestoApp2.Gerente_Menu" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -82,10 +82,10 @@
             <table class="table user-list" style="margin-bottom: 0">
                 <thead>
                     <tr>
-                        <th><span>FOTO</span></th>
+                        <th style="width: 21%"><span>FOTO</span></th>
                         <th><span>INSUMO</span></th>
-                        <th><span>CATEGORIA</span></th>
-                        <th><span>TIPO DE INSUMO</span></th>
+                        <th style="width: 10%"><span>CATEGORIA</span></th>
+                        <th style="width: 10%"> <span>INSUMO</span></th>
                         <th><span>PRECIO</span></th>
                         <th class="text-right"><span>OPCIONES</span></th>
                     </tr>
@@ -97,10 +97,10 @@
 
                     <tr style="background: #555;">
                         <td>
-                            <asp:TextBox ID="UrlNew" runat="server" Style="z-index: 1; width: 130px" TextMode="Url"></asp:TextBox>
+                            <asp:TextBox ID="UrlNew" runat="server" Style="z-index: 1; width: 100%" TextMode="Url" placeholder="Pagina.com//Imagen/Ejemplo.jpg"></asp:TextBox>
                         </td>
                         <td>
-                            <asp:TextBox ID="InsumoNew" runat="server" Style="z-index: 1;" TextMode="SingleLine"></asp:TextBox>
+                            <asp:TextBox ID="InsumoNew" runat="server" Style="z-index: 1;" TextMode="SingleLine" placeholder="Nombre del insumo"></asp:TextBox>
                         </td>
                         <td>
                             <asp:DropDownList ID="DDL_Categorias_Agregar" runat="server"></asp:DropDownList>
@@ -112,7 +112,7 @@
                         </td>
 
                         <td>
-                            <asp:TextBox ID="PrecioNew" runat="server" Style="z-index: 1;" onkeypress="javascript:return solonumeros(event)"></asp:TextBox>
+                            <asp:TextBox ID="PrecioNew" runat="server" Style="z-index: 1;" onkeypress="javascript:return solonumeros(event)" placeholder="888.88"></asp:TextBox>
                             <script>
                                 function solonumeros(e) {
 
@@ -136,7 +136,7 @@
                             </script>
                         </td>
                         <td class="text-right">
-                            <asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="ConfirmAgregar" />
+                            <asp:Button ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="ConfirmAgregar" Width="160PX"/>
                         </td>
                     </tr>
                 </tbody>
@@ -167,8 +167,11 @@
                                 <td>
                                     <asp:DropDownList ID="DDL_TipoInsumo_Item" runat="server"></asp:DropDownList>
                                 </td>
+                                <td>
+                                    <asp:TextBox ID="Precio" runat="server" Style="z-index: 1;" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)"></asp:TextBox>
+                                </td>
                                 <td class="text-right">
-                                    <asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="ConfirmActualizar" CommandArgument='<%#Eval("Id")%>' />
+                                    <asp:Button ID="Button1" runat="server" Text="MODIFICAR" class="btn btn-theme" OnClick="ConfirmActualizar" CommandArgument='<%#Eval("Id")%>' Width="140PX"/>
                                 </td>
 
                             </tr>
@@ -181,9 +184,9 @@
                             <tr style="background: #bbb;">
                                 <%}%>
                                 <td colspan="3">URL
-                            <asp:TextBox ID="Url" runat="server" Style="z-index: 1;" TextMode="Url" AutoPostBack="true" Width="100%"></asp:TextBox>
-                                    <asp:TextBox ID="Precio" runat="server" Style="z-index: 1;" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)"></asp:TextBox>
-
+                            <asp:TextBox ID="Url" runat="server" Style="z-index: 1;" TextMode="Url" AutoPostBack="true" Width="100%"></asp:TextBox></td><td>
+                                    
+                                </td>
                                     <script>
                                         function solonumeros(e) {
 
@@ -206,7 +209,7 @@
                                         }
                                     </script>
                                     <td class="text-right">
-                                        <asp:Button ID="Button3" runat="server" Text="DAR DE BAJA" class="btn btn-theme" OnClick="ConfirmBorrar" CommandArgument='<%#Eval("Id")%>' /></td>
+                                        <asp:Button ID="Button3" runat="server" Text="DAR DE BAJA" class="btn btn-theme" OnClick="ConfirmBorrar" CommandArgument='<%#Eval("Id")%>' Width="140PX"/></td>
                             </tr>
 
                             <%coloropc++;%>
@@ -237,9 +240,9 @@
             <table class="table user-list" style="margin-bottom: 0">
                 <thead>
                     <tr>
-                        <th><span>FOTO</span></th>
-                        <th><span>INSUMO</span></th>
-                        <th><span>CATEGORIA</span></th>
+                        <th style="width: 15%"><span>FOTO</span></th>
+                        <th style="width: 35%"><span>INSUMO</span></th>
+                        <th style="width: 17%"><span>CATEGORIA</span></th>
                         <th><span>PRECIO</span></th>
                         <th class="text-right"><span>OPCIONES</span></th>
                     </tr>
@@ -271,9 +274,11 @@
                                 <td>
                                       <asp:TextBox ID="txt_TipoInsumo_Item2" runat="server" Style="z-index: 1;" TextMode="SingleLine" AutoPostBack="true" Enabled="false"></asp:TextBox>
                                 </td>
-                          
+                                <td>
+                                    <asp:TextBox ID="Precio2" runat="server" Style="z-index: 1;" AutoPostBack="true" Enabled="false"></asp:TextBox>
+                                </td>
                                 <td class="text-right">
-                                    <asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR INSUMO" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmReactivar" />
+                                    <asp:Button ID="ButtonReactivar" runat="server" Text="REACTIVAR" class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmReactivar" Width="140PX"/>
                                 </td>
 
                             </tr>
@@ -288,7 +293,7 @@
                                 <td colspan="4">URL
                                  <asp:TextBox ID="Url2" runat="server" Style="z-index: 1;" TextMode="Url" AutoPostBack="true" Enabled="false" Width="100%"></asp:TextBox>
                                 <td>
-                                  <asp:TextBox ID="Precio2" runat="server" Style="z-index: 1;" AutoPostBack="true" Enabled="false"></asp:TextBox>
+                                  
                                 </td>
                             </tr>
 

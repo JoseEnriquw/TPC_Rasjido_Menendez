@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente-Personal" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Personal.aspx.cs" Inherits="RestoApp2.Gerente_Personal" EnableEventValidation="false"%>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente-Personal.aspx.cs" Inherits="RestoApp2.Gerente_Personal" EnableEventValidation="false"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -93,10 +93,10 @@
 				<table class="table user-list" style="margin-bottom:0">
 					<thead>
 						<tr>
-							<th><span>NOMBRE</span></th>
-							<th><span>APELLIDO</span></th>
-							<th><span>DNI</span></th>
-							<th><span>CARGO</span></th>
+							<th style="width: 19%"><span>NOMBRE</span></th>
+							<th style="width: 18%"><span>APELLIDO</span></th>
+							<th style="width: 19%"><span>DNI</span></th>
+							<th style="width: 20%"><span>CARGO</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
@@ -140,8 +140,8 @@
 							<td>
 								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
-							<td class="text-right">
-                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="ConfirmAgregar" />
+							<td class="text-right" style="width: 40%">
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="ConfirmAgregar" Width="100%"/>
 							</td>
 						</tr>
                         </tbody></table>
@@ -194,8 +194,8 @@
 								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
 							</td>
 							<td class="text-right">
-								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar"/>
-								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmBorrar"/>
+								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar" Width="47%"/>
+								<asp:Button  ID="ButtonD" runat="server" Text="DAR DE BAJA"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmBorrar" Width="47%"/>
 							</td>
 						</tr>
                         <%coloropc++;%>
@@ -235,11 +235,11 @@
 				<table class="table user-list" style="margin-bottom:0">
 					<thead>
 						<tr>
-							<th><span>NOMBRE</span></th>
-							<th><span>APELLIDO</span></th>
-							<th><span>DNI</span></th>
-							<th><span>CARGO</span></th>
-							<th class="text-right"><span>OPCIONES</span></th>
+							<th style="width: 22%"><span>NOMBRE</span></th>
+							<th style="width: 21%"> <span>APELLIDO</span></th>
+							<th style="width: 21%"><span>DNI</span></th>
+							<th style="width: 16%"><span>CARGO</span></th>
+							<th class="text-right" style="width: 20%"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
                     </table>

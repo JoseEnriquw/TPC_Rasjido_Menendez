@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Menu" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="RestoApp2.Menu" %>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="RestoApp2.Menu" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -41,7 +41,7 @@
                             </a>
                              <%}else{%>
 
-                                <div class="hovereffect" style="filter:grayscale(1)">
+                                <div>
                                     <img class="img-responsive" src="<% =item.UrlImagen %>"  alt="" onerror="this.src='https://i.postimg.cc/FKLCS5hD/404.png'" style="object-fit:scale-down; width:400px; height:200px;">
                                 </div>
                             <%}%>

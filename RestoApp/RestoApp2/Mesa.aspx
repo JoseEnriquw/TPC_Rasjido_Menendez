@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Mesa" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" enableEventValidation="false" CodeBehind="Mesa.aspx.cs" Inherits="RestoApp2.Mesa" %>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" enableEventValidation="false" CodeBehind="Mesa.aspx.cs" Inherits="RestoApp2.Mesa" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 

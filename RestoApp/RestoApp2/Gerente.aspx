@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gerente" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente.aspx.cs" Inherits="RestoApp2.Gerente" %>
+﻿<%@ Page Title="RESTOAPP - TU MEJOR RESTAURANT!" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Gerente.aspx.cs" Inherits="RestoApp2.Gerente" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
