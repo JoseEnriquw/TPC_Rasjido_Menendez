@@ -16,7 +16,7 @@
                     <div>
                        <h3>INGRESA CON TU USUARIO</h3>
                        <label for="yourName">DNI</label>
-                       <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                       <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="SingleLine" MinLength="8" Min="10000000" onkeypress="javascript:return solonumeros(event)"></asp:TextBox>
                        <label for="exampleInputEmail1">Contraseña</label>
                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                        <br />
@@ -62,5 +62,25 @@
             document.body.style.visibility = "visible: false";
         }
     </script>
+    <script>
+        function solonumeros(e) {
 
+            var key;
+
+            if (window.event) // IE
+            {
+                key = e.keyCode;
+            }
+            else if (e.which) // Netscape/Firefox/Opera
+            {
+                key = e.which;
+            }
+
+            if (key < 48 || key > 57) {
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </asp:Content>

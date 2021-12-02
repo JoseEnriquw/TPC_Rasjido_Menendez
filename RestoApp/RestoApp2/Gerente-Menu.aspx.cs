@@ -174,7 +174,7 @@ namespace RestoApp2
                         ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).DataBind();
                         ((DropDownList)repeaterMenu.Items[cont].FindControl("DDL_TipoInsumo_Item")).SelectedValue = item.Tipo.Id.ToString();
 
-                        ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text = item.Precio.ToString();
+                        ((TextBox)repeaterMenu.Items[cont].FindControl("Precio")).Text =  string.Format("{0:00.00}",item.Precio);
                             ((TextBox)repeaterMenu.Items[cont].FindControl("Url")).Text = item.UrlImagen;
                             cont++;
                     }
@@ -186,7 +186,7 @@ namespace RestoApp2
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("Insumo2")).Text = item.Nombre.ToUpper();
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("txt_Categorias_Item2")).Text = item.Categoria.Descripcion;
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("txt_TipoInsumo_Item2")).Text = item.Tipo.Descripcion;
-                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = item.Precio.ToString();
+                        ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = string.Format("{0:00.00}", item.Precio);
                         ((TextBox)repeaterMenu2.Items[cont].FindControl("Url2")).Text = item.UrlImagen;
                         cont++;
                     }
@@ -269,7 +269,7 @@ namespace RestoApp2
                 ((TextBox)repeaterMenu2.Items[cont].FindControl("Insumo2")).Text = item.Nombre.ToUpper();             
                 ((TextBox)repeaterMenu.Items[cont].FindControl("txt_Categorias_Item2")).Text = item.Categoria.Descripcion;
                 ((TextBox)repeaterMenu.Items[cont].FindControl("txt_TipoInsumo_Item2")).Text = item.Tipo.Descripcion;
-                ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = item.Precio.ToString();
+                ((TextBox)repeaterMenu2.Items[cont].FindControl("Precio2")).Text = string.Format("{0:00.00}", item.Precio);
                 ((TextBox)repeaterMenu2.Items[cont].FindControl("Url2")).Text = item.UrlImagen;
                 cont++;
             }

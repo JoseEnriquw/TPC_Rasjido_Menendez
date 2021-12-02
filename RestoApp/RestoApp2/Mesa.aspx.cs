@@ -218,7 +218,7 @@ namespace RestoApp2
                 {
 
                     ((TextBox)RepeaterMesa.Items[cont].FindControl("txtCantidad")).Text = item.Cantidad.ToString();
-                    ((Label)RepeaterMesa.Items[cont].FindControl("LabelPrecio")).Text = item.Item.Precio.ToString();
+                    ((Label)RepeaterMesa.Items[cont].FindControl("LabelPrecio")).Text = string.Format("0:00.00",item.Item.Precio.ToString());
 
                     if (!item.estado)
                     {

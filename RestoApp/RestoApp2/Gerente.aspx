@@ -57,9 +57,13 @@
                     </div>
          </div>
 
+
+
         <div style="text-align:center">
+
+
         <asp:Button Text="CANTIDAD DE MESAS" 
-            runat="server" CssClass="btn-primary" style="width:50%; height: 60px; font-size: 20px; 
+            runat="server" CssClass="btn-primary " style="width:50%; height: 60px; font-size: 20px; 
             background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1);" OnClick="Mesas"
             />
         <asp:Button Text="VENTAS DE HOY" 

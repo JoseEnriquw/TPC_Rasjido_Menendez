@@ -9,7 +9,7 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" TextMode="Number" onkeypress="javascript:return solonumeros(event)"   AutoPostBack="true"></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" TextMode="singleline" onkeypress="javascript:return solonumeros(event)"   AutoPostBack="true"></asp:TextBox></td>
 
                    <script>
                        function solonumeros(e) {
@@ -93,11 +93,11 @@
 				<table class="table user-list" style="margin-bottom:0">
 					<thead>
 						<tr>
-							<th style="width: 19%"><span>NOMBRE</span></th>
-							<th style="width: 18%"><span>APELLIDO</span></th>
-							<th style="width: 19%"><span>DNI</span></th>
-							<th style="width: 20%"><span>CARGO</span></th>
-							<th class="text-right"><span>OPCIONES</span></th>
+							<th style="width: 21%"><span>NOMBRE</span></th>
+							<th style="width: 20%"><span>APELLIDO</span></th>
+							<th style="width: 21%"><span>DNI</span></th>
+							<th style="width: 22%"><span>CARGO</span></th>
+							<th  class="text-right"><span>OPCIONES</span></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -112,7 +112,7 @@
 								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="DniNew" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="DniNew" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
 
                                   <script>
                                       function solonumeros(e) {
@@ -137,12 +137,12 @@
                                   </script>
 
 							</td>
-							<td>
-                                <asp:DropDownList ID="DDL_CargoNew" runat="server"></asp:DropDownList>
+							<td style="width: 10%">
+                                <asp:DropDownList ID="DDL_CargoNew" runat="server" Width="45%" Height="100%"></asp:DropDownList>
 
 							</td>
-							<td class="text-right" style="width: 40%">
-                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="ConfirmAgregar" Width="100%"/>
+							<td class="text-right" style="width: 200%" >
+                                <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR" class="btn btn-theme" OnClick="ConfirmAgregar" Width="100%"/>
 							</td>
 						</tr>
                         </tbody></table>
@@ -166,7 +166,7 @@
 								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
 
                                 <script>
                                     function solonumeros(e) {
@@ -192,7 +192,7 @@
 
 							</td>
 							<td>
-								  <asp:DropDownList ID="DDL_Cargo" runat="server"></asp:DropDownList>
+								  <asp:DropDownList ID="DDL_Cargo" runat="server" Height="100%" Width="100%"></asp:DropDownList>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar" Width="47%"/>
@@ -236,9 +236,9 @@
 				<table class="table user-list" style="margin-bottom:0">
 					<thead>
 						<tr>
-							<th style="width: 22%"><span>NOMBRE</span></th>
-							<th style="width: 21%"> <span>APELLIDO</span></th>
-							<th style="width: 21%"><span>DNI</span></th>
+							<th style="width: 24%"><span>NOMBRE</span></th>
+							<th style="width: 23%"> <span>APELLIDO</span></th>
+							<th style="width: 24%"><span>DNI</span></th>
 							<th style="width: 16%"><span>CARGO</span></th>
 							<th class="text-right" style="width: 20%"><span>OPCIONES</span></th>
 						</tr>

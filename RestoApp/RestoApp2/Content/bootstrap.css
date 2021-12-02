@@ -8647,7 +8647,8 @@ thead {
 
 body {
     background: url("https://i.pinimg.com/736x/df/29/ab/df29abe7283dee8d54bad68445dfd560.jpg");
-    background-size: contain;
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -8880,4 +8881,12 @@ body {
         right: 25%;
         text-align: center;
     }
+
+    .efectohover:hover {
+        color: yellow;
+    }
+
+
+
+
 }
