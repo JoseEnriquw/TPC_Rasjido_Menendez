@@ -44,6 +44,7 @@
     <Compile Include="Cargo.cs" />
     <Compile Include="Categorias.cs" />
     <Compile Include="Filtros\FiltrosInsumos.cs" />
+    <Compile Include="Filtros\FiltrosPersonas.cs" />
     <Compile Include="TipoInsumo.cs" />
     <Compile Include="Insumo.cs" />
     <Compile Include="ItemsPedidos.cs" />

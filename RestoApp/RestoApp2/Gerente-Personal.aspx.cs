@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Dominio.Filtros;
 using Negocio;
 
 namespace RestoApp2
@@ -14,6 +15,9 @@ namespace RestoApp2
         public List<Persona> PersonaLista;
         public List<Persona> PersonaListaACT;
         public List<Persona> PersonaListaINA;
+        private NegocioPersona negocioPersona;
+        private FiltrosPersonas filtrosPersonas;
+        private NegocioCargo negocioCargo;
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,23 +57,32 @@ namespace RestoApp2
                 Session["UserLog"] = null;
                 Response.Redirect("Inicio.aspx");
             }
-         
 
+            negocioPersona = new NegocioPersona();
+            negocioCargo = new NegocioCargo();
             if (!IsPostBack)
             {
-                Consultas personal = new Consultas();
+                filtrosPersonas = new FiltrosPersonas();
+                
                 try
                 {
                     PersonaLista = new List<Persona>();
-                    PersonaLista = personal.ListarPersona("");
+                    PersonaLista = negocioPersona.GetAllPersonas(filtrosPersonas);
                     Session.Add("ListadoPersonal", PersonaLista);
+
+                    List<Cargo> listaCargo = new List<Cargo>();
+                    listaCargo.AddRange(negocioCargo.GetAllCargos());
+                    DDL_CargoNew.DataSource = listaCargo;
+                    DDL_CargoNew.DataTextField = "Descripcion";
+                    DDL_CargoNew.DataValueField = "Id";
+                    DDL_CargoNew.DataBind();
 
                     PersonaListaACT = new List<Persona>();
                     PersonaListaINA = new List<Persona>();
 
                     foreach(Persona item in PersonaLista)
                     {
-                        if (item.Baja)
+                        if (!item.Baja)
                         {
                             PersonaListaACT.Add(item);
                         }
@@ -89,8 +102,15 @@ namespace RestoApp2
                     {
                         ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text = item.Nombre.ToUpper();
                         ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text = item.Apellido.ToUpper();
-                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text = item.Dni;
-                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text = item.Cargo.Descripcion.ToUpper();
+                        ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text = item.Dni;                   
+
+                        //Se agregan los datos de la lista DropDonwList
+                        ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataSource = listaCargo;
+                        ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataTextField = "Descripcion";
+                        ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataValueField = "Id";
+                        ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataBind();
+                        ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).SelectedValue = item.Cargo.Id.ToString();
+
                         if (item.Cargo.Descripcion.ToUpper() == "GERENTE" && item.Id != ((Persona)Session["UserLog"]).Id)
                         {
                             ((Button)repeaterPersonal.Items[cont].FindControl("ButtonA")).Visible = false;
@@ -106,7 +126,13 @@ namespace RestoApp2
                         ((TextBox)repeaterPersonal2.Items[cont].FindControl("Nombre2")).Text = item.Nombre.ToUpper();
                         ((TextBox)repeaterPersonal2.Items[cont].FindControl("Apellido2")).Text = item.Apellido.ToUpper();
                         ((TextBox)repeaterPersonal2.Items[cont].FindControl("Dni2")).Text = item.Dni;
-                        ((TextBox)repeaterPersonal2.Items[cont].FindControl("Cargo2")).Text = item.Cargo.Descripcion.ToUpper();
+
+                        //Se agregan los datos de la lista DropDonwList
+                        ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataSource = listaCargo;
+                        ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataTextField = "Descripcion";
+                        ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataValueField = "Id";
+                        ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataBind();
+                        ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).SelectedValue = item.Cargo.Id.ToString();
                         cont++;
                     }
                 }
@@ -119,58 +145,81 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
-            /*
-            string DNI = TB_DNI.Text;
-            string Nombre = TB_Nombre.Text;
-            string Apellido = TB_Apellido.Text;
-
-
-            //Los 3 tienen datos
-            if (DNI != " " && Nombre != " " && Apellido != " ")
+            filtrosPersonas = new FiltrosPersonas();
+            filtrosPersonas.dni = TB_DNI.Text;
+            filtrosPersonas.nombre = TB_Nombre.Text;
+            filtrosPersonas.apellido = TB_Apellido.Text;
+            try
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) && x.Nombre.ToUpper().Contains(Nombre.ToUpper()) && x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
+                PersonaLista = new List<Persona>();
+                PersonaLista = negocioPersona.GetAllPersonas(filtrosPersonas);
+                Session.Add("ListadoPersonal", PersonaLista);
+                List<Cargo> listaCargo = new List<Cargo>();
+                listaCargo.AddRange(negocioCargo.GetAllCargos());
 
+                PersonaListaACT = new List<Persona>();
+                PersonaListaINA = new List<Persona>();
+
+                foreach (Persona item in PersonaLista)
+                {
+                    if (!item.Baja)
+                    {
+                        PersonaListaACT.Add(item);
+                    }
+                    else
+                    {
+                        PersonaListaINA.Add(item);
+                    }
+                }
+
+                repeaterPersonal.DataSource = PersonaListaACT;
+                repeaterPersonal.DataBind();
+                repeaterPersonal2.DataSource = PersonaListaINA;
+                repeaterPersonal2.DataBind();
+
+                int cont = 0;
+                foreach (Persona item in PersonaListaACT)
+                {
+                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text = item.Nombre.ToUpper();
+                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text = item.Apellido.ToUpper();
+                    ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text = item.Dni;
+
+                    //Se agregan los datos de la lista DropDonwList
+                    ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataSource = listaCargo;
+                    ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataTextField = "Descripcion";
+                    ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataValueField = "Id";
+                    ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).DataBind();
+                    ((DropDownList)repeaterPersonal.Items[cont].FindControl("DDL_Cargo")).SelectedValue = item.Cargo.Id.ToString();
+
+                    if (item.Cargo.Descripcion.ToUpper() == "GERENTE" && item.Id != ((Persona)Session["UserLog"]).Id)
+                    {
+                        ((Button)repeaterPersonal.Items[cont].FindControl("ButtonA")).Visible = false;
+                        ((Button)repeaterPersonal.Items[cont].FindControl("ButtonA")).Enabled = false;
+                        ((Button)repeaterPersonal.Items[cont].FindControl("ButtonD")).Visible = false;
+                        ((Button)repeaterPersonal.Items[cont].FindControl("ButtonD")).Enabled = false;
+                    }
+                    cont++;
+                }
+                cont = 0;
+                foreach (Persona item in PersonaListaINA)
+                {
+                    ((TextBox)repeaterPersonal2.Items[cont].FindControl("Nombre2")).Text = item.Nombre.ToUpper();
+                    ((TextBox)repeaterPersonal2.Items[cont].FindControl("Apellido2")).Text = item.Apellido.ToUpper();
+                    ((TextBox)repeaterPersonal2.Items[cont].FindControl("Dni2")).Text = item.Dni;
+
+                    //Se agregan los datos de la lista DropDonwList
+                    ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataSource = listaCargo;
+                    ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataTextField = "Descripcion";
+                    ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataValueField = "Id";
+                    ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).DataBind();
+                    ((DropDownList)repeaterPersonal2.Items[cont].FindControl("DDL_Cargo2")).SelectedValue = item.Cargo.Id.ToString();
+                    cont++;
+                }
             }
-            //DNI no tiene Datos y los demas si
-            else if (DNI == " " && Nombre != " " && Apellido != " ")
+            catch (Exception ex)
             {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.ToUpper().Contains(Nombre.ToUpper()) && x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
-
+                Session.Add("Error", ex.ToString());
             }
-            //Nombre no tine datos y los demas si
-            else if (DNI != " " && Nombre == " " && Apellido != " ")
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) && x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
-
-            }
-            //Apellido no tiene datos y los demas si 
-            else if (DNI != " " && Nombre != " " && Apellido == " ")
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()) && x.Nombre.ToUpper().Contains(Nombre.ToUpper()));
-
-            }
-            //Solo DNI tiene datos
-            else if (DNI != " " && Nombre == " " && Apellido == " ")
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Dni.ToUpper().Contains(DNI.ToUpper()));
-
-            }
-            //Solo Nombre tiene datos
-            else if (DNI == " " && Nombre != " " && Apellido == " ")
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Nombre.ToUpper().Contains(Nombre.ToUpper()));
-
-            }
-            //Solo Apellido tiene datos
-            else if (DNI == " " && Nombre == " " && Apellido != " ")
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]).FindAll(x => x.Apellido.ToUpper().Contains(Apellido.ToUpper()));
-
-            }
-            else
-            {
-                PersonaLista = ((List<Persona>)Session["ListadoPersonal"]);
-            }*/
         }
 
         protected void ConfirmBorrar(object sender, EventArgs e)
@@ -234,7 +283,6 @@ namespace RestoApp2
         protected void Actualizar(object sender, EventArgs e)
         {
             var argument = ((Button)sender).CommandArgument;
-            Consultas personal = new Consultas();
             Persona aux = new Persona();
 
             int cont = 0;
@@ -243,19 +291,16 @@ namespace RestoApp2
                 if (argument == item.Id.ToString()
                     && ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text != ""
                     && ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text != ""
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text != ""
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text != "")
+                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text != "")
                 {
                     aux.Id = item.Id;
                     aux.Nombre = ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text;
                     aux.Apellido = ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text;
                     aux.Dni = ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text;
-                    aux.Cargo = new Cargo();
-                    aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text.ToUpper();
-                    if (aux.Cargo.Descripcion == "GERENTE") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
-                    aux.Baja = true;
+                    aux.Cargo = new Cargo(int.Parse(DDL_CargoNew.SelectedItem.Value), DDL_CargoNew.SelectedItem.Text);
+                    aux.Baja = false;
 
-                    personal.ActualizarPersona(true, aux);
+                    negocioPersona.UpdatePersona(aux);
                 }
                 if (item.Baja) cont++;
             }
@@ -264,47 +309,26 @@ namespace RestoApp2
 
         protected void Borrar(object sender, EventArgs e)
         {
-            var argument = ((Button)sender).CommandArgument;
-            Consultas personal = new Consultas();
-            Persona aux = new Persona();
+            var argument = int.Parse(((Button)sender).CommandArgument);
 
-            int cont = 0;
-            foreach (Persona item in ((List<Persona>)Session["ListadoPersonal"]))
-            {
-                if (argument == item.Id.ToString()
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text != ""
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text != ""
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text != ""
-                    && ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text != "")
-                {
-                    aux.Id = item.Id;
-                    aux.Nombre = ((TextBox)repeaterPersonal.Items[cont].FindControl("Nombre")).Text;
-                    aux.Apellido = ((TextBox)repeaterPersonal.Items[cont].FindControl("Apellido")).Text;
-                    aux.Dni = ((TextBox)repeaterPersonal.Items[cont].FindControl("Dni")).Text;
-                    aux.Cargo = new Cargo();
-                    aux.Cargo.Descripcion = ((TextBox)repeaterPersonal.Items[cont].FindControl("Cargo")).Text;
-                    if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
+            ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument).Baja = true;
 
-                    personal.ActualizarPersona(false, aux);
-                }
-                if (item.Baja) cont++;
-            }
-            Response.Redirect("Gerente-Personal.aspx"); 
+            negocioPersona.UpdatePersona(((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument));
+
+            Response.Redirect("Gerente-Personal.aspx");
         }
 
         protected void Agregar(object sender, EventArgs e)
         {
-            Consultas personal = new Consultas();
             Persona aux = new Persona();
-            if (NombreNew.Text != "" && ApellidoNew.Text != "" && DniNew.Text != "" && CargoNew.Text != "")
+            if (NombreNew.Text != "" && ApellidoNew.Text != "" && DniNew.Text != "" && DDL_CargoNew.SelectedItem.Text != "")
             {
                 aux.Nombre = NombreNew.Text;
                 aux.Apellido = ApellidoNew.Text;
                 aux.Dni = DniNew.Text;
-                aux.Cargo = new Cargo();
-                aux.Cargo.Descripcion = CargoNew.Text;
-                if (aux.Cargo.Descripcion == "Gerente") { aux.Cargo.Id = 1; } else { aux.Cargo.Id = 2; }
-                personal.AgregarPersonal(aux);
+                aux.Cargo = new Cargo(int.Parse(DDL_CargoNew.SelectedItem.Value), DDL_CargoNew.SelectedItem.Text);           
+                aux.Baja = false;
+                negocioPersona.InsertPersona(aux);
             }
             else
             {
@@ -317,12 +341,12 @@ namespace RestoApp2
         protected void Reactivar_Persona(object sender, EventArgs e)
         {
 
-            Consultas consulta = new Consultas();
+
             var argument = int.Parse(((Button)sender).CommandArgument);
 
-            ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument).Baja = true;
+            ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument).Baja = false;
 
-            consulta.ActualizarPersona(true, ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument));
+           negocioPersona.UpdatePersona( ((List<Persona>)Session["ListadoPersonal"]).Find(x => x.Id == argument));
 
             Response.Redirect("Gerente-Personal.aspx");
         }

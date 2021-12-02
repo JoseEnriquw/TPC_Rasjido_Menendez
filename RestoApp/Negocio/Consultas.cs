@@ -13,196 +13,7 @@ namespace Negocio
     {
         public AccessData accessdata = new AccessData("(local)\\SQLEXPRESS", "TPC_Rasjido_Menendez_DB");
        
-
-
-        //Categorias
-        public List<Categorias> FiltrosCategorias()
-        {
-            List<Categorias> Lista = new List<Categorias>();
-
-            try
-            {
-                accessdata.setearConsulta("Select ID,Descripcion from Categorias ");
-                accessdata.ejecutarLectura();
-
-                while (accessdata.Lector.Read())
-                {
-                    Categorias aux = new Categorias();
-                    aux.Id = accessdata.Lector.GetInt32(0);
-                    aux.Descripcion = accessdata.Lector.GetString(1);
-                    Lista.Add(aux);
-
-                }
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-
-            return Lista;
-        }
-
-        //Tipo de Insumo
-        public List<TipoInsumo> FiltrosTipoInsumo()
-        {
-            List<TipoInsumo> Lista = new List<TipoInsumo>();
-
-            try
-            {
-                accessdata.setearConsulta("Select ID,Descripcion from TipoInsumos ");
-                accessdata.ejecutarLectura();
-
-                while (accessdata.Lector.Read())
-                {
-                    TipoInsumo aux = new TipoInsumo();
-                    aux.Id = accessdata.Lector.GetInt32(0);
-                    aux.Descripcion = accessdata.Lector.GetString(1);
-                    Lista.Add(aux);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-
-            return Lista;
-        }
-
-        //Insumos
-       
-        public void ActualizarPersona(bool opcion, Persona aux)
-        {
-            try
-            {
-                string id = " ID=" + aux.Id.ToString();
-                string cargo = " IDCargo=" + aux.Cargo.Id.ToString();
-                string dni = " DNI='" + aux.Dni + "'";
-                string nombre = " Nombre='" + aux.Nombre + "'";
-                string apellido = " Apellido='" + aux.Apellido + "'";
-                string baja = " Baja=" + Convert.ToByte(aux.Baja).ToString();
-
-                if (opcion == true)
-                {
-                    accessdata.setearConsulta("update Personas set" + cargo + " ," + dni + " ," + nombre + " ," + apellido + " ,"+ baja+" where"+ id);
-                }
-                else
-                {
-                    accessdata.setearConsulta("update Personas set Baja = 0 where" + id);
-                }
-
-                accessdata.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-        }
-
-        public void AgregarPersonal(Persona aux)
-        {
-            try
-            {
-                string id = aux.Id.ToString();
-                string cargo = aux.Cargo.Id.ToString();
-                string dni = aux.Dni;
-                string nombre = aux.Nombre;
-                string apellido = aux.Apellido;
-                string baja = Convert.ToByte(aux.Baja).ToString();
-
-                accessdata.setearConsulta("insert into Personas values(" + cargo + ",'" + dni + "','" + nombre + "','" + apellido + "'"+baja+")");  
-                accessdata.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-        }
-
-        public void ActualizarInsumo(bool opcion, Insumo aux)
-        {
-            try
-            {
-                string id = " ID=" + aux.Id.ToString();
-                string nombre = " Nombre='" + aux.Nombre + "'";
-                string idcategoria = " IDCategoria=" + aux.Categoria.Id.ToString();
-                string idtipo = " IDTipo=" + aux.Tipo.Id.ToString();
-                string precio = " Precio=" + aux.Precio.ToString();
-                string stock = " Stock=" + aux.Stock.ToString();
-                string url = " UrlImg='" + aux.UrlImagen + "'";
-                string baja = " Baja=" + Convert.ToByte(aux.Baja).ToString();
-
-                if (opcion == true)
-                {
-                    accessdata.setearConsulta("update Insumos set" 
-                    + nombre + "," 
-                    + idcategoria + "," 
-                    + idtipo + "," 
-                    + precio + ","
-                    + stock + "," 
-                    + url + "," 
-                    + baja 
-                    + " where" + id);
-                }
-                else
-                {
-                    accessdata.setearConsulta("update Insumos set Baja = 0 where" + id);
-                }
-
-                accessdata.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-        }
-
-        public void AgregarInsumo(Insumo aux)
-        {
-            try
-            {
-                string id = aux.Id.ToString();
-                string nombre = aux.Nombre;
-                string idcategoria = aux.Categoria.Id.ToString();
-                string idtipo = aux.Tipo.Id.ToString();
-                string precio = aux.Precio.ToString();
-                string stock = aux.Stock.ToString();
-                string url = aux.UrlImagen;
-                string baja = Convert.ToByte(aux.Baja).ToString();
-
-                accessdata.setearConsulta("insert into Insumos values('" + nombre + "'," + idcategoria + "," + idtipo + "," + precio + "," + stock + ",'" + url + " ,"+baja+")");
-                accessdata.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }
-        }
-
+             
         public List<HistorialPedido> ListarHistorialPedido(string where)
         {
             List<HistorialPedido> lista = new List<HistorialPedido>();
@@ -272,39 +83,6 @@ namespace Negocio
             return lista;
         }
 
-        public List<Persona> ListarPersona(string where)
-        {
-            List<Persona> lista = new List<Persona>();
-
-            try
-            {
-                accessdata.setearConsulta("select * from VW_Personas" + where);
-                accessdata.ejecutarLectura();
-                while (accessdata.Lector.Read())
-                {
-                    Persona aux = new Persona();
-                    aux.Id = accessdata.Lector.GetInt32(0);
-                    aux.Cargo=new Cargo( accessdata.Lector.GetInt32(1),accessdata.Lector.GetString(2));
-                    aux.Dni = accessdata.Lector.GetString(3);
-                    aux.Nombre = accessdata.Lector.GetString(4);
-                    aux.Apellido = accessdata.Lector.GetString(5);
-                    aux.Baja = accessdata.Lector.GetBoolean(6);
-
-                    lista.Add(aux);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessdata.cerrarConexion();
-            }  
-            
-            return lista;
-        }
-
         //Usuario
         public List<Usuario> ListarUsuario(string consulta)
         {
@@ -337,6 +115,8 @@ namespace Negocio
             return lista;
         }
 
+        private NegocioPersona negocioPersona;
+
         public bool ValidarLogueo(string _dni, string _pass, ref Persona userLog)
         {
             accessdata.setearConsulta("select * from Usuarios where DNI = '" + _dni + "' AND Contraseña = '" + _pass + "'");
@@ -344,14 +124,15 @@ namespace Negocio
             if (accessdata.Lector.Read())
             {
                 accessdata.cerrarConexion();
-                List<Persona> lista = ListarPersona(" where DNI='" + _dni + "'");
-                if (lista.Count == 1 && lista[0].Baja==true)
+                negocioPersona = new NegocioPersona();
+                Persona persona = negocioPersona.GetPersonaByDNI(_dni);
+                if (persona.Baja==false)
                 {
-                    userLog.Id = lista[0].Id;
-                    userLog.Nombre = lista[0].Nombre;
-                    userLog.Apellido = lista[0].Apellido;
-                    userLog.Cargo = new Cargo(lista[0].Cargo.Id, lista[0].Cargo.Descripcion);
-                    userLog.Dni = lista[0].Dni;
+                    userLog.Id = persona.Id;
+                    userLog.Nombre = persona.Nombre;
+                    userLog.Apellido = persona.Apellido;
+                    userLog.Cargo = new Cargo(persona.Cargo.Id, persona.Cargo.Descripcion);
+                    userLog.Dni = persona.Dni;
                     return true;
                 }
             }

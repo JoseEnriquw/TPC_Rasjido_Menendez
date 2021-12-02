@@ -20,7 +20,7 @@ namespace Dominio.Filtros
 		{
 		 nombre=" "; 
 	     precio=" "; 
-	     cantidad=" "; 
+	     cantidad=""; 
 	     categoria=" "; 
 	     tipoInsumo =" ";
 	     buscarPorTodo = " ";

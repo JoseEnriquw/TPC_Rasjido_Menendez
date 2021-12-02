@@ -9,11 +9,11 @@
 
 <table class="filter">
               <tr>
-                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
-                  <td class="item-filter">PRECIO: <asp:DropDownList ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number"></asp:DropDownList></td>
-                  <td class="item-filter">CANTIDAD: <asp:DropDownList ID="TB_Cantidad" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number"></asp:DropDownList></td>
-              </tr>
-          </table>
+                  <td class="item-filter">INSUMO: <asp:TextBox ID="TB_Insumo" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" AutoPostBack="true"></asp:TextBox></td>
+                  <td class="item-filter">PRECIO: <asp:TextBox ID="TB_Precio" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number" AutoPostBack="true"></asp:TextBox></td>
+               <td class="item-filter">CANTIDAD: <asp:TextBox ID="TB_Cantidad" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" TextMode="Number" AutoPostBack="true"></asp:TextBox></td>
+             </tr>
+            </table>
     </div>
 
 	<a href="Gerente.aspx">
@@ -90,7 +90,7 @@
 								<%#Eval("Stock").ToString()%>
 							</td>
 							<td>
-								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
 
 								<script>
                                     function solonumeros(e) {
@@ -179,7 +179,7 @@
 								<%#Eval("Stock").ToString()%>
 							</td>
 							<td>
-								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
+								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
 
                                <script>
                                    function solonumeros(e) {

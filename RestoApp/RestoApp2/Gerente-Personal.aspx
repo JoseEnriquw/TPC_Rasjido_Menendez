@@ -9,7 +9,7 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" " TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" TextMode="Number" onkeypress="javascript:return solonumeros(event)"   AutoPostBack="true"></asp:TextBox></td>
 
                    <script>
                        function solonumeros(e) {
@@ -33,9 +33,9 @@
                        }
                    </script>
 
-                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
+                  <td class="item-filter">NOMBRE: <asp:TextBox ID="TB_Nombre" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=""  AutoPostBack="true"></asp:TextBox></td>
                   
-                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text=" "></asp:TextBox></td>
+                  <td class="item-filter">APELLIDO: <asp:TextBox ID="TB_Apellido" runat="server"  CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" AutoPostBack="true"></asp:TextBox></td>
               </tr>
           </table>
     </div>
@@ -138,7 +138,8 @@
 
 							</td>
 							<td>
-								<asp:TextBox ID="CargoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
+                                <asp:DropDownList ID="DDL_CargoNew" runat="server"></asp:DropDownList>
+
 							</td>
 							<td class="text-right" style="width: 40%">
                                 <asp:Button  ID="ButtonAdd" runat="server" Text="AGREGAR"		class="btn btn-theme" OnClick="ConfirmAgregar" Width="100%"/>
@@ -159,13 +160,13 @@
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
 							<td>
-								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
 
                                 <script>
                                     function solonumeros(e) {
@@ -191,7 +192,7 @@
 
 							</td>
 							<td>
-								<asp:TextBox ID="Cargo" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								  <asp:DropDownList ID="DDL_Cargo" runat="server"></asp:DropDownList>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="ButtonA" runat="server" Text="MODIFICAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmActualizar" Width="47%"/>
@@ -256,13 +257,13 @@
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
 							<td>
-								<asp:TextBox ID="Nombre2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Nombre2" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" AutoPostBack="true" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
 
                                 <script>
                                     function solonumeros(e) {
@@ -288,7 +289,7 @@
 
 							</td>
 							<td>
-								<asp:TextBox ID="Cargo2" runat="server" TextMode="SingleLine" AutoPostBack="true"></asp:TextBox>
+								  <asp:DropDownList ID="DDL_Cargo2" runat="server"></asp:DropDownList>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmReactivar"/>

@@ -133,7 +133,7 @@ go
 
 
 insert into Cargos values ('Gerente'),('Empleado')
-insert into Personas values (1,'11222333','Adriel','Rasjido',1),(2,'11222444','Jose','Menendez',1),(2,'11222555','Elian','Rasjido',1),(1,'11222666','Enrique','Menendez',1),(2,'11222888','Maximiliano','Fernandez',1),(2,'11222999','Fernandez','Maximiliano',1)
+insert into Personas values (1,'11222333','Adriel','Rasjido',0),(2,'11222444','Jose','Menendez',0),(2,'11222555','Elian','Rasjido',0),(1,'11222666','Enrique','Menendez',0),(2,'11222888','Maximiliano','Fernandez',0),(2,'11222999','Fernandez','Maximiliano',0)
 insert into Mesas values ('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none'),('none')
 insert into Usuarios values ('11222333','11222333',1),('11222444','11222444',1),('11222555','11222555',1),('11222666','11222666',1)
 insert into Categorias values ('Plato'),('Bebida')
@@ -169,3 +169,6 @@ SELECT * from Categorias
 SELECT * from Pedidos
 select * from ItemsPedido
 
+update Personas set Baja=0 where id=1;
+
+select ID,Nombre,IDCategoria,Categoria,IDTipo,Tipo,Precio,Stock,UrlImg,Baja from VW_Insumos where Precio like '%16%' 

@@ -205,15 +205,15 @@ namespace Negocio
 				}
 
 				//Si la variable cantidad no es nula hace Like de cantidad
-				if (filtros.cantidad != " ")
+				if (filtros.cantidad != "")
 				{
 					if (!filtros.baja || nombre || precio)
 					{
-						where += " and Cantidad like '%" + filtros.cantidad + "%' ";
+						where += " and Stock like '%" + filtros.cantidad + "%' ";
 					}
 					else
 					{
-						where += " Cantidad like '%" + filtros.cantidad + "%' ";
+						where += " Stock like '%" + filtros.cantidad + "%' ";
 					}
 					cantidad = true;
 				}

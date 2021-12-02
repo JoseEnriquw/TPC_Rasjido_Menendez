@@ -15,6 +15,8 @@ namespace RestoApp2
         public List<Insumo> StockLista;
         public List<Insumo> StockListaACT;
         public List<Insumo> StockListaINA;
+        public NegocioInsumos negocioInsumos;
+        public FiltrosInsumos filtros;
         public int coloropc;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,8 +55,8 @@ namespace RestoApp2
                 Session["UserLog"] = null;
                 Response.Redirect("Inicio.aspx");
             }
-            Consultas GerenteMenu = new Consultas();
-            NegocioInsumos negocioInsumos = new NegocioInsumos();
+          
+            negocioInsumos = new NegocioInsumos();
             if (!IsPostBack)
             {
                 try
@@ -69,7 +71,7 @@ namespace RestoApp2
 
                     foreach (Insumo item in StockLista)
                     {
-                        if (item.Baja)
+                        if (!item.Baja)
                         {
                             StockListaACT.Add(item);
                         }
@@ -96,58 +98,34 @@ namespace RestoApp2
 
         protected void OnTextChanged_Filtros(object sender, EventArgs e)
         {
-            /*
-            string Insumo = TB_Insumo.Text;
-            string Precio = TB_Precio.Text;
-            string Cantidad = TB_Cantidad.Text;
+            filtros = new FiltrosInsumos();
+            filtros.baja = true;
+            StockLista = new List<Insumo>();
+            StockListaACT = new List<Insumo>();
+            StockListaINA = new List<Insumo>();
+            filtros.nombre = TB_Insumo.Text;
+            filtros.precio = TB_Precio.Text;
+            filtros.cantidad = TB_Cantidad.Text;
 
+            StockLista = negocioInsumos.GetAllInsumos(filtros);
+            Session["ListadoStock"] = StockLista;
 
-            //Los 3 tienen datos
-            if (Insumo != " " && Precio != " " && Cantidad != " ")
+            foreach (Insumo item in StockLista)
             {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()) && x.Stock.ToString().ToUpper().Contains(Cantidad.ToUpper()));
-
+                if (!item.Baja)
+                {
+                    StockListaACT.Add(item);
+                }
+                else
+                {
+                    StockListaINA.Add(item);
+                }
             }
-            //INSUMO no tiene Datos y los demas si
-            else if (Insumo == " " && Precio != " " && Cantidad != " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()) && x.Stock.ToString().ToUpper().Contains(Cantidad.ToUpper()));
 
-            }
-            //PRECIO no tine datos y los demas si
-            else if (Insumo != " " && Precio == " " && Cantidad != " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Stock.ToString().ToUpper().Contains(Cantidad.ToUpper()));
-
-            }
-            //CANTIDAD no tiene datos y los demas si 
-            else if (Insumo != " " && Precio != " " && Cantidad == " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()) && x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()));
-
-            }
-            //Solo INSUMO tiene datos
-            else if (Insumo != " " && Precio == " " && Cantidad == " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Nombre.ToUpper().Contains(Insumo.ToUpper()));
-
-            }
-            //Solo PRECIO tiene datos
-            else if (Insumo == " " && Precio != " " && Cantidad == " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Precio.ToString().ToUpper().Contains(Precio.ToUpper()));
-
-            }
-            //Solo CANTIDAD tiene datos
-            else if (Insumo == " " && Precio == " " && Cantidad != " ")
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]).FindAll(x => x.Stock.ToString().ToUpper().Contains(Cantidad.ToUpper()));
-
-            }
-            else
-            {
-                StockLista = ((List<Insumo>)Session["ListadoStock"]);
-            }*/
+            repeaterStock.DataSource = StockListaACT;
+            repeaterStock.DataBind();
+            repeaterStock2.DataSource = StockListaINA;
+            repeaterStock2.DataBind();
 
         }
         protected void Confirmacion(object sender, EventArgs e)
@@ -164,7 +142,6 @@ namespace RestoApp2
 
 
             var argument = ((Button)sender).CommandArgument;
-            Consultas insumos = new Consultas();
             Insumo aux = new Insumo();
 
             int pos = 0;
@@ -182,11 +159,11 @@ namespace RestoApp2
                     aux.UrlImagen = item.UrlImagen;
                     aux.Precio = item.Precio;
                     aux.Stock = item.Stock;
-                    aux.Stock+= short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text);
+                    aux.Stock += short.Parse(((TextBox)repeaterStock.Items[cont].FindControl("CantidadNueva")).Text);
                     aux.Baja = item.Baja;
 
                     pos = cont;
-                    insumos.ActualizarInsumo(true, aux);
+                    negocioInsumos.UpdateInsumo(aux);
                     ((List<Insumo>)Session["ListadoStock"])[pos] = aux;
 
                     repeaterStock.DataSource = ((List<Insumo>)Session["ListadoStock"]);
@@ -194,10 +171,9 @@ namespace RestoApp2
                     Response.Redirect("Gerente-Stock.aspx");
 
                 }
-                if(item.Baja) cont++;
+                if (item.Baja) cont++;
             }
 
-          
         }
 
        
