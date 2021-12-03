@@ -218,7 +218,7 @@ namespace RestoApp2
                 {
 
                     ((TextBox)RepeaterMesa.Items[cont].FindControl("txtCantidad")).Text = item.Cantidad.ToString();
-                    ((Label)RepeaterMesa.Items[cont].FindControl("LabelPrecio")).Text = string.Format("0:00.00",item.Item.Precio.ToString());
+                    ((Label)RepeaterMesa.Items[cont].FindControl("LabelPrecio")).Text = item.Item.Precio.ToString();
 
                     if (!item.estado)
                     {
@@ -333,10 +333,19 @@ namespace RestoApp2
 
         protected void CerrarMesa(object sender, EventArgs e)
         {
+            
             Consultas aux = new Consultas();
-
+            bool pedidovalido = false;
 
             int pos = ((List<Dominio.Mesa>)Session["MesasMesero"]).FindIndex(x => x.NumeroMesa == ((Dominio.Mesa)Session["MesaActual"]).NumeroMesa);
+
+
+            if (((List<Dominio.Mesa>)Session["MesasMesero"])[pos].Pedidos.ListaItems != null) {
+				foreach (var item in ((List<Dominio.Mesa>)Session["MesasMesero"])[pos].Pedidos.ListaItems)
+				{
+                    if (item.estado) pedidovalido = true;
+				}
+				if (pedidovalido) { 
             aux.IngresarPedido(((List<Dominio.Mesa>)Session["MesasMesero"])[pos]);
 
             int id = ((List<Dominio.Mesa>)Session["MesasMesero"])[pos].NumeroMesa;
@@ -344,9 +353,11 @@ namespace RestoApp2
 
             ((List<Dominio.Mesa>)Session["MesasMesero"])[pos] = new Dominio.Mesa(id, nombre);
 
-
+            
 
             Response.Redirect("Mesero.aspx");
+                }
+            }
 
         }
 

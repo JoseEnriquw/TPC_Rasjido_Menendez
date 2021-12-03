@@ -20,7 +20,14 @@ textarea {
 
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media (max-width: 1366px) and (max-height: 768px) {
+
+    .filter {
+        width: 100%;
+        margin-top: -4rem;
+        justify-content: center;
+    }
+
     .jumbotron {
         margin-top: 20px;
     }

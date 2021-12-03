@@ -8648,7 +8648,7 @@ thead {
 body {
     background: url("https://i.pinimg.com/736x/df/29/ab/df29abe7283dee8d54bad68445dfd560.jpg");
     background-attachment: fixed;
-    overflow-x: hidden;
+    overflow-x: fhidden;
 }
 
 .navbar {
@@ -8832,10 +8832,18 @@ body {
 
 
 @media (max-width: 1366px) and (max-height: 768px) {
+
+    .filter {
+        display:flex;
+        width: 100%;
+       margin-top: -4rem;
+        justify-content: center;
+    }
     .jumbotron {
         background: #ff0000;
         height: 35%;
     }
+ 
 
     .contenido {
         margin-top: 22%;

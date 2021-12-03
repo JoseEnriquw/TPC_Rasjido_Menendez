@@ -25,15 +25,6 @@ C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.c
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.dll
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Negocio\obj\Debug\Negocio.pdb
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.dll
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.pdb
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.dll
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.pdb
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.dll
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.pdb
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.dll
@@ -51,3 +42,12 @@ C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.dll
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.dll
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.dll
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Negocio\obj\Debug\Negocio.pdb

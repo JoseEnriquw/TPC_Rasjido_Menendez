@@ -9,7 +9,7 @@
 
 		<table class="filter">
               <tr>
-                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" TextMode="singleline" onkeypress="javascript:return solonumeros(event)"   AutoPostBack="true"></asp:TextBox></td>
+                  <td class="item-filter">DNI: <asp:TextBox ID="TB_DNI" runat="server" CssClass="drop" OnTextChanged="OnTextChanged_Filtros" Text="" TextMode="singleline" onkeypress="javascript:return solonumeros(event)"   AutoPostBack="true" MaxLength="8"></asp:TextBox></td>
 
                    <script>
                        function solonumeros(e) {
@@ -112,7 +112,7 @@
 								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="DniNew" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="DniNew" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" MaxLength="8"></asp:TextBox>
 
                                   <script>
                                       function solonumeros(e) {
@@ -166,7 +166,7 @@
 								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" ></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="Dni" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" MaxLength="8"></asp:TextBox>
 
                                 <script>
                                     function solonumeros(e) {

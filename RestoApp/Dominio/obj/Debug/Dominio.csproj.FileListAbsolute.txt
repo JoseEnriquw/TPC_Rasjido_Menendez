@@ -16,12 +16,6 @@ C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.c
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.dll
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.pdb
 C:\Users\Adriel Rasjido\Desktop\PUBLICO_TPC\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.dll
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.pdb
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.dll
-C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.pdb
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.dll
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.pdb
 C:\Users\Adriel Rasjido\Desktop\TPC\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
@@ -33,3 +27,9 @@ C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.dll
 C:\Users\Kikito\Documents\GitHub\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.dll
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.dll
+C:\Users\Kikito\Desktop\TPC_Rasjido_Menendez\RestoApp\Dominio\obj\Debug\Dominio.pdb

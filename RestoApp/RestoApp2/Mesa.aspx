@@ -56,13 +56,13 @@
 								<%= mesa.Nombre %>
 							</td>
 			                <td class="text-center">
-								<%=string.Format("0:00.00",CantTotalInsumos) %>
+								<%=CantTotalInsumos  %>
 							</td>
 							<td class="text-center">
-								$<%=string.Format("0:00.00",CostoEstimadoTotal) %>
+								$<%=CostoEstimadoTotal %>
 							</td>
 							<td class="text-center">
-								$<%=string.Format("0:00.00",mesa.Pedidos.PrecioTotal) %>
+								$<%=mesa.Pedidos.PrecioTotal %>
 							</td>
 							<td class="text-right">
 								<asp:Button ID="Button1" runat="server" Text="CERRAR MESA" class="btn btn-theme" OnClick="CerrarMesa" CommandArgument="<% = mesa. %>" />
@@ -78,9 +78,7 @@
 							<th><span>PEDIDO</span></th>
 						    <th><span>ESTADO</span></th>
 							<th><span>CANTIDAD</span></th>
-							<th><span>
-
-							    </span></th>
+							<th><span>PRECIO</span></th>
 							<th><span>SUB TOTAL</span></th>
 							<th class="text-right"><span>OPCIONES</span></th>
 						</tr>
