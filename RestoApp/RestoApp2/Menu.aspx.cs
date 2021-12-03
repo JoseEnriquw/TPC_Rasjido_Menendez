@@ -104,31 +104,38 @@ namespace RestoApp2
 
         public bool verificarStock(int cantpedida, int id)
         {
+            
             bool result = false;
-            int stock = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == id).Stock;
-            int pos = 0;
-
-            foreach (var item in ((List<Dominio.Mesa>)Session["MesasMesero"]))
+            try
             {
+                int stock = ((List<Insumo>)Session["ListadoMenu"]).Find(x => x.Id == id).Stock;
+                int pos = 0;
 
-                if (item.Pedidos.ListaItems != null)
+                foreach (var item in ((List<Dominio.Mesa>)Session["MesasMesero"]))
                 {
-                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == true)) >= 0)
+
+                    if (item.Pedidos.ListaItems != null)
                     {
-                        stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                        if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == true)) >= 0)
+                        {
+                            stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                        }
+                        if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == false)) >= 0)
+                        {
+                            stock -= item.Pedidos.ListaItems[pos].Cantidad;
+                        }
                     }
-                    if ((pos = item.Pedidos.ListaItems.FindIndex(x => x.Item.Id == id && x.estado == false)) >= 0)
-                    {
-                        stock -= item.Pedidos.ListaItems[pos].Cantidad;
-                    }
+
+
+
                 }
 
-
-
+                result = ((stock - cantpedida) >= 0);
             }
-
-            result = ((stock - cantpedida) >= 0);
-
+            catch(Exception ex)
+            {
+                return false;
+            }
 
             return result;
         }
