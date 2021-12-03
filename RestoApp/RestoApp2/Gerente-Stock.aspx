@@ -180,7 +180,7 @@
 								<%#Eval("Stock").ToString()%>
 							</td>
 							<td>
-								<asp:TextBox ID="CantidadNueva" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
+								<asp:TextBox ID="CantidadNueva" runat="server" onkeypress="javascript:return solonumeros(event)" placeholder="Cantidad entrante"></asp:TextBox>
 
                                <script>
                                    function solonumeros(e) {

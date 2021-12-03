@@ -81,7 +81,7 @@
             <a href="javascript:personasinactivas()">
                 <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
                     <div class="panel-body text-center">
-                        <small style="font-size:25px; color: #fff">VER EMPLEADOS DADOS DE BAJA</small>
+                        <small style="font-size:25px; color: #fff">VER TODOS LOS EMPLEADOS DADOS DE BAJA</small>
                     </div>
                 </div>
             </a>
@@ -106,10 +106,10 @@
 
 						<tr style="background: #555;">
 							<td>
-								<asp:TextBox ID="NombreNew" runat="server" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="NombreNew" runat="server" TextMode="SingleLine" onkeypress="javascript:return sinnumeros(event)"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine"></asp:TextBox>
+								<asp:TextBox ID="ApellidoNew" runat="server" TextMode="SingleLine" onkeypress="javascript:return sinnumeros(event)"></asp:TextBox>
 							</td>
 							<td>
 								<asp:TextBox ID="DniNew" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" MaxLength="8"></asp:TextBox>
@@ -129,6 +129,25 @@
                                           }
 
                                           if (key < 48 || key > 57) {
+                                              return false;
+                                          }
+
+                                          return true;
+                                      }
+                                      function sinnumeros(e) {
+
+                                          var key;
+
+                                          if (window.event) // IE
+                                          {
+                                              key = e.keyCode;
+                                          }
+                                          else if (e.which) // Netscape/Firefox/Opera
+                                          {
+                                              key = e.which;
+                                          }
+
+                                          if (key > 48 && key < 57) {
                                               return false;
                                           }
 
@@ -160,10 +179,10 @@
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
 							<td>
-								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" ></asp:TextBox>
+								<asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" onkeypress="javascript:return sinnumeros(event)"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" ></asp:TextBox>
+								<asp:TextBox ID="Apellido" runat="server" TextMode="SingleLine" onkeypress="javascript:return sinnumeros(event)"></asp:TextBox>
 							</td>
 							<td>
 								<asp:TextBox ID="Dni" runat="server" TextMode="singleline" onkeypress="javascript:return solonumeros(event)" MaxLength="8"></asp:TextBox>
@@ -224,7 +243,7 @@
             <a href="javascript:personasactivas()">
                 <div class="panel" style="background-image: url(https://th.bing.com/th/id/OIP.8KI1Em2sYcNrxizTdGdGlAHaDt?pid=ImgDet&rs=1)">
                     <div class="panel-body text-center">
-                        <small style="font-size:25px; color: #fff">VER EMPLEADOS ACTIVOS</small>
+                        <small style="font-size:25px; color: #fff">VER TODOS LOS EMPLEADOS ACTIVOS</small>
                     </div>
                 </div>
             </a>
@@ -257,13 +276,13 @@
 						<tr style="background: #eee;"><%}else{%>
 						<tr style="background: #bbb;"><%}%>
 							<td>
-								<asp:TextBox ID="Nombre2" runat="server" TextMode="SingleLine" ></asp:TextBox>
+								<asp:TextBox ID="Nombre2" runat="server" TextMode="SingleLine" Enabled="false"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" ></asp:TextBox>
+								<asp:TextBox ID="Apellido2" runat="server" TextMode="SingleLine" Enabled="false"></asp:TextBox>
 							</td>
 							<td>
-								<asp:TextBox ID="Dni2" runat="server" TextMode="Number" onkeypress="javascript:return solonumeros(event)" ></asp:TextBox>
+								<asp:TextBox ID="Dni2" runat="server" onkeypress="javascript:return solonumeros(event)" Enabled="false"></asp:TextBox>
 
                                 <script>
                                     function solonumeros(e) {
@@ -289,7 +308,7 @@
 
 							</td>
 							<td>
-								  <asp:DropDownList ID="DDL_Cargo2" runat="server"></asp:DropDownList>
+								  <asp:DropDownList ID="DDL_Cargo2" runat="server" Enabled="false"></asp:DropDownList>
 							</td>
 							<td class="text-right">
 								<asp:Button  ID="ButtonA" runat="server" Text="REACTIVAR"		class="btn btn-theme" CommandArgument='<%#Eval("Id")%>' OnClick="ConfirmReactivar"/>

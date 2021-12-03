@@ -100,8 +100,9 @@
         Actualmente cuentas con un total de: <%=cantidadMesas%> Mesas
         <p>quieres hacer algun cambio?</p>
 
+        <%NewCant.Text = cantidadMesas.ToString();%>
 
-        <asp:TextBox ID="NewCant" runat="server" ForeColor="Black" TextMode="Number" Text="0" Font-Bold="true"/>
+        <asp:TextBox ID="NewCant" runat="server" ForeColor="Black" Font-Bold="true" onkeypress="javascript:return solonumeros(event)"/>
 
         <p>Advertencia todo cambio afectara a la base de datos<br />Esto afectara las mesas existentes!</p>
 
@@ -245,6 +246,26 @@
         }
     </script>
 
+    <script>
+        function solonumeros(e) {
 
+            var key;
+
+            if (window.event) // IE
+            {
+                key = e.keyCode;
+            }
+            else if (e.which) // Netscape/Firefox/Opera
+            {
+                key = e.which;
+            }
+
+            if (key < 48 || key > 57) {
+                return false;
+            }
+
+            return true;
+        }
+    </script>
     </asp:Content>
 
